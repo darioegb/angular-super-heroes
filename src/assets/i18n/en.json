@@ -1,0 +1,21 @@
+{
+  "superHero": {
+    "grid": {
+      "filterInput": {
+        "label": "Filter Super Hero",
+        "placeholder": "Ex. super"
+      },
+      "addButton": "Add Super Hero"
+    },
+    "detail": {
+
+    }
+  },
+  "globals": {
+    "grid": {
+      "actionsColumn": "Actions",
+      "noMatchingDataText": "No data matching the filter {{value}}"
+    },
+    "title": "Superheroes"
+  }
+}
