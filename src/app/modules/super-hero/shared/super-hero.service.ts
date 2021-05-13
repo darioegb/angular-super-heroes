@@ -2,8 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Page } from 'src/app/shared/interfaces';
-import { PageConfig } from 'src/app/shared/models';
+import { Page } from 'src/app/shared/models/grid.model';
+import { PageConfig } from 'src/app/shared/models/page-config.model';
 import { environment } from 'src/environments/environment';
 import { SuperHero } from './super-hero.model';
 

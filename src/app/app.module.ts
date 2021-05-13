@@ -4,9 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
+import { MatPaginatorI18nService } from 'src/app/shared/services/mat-paginator-i18n.service';
+import { CoreModule } from './core/core.module';
 
 // AoT requires an exported function for factories
 export const httpLoaderFactory = (http: HttpClient) =>
@@ -17,8 +22,9 @@ export const httpLoaderFactory = (http: HttpClient) =>
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     HttpClientModule,
+    BrowserAnimationsModule,
+    MatProgressSpinnerModule,
     TranslateModule.forRoot({
       defaultLanguage: 'es',
       useDefaultLang: true,
@@ -28,8 +34,14 @@ export const httpLoaderFactory = (http: HttpClient) =>
         deps: [HttpClient],
       },
     }),
+    CoreModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useClass: MatPaginatorI18nService,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

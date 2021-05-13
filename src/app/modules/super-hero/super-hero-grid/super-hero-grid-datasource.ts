@@ -1,30 +1,27 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Observable, BehaviorSubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
 import { SuperHero } from '../shared/super-hero.model';
-import { Column, ColumnDef, Page } from 'src/app/shared/interfaces';
+import { Column, ColumnDef, Page } from 'src/app/shared/models/grid.model';
 import { SuperHeroService } from '../shared/super-hero.service';
-import { PageConfig } from 'src/app/shared/models';
+import { PageConfig } from 'src/app/shared/models/page-config.model';
 import { catchError } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
 
 export class SuperHeroGridDataSource extends DataSource<SuperHero> {
-
-  private columns: Column[] = [
-    { headerDef: 'name', cellDef: 'Name' },
-    { headerDef: 'age', cellDef: 'Age' },
-    { headerDef: 'genre', cellDef: 'Genre' },
-    { headerDef: 'specialty', cellDef: 'Specialty' },
-    { headerDef: 'height', cellDef: 'Height' },
-    { headerDef: 'weight', cellDef: 'Weight' },
-    { headerDef: 'picture', cellDef: 'Picture' },
-  ];
+  private columns: Column[] = [];
   private displayedColumns: string[] = [];
   private dataSubject = new BehaviorSubject<SuperHero[]>([]);
   private countSubject = new BehaviorSubject<number>(0);
+  private translateSubscription: Subscription;
 
   count$ = this.countSubject.asObservable();
 
-  constructor(private superHeroService: SuperHeroService) {
+  constructor(
+    private superHeroService: SuperHeroService,
+    private translateService: TranslateService
+  ) {
     super();
+    this.getTranslations();
     this.initDisplayedColumns();
   }
 
@@ -34,6 +31,26 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
 
   disconnect() {
     this.dataSubject.complete();
+    this.countSubject.complete();
+    this.translateSubscription.unsubscribe();
+  }
+
+  getTranslations() {
+    this.translateSubscription = this.translateService
+      .get('superHero.grid.columns')
+      .subscribe((translations) => {
+        const { name, age, genre, specialty, height, weight, picture } =
+          translations;
+        this.columns = [
+          { headerDef: 'name', cellDef: name },
+          { headerDef: 'age', cellDef: age },
+          { headerDef: 'genre', cellDef: genre },
+          { headerDef: 'specialty', cellDef: specialty },
+          { headerDef: 'height', cellDef: height },
+          { headerDef: 'weight', cellDef: weight },
+          { headerDef: 'picture', cellDef: picture },
+        ];
+      });
   }
 
   columnsDef(): ColumnDef {

@@ -5,7 +5,16 @@
         "label": "Filter Super Hero",
         "placeholder": "Ex. super"
       },
-      "addButton": "Add Super Hero"
+      "addButton": "Add Super Hero",
+      "columns": {
+        "name": "Name",
+        "age": "Age",
+        "genre": "Genre",
+        "specialty": "Specialty",
+        "height": "Height",
+        "weight": "Weight",
+        "picture": "Picture"
+      }
     },
     "detail": {
 
@@ -14,7 +23,17 @@
   "globals": {
     "grid": {
       "actionsColumn": "Actions",
-      "noMatchingDataText": "No data matching the filter {{value}}"
+      "noMatchingDataText": "No data matching the filter {{value}}",
+      "columns": {
+        "actions": "Actions"
+      }
+    },
+    "paginator": {
+      "itemsPerPageLabel": "Items per page",
+      "nextPageLabel": "Next Page",
+      "previousPageLabel": "Previous Page",
+      "firstPageLabel": "First Page",
+      "lastPageLabel": "Last Page"
     },
     "title": "Superheroes"
   }
