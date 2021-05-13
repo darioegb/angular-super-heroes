@@ -17,8 +17,9 @@ import { fromEvent, merge, Subject } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
+  filter,
+  map,
   takeUntil,
-  tap,
 } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -56,11 +57,8 @@ export class SuperHeroGridComponent
       .subscribe(() => (this.paginator.pageIndex = 0));
     this.initFilterData();
     merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        takeUntil(this.unsubscribe$),
-        tap(() => this.onLoadData())
-      )
-      .subscribe();
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.onLoadData());
   }
 
   get columnsDef(): ColumnDef {
@@ -88,15 +86,16 @@ export class SuperHeroGridComponent
   private initFilterData() {
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
-        debounceTime(200),
+        map((event: any) => event.target.value),
+        filter((result) => result.length > 2 || result.length === 0),
+        debounceTime(1000),
         distinctUntilChanged(),
-        takeUntil(this.unsubscribe$),
-        tap(() => {
-          this.paginator.pageIndex = 0;
-          this.onLoadData();
-        })
+        takeUntil(this.unsubscribe$)
       )
-      .subscribe();
+      .subscribe(() => {
+        this.paginator.pageIndex = 0;
+        this.onLoadData();
+      });
   }
 
   private setPageConfig() {
