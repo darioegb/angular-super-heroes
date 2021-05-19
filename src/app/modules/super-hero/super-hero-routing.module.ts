@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SuperHeroGridComponent } from './super-hero-grid/super-hero-grid.component';
 import { SuperHeroDetailComponent } from './super-hero-detail/super-hero-detail.component';
+import { SuperHeroResolver } from './shared/super-hero.resolver';
 
 
 const routes: Routes = [
@@ -16,6 +17,9 @@ const routes: Routes = [
   {
     path: 'detail/:superHeroId',
     component: SuperHeroDetailComponent,
+    resolve: {
+      superHero: SuperHeroResolver
+    }
   }
 ];
 

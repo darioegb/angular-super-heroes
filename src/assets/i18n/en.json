@@ -5,7 +5,6 @@
         "label": "Filter Super Hero",
         "placeholder": "Ex. super"
       },
-      "addButton": "Add Super Hero",
       "columns": {
         "name": "Name",
         "age": "Age",
@@ -17,10 +16,33 @@
       }
     },
     "detail": {
-
+      "title": "SuperHeroe",
+      "form": {
+        "agePlaceholder": "Ex. 50",
+        "namePlaceholder": "Ex. Superman",
+        "genrePlaceholder": "Male example",
+        "specialtyPlaceHolder": "Ex. Can fly",
+        "heightPlaceholder": "Ex. 1.70m",
+        "weightPlaceholder": "Ex. 70kg"
+      }
+    },
+    "toasts": {
+      "add": {
+        "success": "The superheoe was added successfully",
+        "error": "An error occurred while adding a superhero"
+      },
+      "edit": {
+        "success": "The superheoe was modified successfully",
+        "error": "An error occurred while editing a superhero"
+      },
+      "delete": {
+        "success": "The superheoe has been successfully removed",
+        "error": "An error occurred while deleting a superhero"
+      }
     }
   },
   "globals": {
+    "title": "Superheroes",
     "grid": {
       "actionsColumn": "Actions",
       "noMatchingDataText": "No data matching the filter {{value}}",
@@ -35,6 +57,37 @@
       "firstPageLabel": "First Page",
       "lastPageLabel": "Last Page"
     },
-    "title": "Superheroes"
+    "buttons": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "view": "View"
+    },
+    "enums": {
+      "genres": {
+        "male": "Male",
+        "female": "Female",
+        "undefined": "Undefined"
+      }
+    }
+  },
+  "validations": {
+    "required": "The field is required.",
+    "maxlength": "The maximum length allowed is {{param}}.",
+    "minlength": "The minimum allowed length is {{param}}.",
+    "email": "It is not a valid email.",
+    "min": "The minimum allowed is {{param}}.",
+    "max": "The maximum allowed is {{param}}.",
+    "pattern": {
+      "numeric": "The valid format is numeric.",
+      "alphabet": "The valid format is alphabetical.",
+      "smallLetters": "The valid format is lowercase letters.",
+      "capitalLetters": "The valid format is capital letters.",
+      "alphaNumeric": "The valid format is alphanumeric.",
+      "phoneNumber": "Invalid phoneNumber.",
+      "websiteUrl": "Invalid website url.",
+      "ip": "Invalid IP address."
+    }
   }
 }

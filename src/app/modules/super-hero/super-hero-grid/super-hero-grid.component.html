@@ -6,9 +6,16 @@
     #input
   />
 </mat-form-field>
-<button mat-flat-button color="primary" (click)="onAddOrEditOrView()">
-  {{ "superHero.grid.addButton" | translate }}
-</button>
+
+<mat-toolbar class="table-toolbar">
+  <button
+    mat-icon-button
+    aria-label="Icon button with a add icon"
+    (click)="onAddOrEditOrView()"
+  >
+    <mat-icon color="primary" aria-hidden="false">add</mat-icon>
+  </button>
+</mat-toolbar>
 
 <table
   mat-table

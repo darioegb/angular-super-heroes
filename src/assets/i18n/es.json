@@ -5,7 +5,6 @@
         "label": "Filtrar Superheroe",
         "placeholder": "Ej. super"
       },
-      "addButton": "Agregar Superheroe",
       "columns": {
         "name": "Nombre",
         "age": "Edad",
@@ -17,10 +16,33 @@
       }
     },
     "detail": {
-
+      "title": "SuperHeroe",
+      "form": {
+        "agePlaceholder": "Ej. 50",
+        "namePlaceholder": "Ej. Superman",
+        "genrePlaceholder": "Ej. masculino",
+        "specialtyPlaceHolder": "Ej. Puede volar",
+        "heightPlaceholder": "Ej. 1.70m",
+        "weightPlaceholder": "Ej. 70kg"
+      }
+    },
+    "toasts": {
+      "add": {
+        "success": "El superheoe se agregó con éxito",
+        "error": "Ocurrió un error al agregar un superheroe"
+      },
+      "edit": {
+        "success": "El superheoe fue modificado con éxito",
+        "error": "Ocurrió un error al editar un superheroe"
+      },
+      "delete": {
+        "success": "El superheoe ha sido eliminado con exitosamente",
+        "error": "Ocurrió un error al eliminar un superheroe"
+      }
     }
   },
   "globals": {
+    "title": "Superhéroes",
     "grid": {
       "actionsColumn": "Acciones",
       "noMatchingDataText": "No hay datos que coincidan con el filtro {{value}}",
@@ -35,6 +57,37 @@
       "firstPageLabel": "Primera Pagina",
       "lastPageLabel": "Ultima Pagina"
     },
-    "title": "Superhéroes"
+    "buttons": {
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "edit": "Editar",
+      "delete": "Borrar",
+      "view": "Ver"
+    },
+    "enums": {
+      "genres": {
+        "male": "Masculino",
+        "female": "Femenino",
+        "undefined": "Indefinido"
+      }
+    }
+  },
+  "validations": {
+    "required": "El campo es obligatorio.",
+    "maxlength": "La longitud máxima permitida es {{param}}.",
+    "minlength": "La longitud mínima permitida es {{param}}.",
+    "email": "No es un correo electrónico válido.",
+    "min": "El mínimo permitido es {{param}}.",
+    "max": "El máximo permitido es {{param}}.",
+    "pattern": {
+      "numeric": "El formato válido es numérico.",
+      "alphabet": "El formato válido es alfabético.",
+      "smallLetters": "El formato válido son letras minúsculas.",
+      "capitalLetters": "El formato válido son letras mayúsculas.",
+      "alphaNumeric": "El formato válido es alfanumérico.",
+      "phoneNumber": "PhoneNumber no válido.",
+      "websiteUrl": "URL del sitio web no válida",
+      "ip": "Dirección IP no válida."
+    }
   }
 }

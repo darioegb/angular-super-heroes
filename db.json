@@ -1,24 +1,104 @@
 {
   "superHeroes": [
-    {"id": 1, "name": "Spiderman", "genre": "man"},
-    {"id": 2, "name": "Superman", "genre": "man"},
-    {"id": 3, "name": "Batman", "genre": "man"},
-    {"id": 4, "name": "Iron Man", "genre": "man"},
-    {"id": 5, "name": "Manolito el fuerte", "genre": "man"},
-    {"id": 6, "name": "Chapulin colorado", "genre": "man"},
-    {"id": 7, "name": "Hulk", "genre": "man"},
-    {"id": 8, "name": "Popelle", "genre": "man"},
-    {"id": 9, "name": "Thor", "genre": "man"},
-    {"id": 10, "name": "Daredevil", "genre": "man"},
-    {"id": 11, "name": "Capitan America", "genre": "man"},
-    {"id": 12, "name": "Pantera Negra", "genre": "man"},
-    {"id": 13, "name": "Valquiria", "genre": "woman"},
-    {"id": 14, "name": "Visión", "genre": "man"},
-    {"id": 15, "name": "Wolverine", "genre": "man"},
-    {"id": 16, "name": "Mujer Maravilla", "genre": "woman"},
-    {"id": 17, "name": "Antman", "genre": "man"},
-    {"id": 18, "name": "Hijitus", "genre": "man"},
-    {"id": 19, "name": "Gatubela", "genre": "woman"},
-    {"id": 20, "name": "Doctor Stranger", "genre": "man"}
+    {
+      "id": 1,
+      "name": "Spiderman",
+      "genre": "man"
+    },
+    {
+      "id": 2,
+      "name": "Superman",
+      "genre": "man"
+    },
+    {
+      "id": 3,
+      "name": "Batman",
+      "genre": "man"
+    },
+    {
+      "id": 4,
+      "name": "Iron Man",
+      "genre": "man"
+    },
+    {
+      "id": 5,
+      "name": "Manolito el fuerte",
+      "genre": "man"
+    },
+    {
+      "id": 6,
+      "name": "Chapulin colorado",
+      "genre": "man"
+    },
+    {
+      "id": 7,
+      "name": "Hulk",
+      "genre": "man"
+    },
+    {
+      "id": 8,
+      "name": "Popelle",
+      "genre": "man"
+    },
+    {
+      "id": 9,
+      "name": "Thor",
+      "genre": "man"
+    },
+    {
+      "id": 10,
+      "name": "Daredevil",
+      "genre": "man"
+    },
+    {
+      "id": 11,
+      "name": "Capitan America",
+      "genre": "man"
+    },
+    {
+      "id": 12,
+      "name": "Pantera Negra",
+      "genre": "man"
+    },
+    {
+      "id": 13,
+      "name": "Valquiria",
+      "genre": "woman"
+    },
+    {
+      "id": 14,
+      "name": "Visión",
+      "genre": "man"
+    },
+    {
+      "id": 15,
+      "name": "Wolverine",
+      "genre": "man"
+    },
+    {
+      "id": 16,
+      "name": "Mujer Maravilla",
+      "genre": "woman"
+    },
+    {
+      "id": 17,
+      "name": "Antman",
+      "genre": "man"
+    },
+    {
+      "id": 18,
+      "name": "Hijitus",
+      "genre": "man"
+    },
+    {
+      "id": 19,
+      "name": "Gatubela",
+      "genre": "woman"
+    },
+    {
+      "id": 20,
+      "name": "Doctor Stranger",
+      "genre": "man"
+    }
   ]
 }

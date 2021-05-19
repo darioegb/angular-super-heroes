@@ -22,6 +22,8 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-super-hero-grid',
@@ -39,8 +41,11 @@ export class SuperHeroGridComponent
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private superHeroService: SuperHeroService,
-    private translateService: TranslateService
+    private router: Router,
+    private route: ActivatedRoute,
+    private translateService: TranslateService,
+    private toastr: ToastrService,
+    private superHeroService: SuperHeroService
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +53,7 @@ export class SuperHeroGridComponent
       this.superHeroService,
       this.translateService
     );
-    this.dataSource.loadData(this.pageConfig);
+    this.onLoadData(true);
   }
 
   ngAfterViewInit(): void {
@@ -65,17 +70,47 @@ export class SuperHeroGridComponent
     return this.dataSource.columnsDef();
   }
 
-  onLoadData() {
-    this.setPageConfig();
+  onLoadData(skipPageConfig = false) {
+    if (!skipPageConfig) {
+      this.setPageConfig();
+    }
     this.dataSource.loadData(this.pageConfig);
   }
 
   onAddOrEditOrView(item?: SuperHero, view = false) {
-    console.log(item, view);
+    if (!item) {
+      this.router.navigate(['detail'], {
+        relativeTo: this.route,
+      });
+    } else {
+      this.router.navigate([`detail/${item.id}`], {
+        state: {
+          data: {
+            superHero: item,
+          },
+        },
+        queryParams: {
+          view,
+        },
+        relativeTo: this.route,
+      });
+    }
   }
 
   onDelete(id: string) {
-    console.log(id);
+    this.superHeroService.deleteSuperHero(id).subscribe(
+      () => {
+        this.onLoadData(true);
+        this.toastr.success(
+          this.translateService.instant('superHero.toasts.delete.success')
+        );
+      },
+      () => {
+        this.toastr.error(
+          this.translateService.instant('superHero.toasts.delete.error')
+        );
+      }
+    );
   }
 
   ngOnDestroy(): void {

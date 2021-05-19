@@ -1,9 +1,9 @@
 export interface SuperHero {
-  id: string;
+  id?: string;
   name: string;
+  genre: string;
+  specialty: string;
   age?: number;
-  genre?: string;
-  specialty?: string;
   height?: number;
   picture?: string;
   weight?: number;

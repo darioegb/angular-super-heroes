@@ -1,13 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UpperCaseDirective } from './upper-case.directive';
-
-
+import { UpperCaseDirective } from './directives/upper-case.directive';
+import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
 
 @NgModule({
-  declarations: [UpperCaseDirective],
-  imports: [
-    CommonModule
-  ]
+  declarations: [UpperCaseDirective, DropdownTranslatePipe],
+  imports: [CommonModule],
+  exports: [UpperCaseDirective, DropdownTranslatePipe]
 })
-export class SharedModule { }
+export class SharedModule {}
