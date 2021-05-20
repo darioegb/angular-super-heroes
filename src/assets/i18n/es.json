@@ -44,11 +44,7 @@
   "globals": {
     "title": "Superhéroes",
     "grid": {
-      "actionsColumn": "Acciones",
-      "noMatchingDataText": "No hay datos que coincidan con el filtro {{value}}",
-      "columns": {
-        "actions": "Acciones"
-      }
+      "noMatchingDataText": "No hay datos que coincidan con el filtro {{value}}"
     },
     "paginator": {
       "itemsPerPageLabel": "Items por pagina",

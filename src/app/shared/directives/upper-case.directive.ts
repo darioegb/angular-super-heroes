@@ -7,7 +7,7 @@ import { NgControl } from '@angular/forms';
 export class UpperCaseDirective {
   constructor(private el: ElementRef, private ngControl: NgControl) {}
 
-  @HostListener('keydown', ['$event'])
+  @HostListener('keyup', ['$event'])
   onKeyDown(event: Event) {
     this.toUpperCase(event);
   }
@@ -17,13 +17,10 @@ export class UpperCaseDirective {
     this.toUpperCase(event);
   }
 
-  @HostListener('change', ['$event'])
-  onChange(event: Event) {
-    this.toUpperCase(event);
-  }
-
   private toUpperCase(event: Event) {
-    let newVal: string = (event.target as HTMLInputElement).value.toUpperCase();
+    const newVal: string = (
+      event.target as HTMLInputElement
+    ).value.toUpperCase();
     this.el.nativeElement.value = newVal;
     this.ngControl.control.patchValue(newVal);
     event.stopPropagation();

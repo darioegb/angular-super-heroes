@@ -11,7 +11,6 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
-import { MatToolbarModule } from '@angular/material/toolbar';
 import { TranslateModule } from '@ngx-translate/core';
 import { SuperHeroGridComponent } from './super-hero-grid/super-hero-grid.component';
 import { SuperHeroDetailComponent } from './super-hero-detail/super-hero-detail.component';
@@ -34,7 +33,6 @@ import { NgxErrorMessageModule } from 'ngx-error-message';
     MatPaginatorModule,
     MatSortModule,
     MatCheckboxModule,
-    MatToolbarModule,
     TranslateModule.forChild(),
     NgxErrorMessageModule,
     SuperHeroRoutingModule,

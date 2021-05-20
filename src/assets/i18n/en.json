@@ -44,11 +44,7 @@
   "globals": {
     "title": "Superheroes",
     "grid": {
-      "actionsColumn": "Actions",
-      "noMatchingDataText": "No data matching the filter {{value}}",
-      "columns": {
-        "actions": "Actions"
-      }
+      "noMatchingDataText": "No data matching the filter {{value}}"
     },
     "paginator": {
       "itemsPerPageLabel": "Items per page",

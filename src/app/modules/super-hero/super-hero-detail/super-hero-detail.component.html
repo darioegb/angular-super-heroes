@@ -14,12 +14,13 @@
             }}</mat-label>
             <input
               type="text"
-              matInput
               [placeholder]="
                 'superHero.detail.form.namePlaceholder' | translate
               "
               formControlName="name"
+              matInput
               ngxErrorMessage
+              appUpperCase
             />
           </mat-form-field>
         </div>
@@ -30,9 +31,9 @@
             }}</mat-label>
             <input
               type="number"
-              matInput
               [placeholder]="'superHero.detail.form.agePlaceholder' | translate"
               formControlName="age"
+              matInput
               ngxErrorMessage
             />
           </mat-form-field>
@@ -63,11 +64,11 @@
               "superHero.grid.columns.specialty" | translate
             }}</mat-label>
             <textarea
-              matInput
               [placeholder]="
                 'superHero.detail.form.specialtyPlaceHolder' | translate
               "
               formControlName="specialty"
+              matInput
               ngxErrorMessage
             ></textarea>
           </mat-form-field>
@@ -81,11 +82,11 @@
             }}</mat-label>
             <input
               type="number"
-              matInput
               [placeholder]="
                 'superHero.detail.form.heightPlaceholder' | translate
               "
               formControlName="height"
+              matInput
               ngxErrorMessage
             />
           </mat-form-field>
@@ -97,11 +98,11 @@
             }}</mat-label>
             <input
               type="number"
-              matInput
               [placeholder]="
                 'superHero.detail.form.weightPlaceholder' | translate
               "
               formControlName="weight"
+              matInput
               ngxErrorMessage
             />
           </mat-form-field>

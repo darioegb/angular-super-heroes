@@ -39,7 +39,6 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.view = /true/i.test(this.route.snapshot.queryParams['view']);
     this.initForm();
     this.getData();
-    this.view && this.superHeroForm.disable();
   }
 
   get superHeroControls() {
@@ -78,6 +77,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       .subscribe(([params, data]) => {
         if (params.superHeroId) {
           this.superHero = data.superHero;
+          this.view && this.superHeroForm.disable();
           this.setForm();
         }
       });
