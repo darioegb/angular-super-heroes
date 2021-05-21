@@ -50,14 +50,14 @@
         aria-label="Icon button with a edit icon"
         (click)="onAddOrEditOrView(element)"
       >
-        <mat-icon color="primary" aria-hidden="false">edit</mat-icon>
+        <mat-icon aria-hidden="false">edit</mat-icon>
       </button>
       <button
         mat-icon-button
         aria-label="Icon button with a delete icon"
-        (click)="onDelete(element?.id)"
+        (click)="onDelete(element)"
       >
-        <mat-icon color="warn" aria-hidden="false">delete</mat-icon>
+        <mat-icon aria-hidden="false">delete</mat-icon>
       </button>
     </td>
   </ng-container>

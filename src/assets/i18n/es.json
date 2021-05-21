@@ -54,6 +54,7 @@
       "lastPageLabel": "Ultima Pagina"
     },
     "buttons": {
+      "confirm": "Confirmar",
       "cancel": "Cancelar",
       "save": "Guardar",
       "edit": "Editar",
@@ -65,6 +66,11 @@
         "male": "Masculino",
         "female": "Femenino",
         "undefined": "Indefinido"
+      }
+    },
+    "dialogs": {
+      "delete": {
+        "title": "¿Esta seguro que desea eliminar a {{value}}?"
       }
     }
   },

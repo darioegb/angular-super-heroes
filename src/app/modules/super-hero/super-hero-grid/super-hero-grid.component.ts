@@ -13,17 +13,21 @@ import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
 import { ColumnDef } from '../../../shared/models/grid.model';
 import { SuperHeroService } from '../shared/super-hero.service';
 import { PageConfig } from 'src/app/shared/models/page-config.model';
-import { fromEvent, merge, Subject } from 'rxjs';
+import { EMPTY, fromEvent, merge, Subject } from 'rxjs';
 import {
   debounceTime,
   distinctUntilChanged,
   filter,
   map,
+  switchMap,
+  take,
   takeUntil,
 } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-super-hero-grid',
@@ -45,6 +49,7 @@ export class SuperHeroGridComponent
     private route: ActivatedRoute,
     private translateService: TranslateService,
     private toastr: ToastrService,
+    private dialogService: MatDialog,
     private superHeroService: SuperHeroService
   ) {}
 
@@ -89,28 +94,45 @@ export class SuperHeroGridComponent
             superHero: item,
           },
         },
-        queryParams: {
-          view,
-        },
+        queryParams: view
+          ? {
+              view,
+            }
+          : null,
         relativeTo: this.route,
       });
     }
   }
 
-  onDelete(id: string) {
-    this.superHeroService.deleteSuperHero(id).subscribe(
-      () => {
-        this.onLoadData(true);
-        this.toastr.success(
-          this.translateService.instant('superHero.toasts.delete.success')
-        );
+  onDelete(item: SuperHero) {
+    const dialogRef = this.dialogService.open(ConfirmDialogComponent, {
+      data: {
+        title: this.translateService.instant('globals.dialogs.delete.title', {
+          value: item.name,
+        }),
       },
-      () => {
-        this.toastr.error(
-          this.translateService.instant('superHero.toasts.delete.error')
-        );
-      }
-    );
+    });
+    dialogRef
+      .afterClosed()
+      .pipe(
+        take(1),
+        switchMap((result: boolean) =>
+          result ? this.superHeroService.deleteSuperHero(item.id) : EMPTY
+        )
+      )
+      .subscribe(
+        () => {
+          this.onLoadData(true);
+          this.toastr.success(
+            this.translateService.instant('superHero.toasts.delete.success')
+          );
+        },
+        () => {
+          this.toastr.error(
+            this.translateService.instant('superHero.toasts.delete.error')
+          );
+        }
+      );
   }
 
   ngOnDestroy(): void {
