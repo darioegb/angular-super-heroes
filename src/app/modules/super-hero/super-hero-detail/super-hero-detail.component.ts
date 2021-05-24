@@ -5,9 +5,10 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
-import { takeUntil, withLatestFrom } from 'rxjs/operators';
+import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { genresEnum } from 'src/app/shared/constants/constants';
 import { Option } from 'src/app/shared/models/option.model';
+import { ToastTranslation } from 'src/app/shared/models/toast.model';
 import { UtilService } from 'src/app/shared/services/util.service';
 import { SuperHero } from '../shared/super-hero.model';
 import { SuperHeroService } from '../shared/super-hero.service';
@@ -22,6 +23,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   genres: Option[] = [];
   superHero: SuperHero;
   view: boolean;
+  toastTranslations: { [key: string]: ToastTranslation };
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -39,13 +41,14 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.view = /true/i.test(this.route.snapshot.queryParams['view']);
     this.initForm();
     this.getData();
+    this.getTranslations();
   }
 
   get superHeroControls() {
     return this.superHeroForm.controls;
   }
 
-  initForm() {
+  initForm(): void {
     this.superHeroForm = this.fb.group({
       name: [
         null,
@@ -71,7 +74,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  getData() {
+  getData(): void {
     this.route.params
       .pipe(takeUntil(this.unsubscribe$), withLatestFrom(this.route.data))
       .subscribe(([params, data]) => {
@@ -83,7 +86,14 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       });
   }
 
-  setForm() {
+  getTranslations(): void {
+    this.translateService
+      .get('superHero.toasts')
+      .pipe(take(1))
+      .subscribe((translations) => (this.toastTranslations = translations));
+  }
+
+  setForm(): void {
     this.superHeroForm.patchValue({
       name: this.superHero.name,
       genre: this.superHero.genre,
@@ -95,7 +105,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  initSuperHero() {
+  initSuperHero(): void {
     this.superHero = {
       name: '',
       genre: null,
@@ -103,11 +113,11 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     };
   }
 
-  setSuperHero() {
+  setSuperHero(): void {
     this.superHero = { ...this.superHero, ...this.superHeroForm.value };
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.superHeroForm.invalid) {
       this.superHeroForm.markAllAsTouched();
       return;
@@ -116,38 +126,30 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.superHero?.id ? this.updateSuperHero() : this.saveSuperHero();
   }
 
-  saveSuperHero() {
+  saveSuperHero(): void {
     this.initSuperHero();
     this.setSuperHero();
     this.superHeroService.addSuperHero(this.superHero).subscribe(
       () => {
-        this.toastr.success(
-          this.translateService.instant('superHero.toasts.add.success')
-        );
+        this.toastr.success(this.toastTranslations.add.success);
         this.goBack();
       },
       () => {
-        this.toastr.error(
-          this.translateService.instant('superHero.toasts.add.error')
-        );
+        this.toastr.error(this.toastTranslations.add.error);
         this.goBack();
       }
     );
   }
 
-  updateSuperHero() {
+  updateSuperHero(): void {
     this.setSuperHero();
     this.superHeroService.editSuperHero(this.superHero).subscribe(
       () => {
-        this.toastr.success(
-          this.translateService.instant('superHero.toasts.edit.success')
-        );
+        this.toastr.success(this.toastTranslations.edit.success);
         this.goBack();
       },
       () => {
-        this.toastr.error(
-          this.translateService.instant('superHero.toasts.edit.error')
-        );
+        this.toastr.error(this.toastTranslations.edit.error);
         this.goBack();
       }
     );

@@ -28,6 +28,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
+import { ToastTranslation } from 'src/app/shared/models/toast.model';
 
 @Component({
   selector: 'app-super-hero-grid',
@@ -42,6 +43,7 @@ export class SuperHeroGridComponent
   @ViewChild('input') input: ElementRef;
   dataSource: SuperHeroGridDataSource;
   pageConfig: PageConfig = new PageConfig();
+  toastTranslations: ToastTranslation;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -59,6 +61,7 @@ export class SuperHeroGridComponent
       this.translateService
     );
     this.onLoadData(true);
+    this.getTranslations();
   }
 
   ngAfterViewInit(): void {
@@ -75,14 +78,14 @@ export class SuperHeroGridComponent
     return this.dataSource.columnsDef();
   }
 
-  onLoadData(skipPageConfig = false) {
+  onLoadData(skipPageConfig = false): void {
     if (!skipPageConfig) {
       this.setPageConfig();
     }
     this.dataSource.loadData(this.pageConfig);
   }
 
-  onAddOrEditOrView(item?: SuperHero, view = false) {
+  onAddOrEditOrView(item?: SuperHero, view = false): void {
     if (!item) {
       this.router.navigate(['detail'], {
         relativeTo: this.route,
@@ -104,7 +107,14 @@ export class SuperHeroGridComponent
     }
   }
 
-  onDelete(item: SuperHero) {
+  getTranslations(): void {
+    this.translateService
+      .get('superHero.toasts.delete')
+      .pipe(take(1))
+      .subscribe((translations) => (this.toastTranslations = translations));
+  }
+
+  onDelete(item: SuperHero): void {
     const dialogRef = this.dialogService.open(ConfirmDialogComponent, {
       data: {
         title: this.translateService.instant('globals.dialogs.delete.title', {
@@ -123,14 +133,10 @@ export class SuperHeroGridComponent
       .subscribe(
         () => {
           this.onLoadData(true);
-          this.toastr.success(
-            this.translateService.instant('superHero.toasts.delete.success')
-          );
+          this.toastr.success(this.toastTranslations.success);
         },
         () => {
-          this.toastr.error(
-            this.translateService.instant('superHero.toasts.delete.error')
-          );
+          this.toastr.error(this.toastTranslations.error);
         }
       );
   }
@@ -155,7 +161,7 @@ export class SuperHeroGridComponent
       });
   }
 
-  private setPageConfig() {
+  private setPageConfig(): void {
     this.pageConfig.page = this.paginator.pageIndex + 1;
     this.pageConfig.limit = this.paginator.pageSize;
     this.pageConfig.sort =

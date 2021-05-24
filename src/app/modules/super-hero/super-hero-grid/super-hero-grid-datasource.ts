@@ -29,13 +29,13 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
     return this.dataSubject.asObservable();
   }
 
-  disconnect() {
+  disconnect(): void {
     this.dataSubject.complete();
     this.countSubject.complete();
     this.translateSubscription.unsubscribe();
   }
 
-  getTranslations() {
+  getTranslations(): void {
     this.translateSubscription = this.translateService
       .get('superHero.grid.columns')
       .subscribe((translations) => {
@@ -57,7 +57,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
     return { columns: this.columns, displayedColumns: this.displayedColumns };
   }
 
-  loadData(pageConfig: PageConfig) {
+  loadData(pageConfig: PageConfig): void {
     this.superHeroService
       .getSuperHeroes(pageConfig)
       .pipe(catchError(() => of([])))
@@ -67,7 +67,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
       });
   }
 
-  private initDisplayedColumns() {
+  private initDisplayedColumns(): void {
     this.columns.forEach((column) =>
       this.displayedColumns.push(column.headerDef)
     );
