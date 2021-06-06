@@ -21,7 +21,10 @@ describe('SuperHeroService', () => {
       imports: [
         BrowserAnimationsModule,
         HttpClientTestingModule,
-        TranslateTestingModule.withTranslations('es', {}),
+        TranslateTestingModule.withTranslations(
+          'es',
+          require('src/assets/i18n/es.json')
+        ),
         ToastrModule.forRoot(),
       ],
       providers: [SuperHeroService],

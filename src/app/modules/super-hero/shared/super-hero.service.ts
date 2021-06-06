@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { SuperHero } from './super-hero.model';
-import { GenericService } from '@app/core/services/generic.service';
+import { GenericService } from '@core/services/generic.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 

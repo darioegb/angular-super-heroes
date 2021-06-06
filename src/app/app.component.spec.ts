@@ -5,19 +5,16 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 
 describe('AppComponent', () => {
-  const SPANISH_TRANSLATIONS = {
-    globals: {
-      title: 'Superhéroes'
-    },
-  };
-
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
           RouterTestingModule,
           HttpClientTestingModule,
-          TranslateTestingModule.withTranslations('es', SPANISH_TRANSLATIONS),
+          TranslateTestingModule.withTranslations(
+            'es',
+            require('src/assets/i18n/es.json')
+          ),
         ],
         declarations: [AppComponent],
       }).compileComponents();
@@ -31,5 +28,4 @@ describe('AppComponent', () => {
     app.ngOnInit();
     expect(app.isLoading$).toBeDefined();
   });
-
 });

@@ -1,4 +1,4 @@
-import { genresEnum } from '@app/shared/constants/constants';
+import { genresEnum } from '@shared/constants/constants';
 export interface SuperHero {
   id?: string;
   name: string;

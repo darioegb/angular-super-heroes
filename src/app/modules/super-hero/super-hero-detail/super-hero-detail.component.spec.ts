@@ -18,36 +18,13 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SharedModule } from '@app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ActivatedRouteStub } from '@testing/activated-route-stub';
-import { SuperHero } from '@app/modules/super-hero/shared/super-hero.model';
-import { SuperHeroService } from '@app/modules/super-hero/shared/super-hero.service';
+import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
+import { SuperHeroService } from '@modules/super-hero/shared/super-hero.service';
 import { of, throwError } from 'rxjs';
 
 describe('SuperHeroDetailComponent', () => {
-  const SPANISH_TRANSLATIONS = {
-    superHeroes: {
-      toasts: {
-        add: {
-          success: 'El superheoe se agregó con éxito',
-          error: 'Ocurrió un error al agregar un superheroe',
-        },
-        update: {
-          success: 'El superheoe fue actualizado con éxito',
-          error: 'Ocurrió un error al actualizar un superheroe',
-        },
-      },
-    },
-    globals: {
-      enums: {
-        genres: {
-          male: 'Masculino',
-          female: 'Femenino',
-          undefined: 'Indefinido',
-        },
-      },
-    },
-  };
   let activatedRoute: ActivatedRouteStub;
   let component: SuperHeroDetailComponent;
   let fixture: ComponentFixture<SuperHeroDetailComponent>;
@@ -80,7 +57,10 @@ describe('SuperHeroDetailComponent', () => {
             MatRadioModule,
             MatSelectModule,
             HttpClientTestingModule,
-            TranslateTestingModule.withTranslations('es', SPANISH_TRANSLATIONS),
+            TranslateTestingModule.withTranslations(
+              'es',
+              require('src/assets/i18n/es.json')
+            ),
             ToastrModule.forRoot(),
             SharedModule,
           ],

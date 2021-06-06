@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { environment } from '@environments/environment';
 import {
   HttpClient,
   HttpErrorResponse,
@@ -7,8 +7,8 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { PageConfig } from '@app/shared/models/page-config.model';
-import { Page } from '@app/shared/models/grid.model';
+import { PageConfig } from '@shared/models/page-config.model';
+import { Page } from '@shared/models/grid.model';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 

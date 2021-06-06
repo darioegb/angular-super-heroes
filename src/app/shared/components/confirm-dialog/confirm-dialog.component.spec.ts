@@ -7,29 +7,26 @@ import { TranslateTestingModule } from 'ngx-translate-testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('ConfirmDialogComponent', () => {
-  const SPANISH_TRANSLATIONS = {
-    globals: {
-      buttons: {
-        confirm: 'Confirmar',
-        cancel: 'Cancelar',
-      },
-    },
-  };
   let component: ConfirmDialogComponent;
   let fixture: ComponentFixture<ConfirmDialogComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      declarations: [ConfirmDialogComponent],
-      imports: [
-        MatDialogModule,
-        NoopAnimationsModule,
-        HttpClientTestingModule,
-        TranslateTestingModule.withTranslations('es', SPANISH_TRANSLATIONS),
-      ],
-      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
-    }).compileComponents();
-  }));
+  beforeEach(
+    waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [ConfirmDialogComponent],
+        imports: [
+          MatDialogModule,
+          NoopAnimationsModule,
+          HttpClientTestingModule,
+          TranslateTestingModule.withTranslations(
+            'es',
+            require('src/assets/i18n/es.json')
+          ),
+        ],
+        providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
+      }).compileComponents();
+    })
+  );
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConfirmDialogComponent);

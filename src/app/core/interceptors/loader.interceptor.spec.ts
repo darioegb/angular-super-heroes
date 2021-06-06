@@ -7,10 +7,10 @@ import {
   HttpClientTestingModule,
 } from '@angular/common/http/testing';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SuperHeroService } from '@app/modules/super-hero/shared/super-hero.service';
+import { SuperHeroService } from '@modules/super-hero/shared/super-hero.service';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateTestingModule } from 'ngx-translate-testing';
-import { SuperHero } from '@app/modules/super-hero/shared/super-hero.model';
+import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
 
 describe('LoaderInterceptor', () => {
   let httpTestingController: HttpTestingController;
@@ -20,7 +20,10 @@ describe('LoaderInterceptor', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        TranslateTestingModule.withTranslations('es', {}),
+        TranslateTestingModule.withTranslations(
+          'es',
+          require('src/assets/i18n/es.json')
+        ),
         ToastrModule.forRoot(),
       ],
       providers: [

@@ -12,32 +12,21 @@ import { MatTableModule } from '@angular/material/table';
 
 import { SuperHeroGridComponent } from './super-hero-grid.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SharedModule } from '@app/shared/shared.module';
+import { SharedModule } from '@shared/shared.module';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SuperHeroService } from '../shared/super-hero.service';
 import { of } from 'rxjs';
-import { SuperHero } from '@app/modules/super-hero/shared/super-hero.model';
+import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogStub } from '@testing/dialog-stub';
-import { PageConfig } from '@app/shared/models/page-config.model';
+import { PageConfig } from '@shared/models/page-config.model';
 
 describe('SuperHeroGridComponent', () => {
-  const SPANISH_TRANSLATIONS = {
-    globals: {
-      enums: {
-        genres: {
-          male: 'Masculino',
-          female: 'Femenino',
-          undefined: 'Indefinido',
-        },
-      },
-    },
-  };
   let component: SuperHeroGridComponent;
   let fixture: ComponentFixture<SuperHeroGridComponent>;
   let toastServiceStub: Partial<ToastrService>;
@@ -81,7 +70,10 @@ describe('SuperHeroGridComponent', () => {
             MatSortModule,
             MatTableModule,
             HttpClientTestingModule,
-            TranslateTestingModule.withTranslations('es', SPANISH_TRANSLATIONS),
+            TranslateTestingModule.withTranslations(
+              'es',
+              require('src/assets/i18n/es.json')
+            ),
             ToastrModule.forRoot(),
             SharedModule,
           ],

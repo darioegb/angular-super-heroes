@@ -7,15 +7,6 @@ import { DefaultLangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { ReplaySubject, of } from 'rxjs';
 
 describe('MatPaginatorI18nService', () => {
-  const SPANISH_TRANSLATIONS = {
-    paginator: {
-      itemsPerPageLabel: 'Items por pagina',
-      nextPageLabel: 'Siguiente Pagina',
-      previousPageLabel: 'Pagina Anterior',
-      firstPageLabel: 'Primera Pagina',
-      lastPageLabel: 'Ultima Pagina',
-    },
-  };
   const eventSubject = new ReplaySubject<DefaultLangChangeEvent>(1);
   const fakeTranslate = {
     onLangChange: eventSubject.asObservable(),
@@ -29,7 +20,10 @@ describe('MatPaginatorI18nService', () => {
     TestBed.configureTestingModule({
       imports: [
         HttpClientTestingModule,
-        TranslateTestingModule.withTranslations('es', SPANISH_TRANSLATIONS),
+        TranslateTestingModule.withTranslations(
+          'es',
+          require('src/assets/i18n/es.json')
+        ),
       ],
       providers: [
         {

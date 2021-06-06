@@ -9,21 +9,16 @@ describe('DropdownTranslatePipe', () => {
   let pipe: DropdownTranslatePipe;
   let service: TranslateService;
 
-  const SPANISH_TRANSLATIONS = {
-    genres: {
-      male: 'Masculino',
-      female: 'Femenino',
-      undefined: 'Indefinido',
-    },
-  };
-
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
         imports: [
           BrowserModule,
           HttpClientTestingModule,
-          TranslateTestingModule.withTranslations('es', SPANISH_TRANSLATIONS),
+          TranslateTestingModule.withTranslations(
+            'es',
+            require('src/assets/i18n/es.json')
+          ),
         ],
       });
       service = TestBed.inject(TranslateService);
@@ -36,6 +31,6 @@ describe('DropdownTranslatePipe', () => {
   });
 
   it('transforms `Male` to `Masculino`', () => {
-    expect(pipe.transform('Male', 'genres')).toBe('Masculino');
+    expect(pipe.transform('Male', 'globals.enums.genres')).toBe('Masculino');
   });
 });
