@@ -11,7 +11,7 @@ import { SuperHeroService } from './super-hero.service';
 import { of } from 'rxjs';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateTestingModule } from 'ngx-translate-testing';
-import { RouterStub } from '@testing/router-stub';
+import { RouterStub } from '@root/testing';
 
 describe('HeroResolver', () => {
   let resolver: SuperHeroResolver;

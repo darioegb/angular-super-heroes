@@ -6,13 +6,12 @@ import {
   OnInit,
   ViewChild,
 } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { SuperHero } from '../shared/super-hero.model';
-import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
-import { ColumnDef } from '../../../shared/models/grid.model';
-import { SuperHeroService } from '../shared/super-hero.service';
-import { PageConfig } from '@shared/models/page-config.model';
+import { MatDialog } from '@angular/material/dialog';
 import { EMPTY, fromEvent, merge, Subject } from 'rxjs';
 import {
   debounceTime,
@@ -23,13 +22,11 @@ import {
   take,
   takeUntil,
 } from 'rxjs/operators';
-import { TranslateService } from '@ngx-translate/core';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
+import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
+import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
+import { ColumnDef, PageConfig, ToastTranslation } from '@shared/models';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { ToastTranslation } from '@shared/models/toast.model';
-import { genresEnum } from '@shared/constants/constants';
+import { genresEnum } from '@app/constants';
 
 @Component({
   selector: 'app-super-hero-grid',

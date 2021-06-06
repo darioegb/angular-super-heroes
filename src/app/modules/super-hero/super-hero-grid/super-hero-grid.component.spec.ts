@@ -16,14 +16,13 @@ import { SharedModule } from '@shared/shared.module';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SuperHeroService } from '../shared/super-hero.service';
 import { of } from 'rxjs';
-import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
+import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { DialogStub } from '@testing/dialog-stub';
+import { DialogStub } from '@root/testing';
 import { PageConfig } from '@shared/models/page-config.model';
 
 describe('SuperHeroGridComponent', () => {

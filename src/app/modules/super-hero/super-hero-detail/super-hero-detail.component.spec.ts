@@ -19,7 +19,7 @@ import { TranslateTestingModule } from 'ngx-translate-testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SharedModule } from '@shared/shared.module';
-import { ActivatedRouteStub } from '@testing/activated-route-stub';
+import { ActivatedRouteStub } from '@root/testing';
 import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
 import { SuperHeroService } from '@modules/super-hero/shared/super-hero.service';
 import { of, throwError } from 'rxjs';

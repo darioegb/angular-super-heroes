@@ -1,10 +1,8 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { SuperHero } from '../shared/super-hero.model';
-import { Column, ColumnDef, Page } from '@shared/models/grid.model';
-import { SuperHeroService } from '../shared/super-hero.service';
-import { PageConfig } from '@shared/models/page-config.model';
+import { Column, ColumnDef, Page, PageConfig } from '@shared/models';
 import { TranslateService } from '@ngx-translate/core';
+import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 
 export class SuperHeroGridDataSource extends DataSource<SuperHero> {
   private columns: Column[] = [];

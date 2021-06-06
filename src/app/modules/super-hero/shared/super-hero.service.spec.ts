@@ -4,13 +4,13 @@ import {
   HttpTestingController,
 } from '@angular/common/http/testing';
 
-import { SuperHeroService } from './super-hero.service';
-import { SuperHero } from './super-hero.model';
-import { PageConfig } from '../../../shared/models/page-config.model';
 import { ToastrModule } from 'ngx-toastr';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { SuperHeroService } from './super-hero.service';
+import { SuperHero } from './super-hero.model';
+import { PageConfig } from '@shared/models/page-config.model';
 
 describe('SuperHeroService', () => {
   let httpTestingController: HttpTestingController;

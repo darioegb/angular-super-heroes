@@ -17,12 +17,12 @@
       "node_modules/@types"
     ],
     "paths": {
+      "@root/*": ["src/*"],
       "@app/*": ["src/app/*"],
       "@core/*": ["src/app/core/*"],
       "@shared/*": ["src/app/shared/*"],
       "@modules/*": ["src/app/modules/*"],
       "@environments/*": ["src/environments/*"],
-      "@testing/*": ["src/testing/*"],
     }
   }
 }

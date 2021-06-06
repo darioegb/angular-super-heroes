@@ -7,8 +7,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { PageConfig } from '@shared/models/page-config.model';
-import { Page } from '@shared/models/grid.model';
+import { PageConfig, Page } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 

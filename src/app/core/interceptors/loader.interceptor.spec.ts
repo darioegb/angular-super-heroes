@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoaderInterceptor } from './loader.interceptor';
-import { LoaderService } from '../services/loader.service';
+import { LoaderService } from '@core/services';
 import {
   HttpTestingController,
   HttpClientTestingModule,

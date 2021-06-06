@@ -11,7 +11,7 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { ToastrModule } from 'ngx-toastr';
 
-import { MatPaginatorI18nService } from './shared/services/mat-paginator-i18n.service';
+import { MatPaginatorI18nService } from './shared/services';
 import { CoreModule } from './core/core.module';
 
 // AoT requires an exported function for factories

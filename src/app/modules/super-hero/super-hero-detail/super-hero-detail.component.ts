@@ -10,12 +10,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
-import { genresEnum } from '@shared/constants/constants';
-import { Option } from '@shared/models/option.model';
-import { ToastTranslation } from '@shared/models/toast.model';
-import { UtilService } from '@shared/services/util.service';
-import { SuperHero } from '../shared/super-hero.model';
-import { SuperHeroService } from '../shared/super-hero.service';
+import { genresEnum } from '@app/constants';
+import { Option, ToastTranslation } from '@shared/models';
+import { UtilService } from '@shared/services';
+import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 
 @Component({
   selector: 'app-super-hero-detail',
