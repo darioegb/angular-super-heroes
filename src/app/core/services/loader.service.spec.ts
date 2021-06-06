@@ -10,7 +10,19 @@ describe('LoaderService', () => {
     service = TestBed.inject(LoaderService);
   });
 
-  it('should be created', () => {
-    expect(service).toBeTruthy();
+  it('#show should set isLoading to true', (done: DoneFn) => {
+    service.show();
+    service.isLoading$.subscribe((loading) => {
+      expect(loading).toBeTruthy();
+      done();
+    });
+  });
+
+  it('#hide should set isLoading to false', (done: DoneFn) => {
+    service.hide();
+    service.isLoading$.subscribe((loading) => {
+      expect(loading).not.toBeTruthy();
+      done();
+    });
   });
 });

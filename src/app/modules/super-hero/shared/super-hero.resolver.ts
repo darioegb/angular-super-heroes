@@ -26,6 +26,6 @@ export class SuperHeroResolver implements Resolve<SuperHero> {
       this.router.getCurrentNavigation().extras.state?.data?.superHero;
     return superHero
       ? of(superHero)
-      : this.superHeroService.getSuperHero(route.paramMap.get('superHeroId'));
+      : this.superHeroService.get(route.paramMap.get('superHeroId'));
   }
 }

@@ -8,6 +8,6 @@ export class DropdownTranslatePipe implements PipeTransform {
   constructor(private translateService: TranslateService) {}
 
   transform(value: string, key: string): string {
-    return this.translateService.instant(`${key}.${value.toLowerCase()}`);
+    return this.translateService.instant(`${key}.${value?.toLowerCase()}`);
   }
 }

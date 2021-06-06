@@ -1,10 +1,9 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Observable, BehaviorSubject, of, Subscription } from 'rxjs';
+import { Observable, BehaviorSubject, Subscription } from 'rxjs';
 import { SuperHero } from '../shared/super-hero.model';
-import { Column, ColumnDef, Page } from 'src/app/shared/models/grid.model';
+import { Column, ColumnDef, Page } from '@app/shared/models/grid.model';
 import { SuperHeroService } from '../shared/super-hero.service';
-import { PageConfig } from 'src/app/shared/models/page-config.model';
-import { catchError } from 'rxjs/operators';
+import { PageConfig } from '@app/shared/models/page-config.model';
 import { TranslateService } from '@ngx-translate/core';
 
 export class SuperHeroGridDataSource extends DataSource<SuperHero> {
@@ -37,7 +36,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
 
   getTranslations(): void {
     this.translateSubscription = this.translateService
-      .get('superHero.grid.columns')
+      .get('superHeroes.grid.columns')
       .subscribe((translations) => {
         const { name, age, genre, specialty, height, weight, picture } =
           translations;
@@ -59,8 +58,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
 
   loadData(pageConfig: PageConfig): void {
     this.superHeroService
-      .getSuperHeroes(pageConfig)
-      .pipe(catchError(() => of([])))
+      .getPage(pageConfig)
       .subscribe((result: Page<SuperHero>) => {
         this.dataSubject.next(result.items);
         this.countSubject.next(result.count);

@@ -2,103 +2,107 @@
   "superHeroes": [
     {
       "id": 1,
-      "name": "Spiderman",
-      "genre": "man"
+      "name": "SPIDERMAN",
+      "genre": 1,
+      "specialty": "esto es una prueba",
+      "age": 50,
+      "height": 1.7,
+      "weight": 80
     },
     {
       "id": 2,
-      "name": "Superman",
-      "genre": "man"
+      "name": "SUPERMAN",
+      "genre": 1
     },
     {
       "id": 3,
-      "name": "Batman",
-      "genre": "man"
+      "name": "BATMAN",
+      "genre": 1
     },
     {
       "id": 4,
-      "name": "Iron Man",
-      "genre": "man"
+      "name": "IRON MAN",
+      "genre": 1
     },
     {
       "id": 5,
-      "name": "Manolito el fuerte",
-      "genre": "man"
+      "name": "MANOLITO EL FUERTE",
+      "genre": 1
     },
     {
       "id": 6,
-      "name": "Chapulin colorado",
-      "genre": "man"
+      "name": "CHAPULIN COLORADO",
+      "genre": 1
     },
     {
       "id": 7,
-      "name": "Hulk",
-      "genre": "man"
+      "name": "HULK",
+      "genre": 1
     },
     {
       "id": 8,
-      "name": "Popelle",
-      "genre": "man"
+      "name": "POPELLE",
+      "genre": 1
     },
     {
       "id": 9,
-      "name": "Thor",
-      "genre": "man"
+      "name": "THOR",
+      "genre": 1
     },
     {
       "id": 10,
-      "name": "Daredevil",
-      "genre": "man"
+      "name": "DAREDEVIL",
+      "genre": 1
     },
     {
       "id": 11,
-      "name": "Capitan America",
-      "genre": "man"
+      "name": "CAPITAN AMERICA",
+      "genre": 1
     },
     {
       "id": 12,
-      "name": "Pantera Negra",
-      "genre": "man"
+      "name": "PANTERA NEGRA",
+      "genre": 1
     },
     {
       "id": 13,
-      "name": "Valquiria",
-      "genre": "woman"
+      "name": "VALQUIRIA",
+      "genre": 2
     },
     {
       "id": 14,
-      "name": "Visión",
-      "genre": "man"
+      "name": "VISIÓN",
+      "genre": 1
     },
     {
       "id": 15,
-      "name": "Wolverine",
-      "genre": "man"
+      "name": "WOLVERINE",
+      "genre": 1
     },
     {
       "id": 16,
-      "name": "Mujer Maravilla",
-      "genre": "woman"
+      "name": "MUJER MARAVILLA",
+      "genre": 2
     },
     {
       "id": 17,
-      "name": "Antman",
-      "genre": "man"
+      "name": "ANTMAN",
+      "genre": 1
     },
     {
       "id": 18,
-      "name": "Hijitus",
-      "genre": "man"
+      "name": "HIJITUS",
+      "genre": 1
     },
     {
       "id": 19,
-      "name": "Gatubela",
-      "genre": "woman"
+      "name": "GATUBELA",
+      "genre": 2
     },
     {
       "id": 20,
-      "name": "Doctor Stranger",
-      "genre": "man"
+      "name": "DOCTOR STRANGER",
+      "genre": 1
     }
   ]
 }

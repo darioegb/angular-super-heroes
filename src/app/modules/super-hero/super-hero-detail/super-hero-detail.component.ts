@@ -1,15 +1,19 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
-import { genresEnum } from 'src/app/shared/constants/constants';
-import { Option } from 'src/app/shared/models/option.model';
-import { ToastTranslation } from 'src/app/shared/models/toast.model';
-import { UtilService } from 'src/app/shared/services/util.service';
+import { genresEnum } from '@app/shared/constants/constants';
+import { Option } from '@app/shared/models/option.model';
+import { ToastTranslation } from '@app/shared/models/toast.model';
+import { UtilService } from '@app/shared/services/util.service';
 import { SuperHero } from '../shared/super-hero.model';
 import { SuperHeroService } from '../shared/super-hero.service';
 
@@ -38,7 +42,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.genres = this.utilService.convertEnumToKeyValueArray(genresEnum);
-    this.view = /true/i.test(this.route.snapshot.queryParams['view']);
+    this.view = /true/i.test(this.route.snapshot.queryParams?.view);
     this.initForm();
     this.getData();
     this.getTranslations();
@@ -54,7 +58,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
         null,
         Validators.compose([
           Validators.required,
-          Validators.minLength(3),
+          Validators.minLength(1),
           Validators.maxLength(100),
         ]),
       ],
@@ -88,7 +92,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
 
   getTranslations(): void {
     this.translateService
-      .get('superHero.toasts')
+      .get('superHeroes.toasts')
       .pipe(take(1))
       .subscribe((translations) => (this.toastTranslations = translations));
   }
@@ -123,36 +127,30 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       return;
     }
     this.setSuperHero();
-    this.superHero?.id ? this.updateSuperHero() : this.saveSuperHero();
+    this.superHero.id ? this.updateSuperHero() : this.saveSuperHero();
   }
 
   saveSuperHero(): void {
     this.initSuperHero();
     this.setSuperHero();
-    this.superHeroService.addSuperHero(this.superHero).subscribe(
-      () => {
+    this.superHeroService.add(this.superHero).subscribe({
+      next: () => {
         this.toastr.success(this.toastTranslations.add.success);
         this.goBack();
       },
-      () => {
-        this.toastr.error(this.toastTranslations.add.error);
-        this.goBack();
-      }
-    );
+      error: () => this.goBack(),
+    });
   }
 
   updateSuperHero(): void {
     this.setSuperHero();
-    this.superHeroService.editSuperHero(this.superHero).subscribe(
-      () => {
-        this.toastr.success(this.toastTranslations.edit.success);
+    this.superHeroService.update(this.superHero).subscribe({
+      next: () => {
+        this.toastr.success(this.toastTranslations.update.success);
         this.goBack();
       },
-      () => {
-        this.toastr.error(this.toastTranslations.edit.error);
-        this.goBack();
-      }
-    );
+      error: () => this.goBack(),
+    });
   }
 
   goBack(): void {

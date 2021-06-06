@@ -1,16 +1,61 @@
 import { TestBed } from '@angular/core/testing';
 
 import { LoaderInterceptor } from './loader.interceptor';
+import { LoaderService } from '../services/loader.service';
+import {
+  HttpTestingController,
+  HttpClientTestingModule,
+} from '@angular/common/http/testing';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { SuperHeroService } from '@app/modules/super-hero/shared/super-hero.service';
+import { ToastrModule } from 'ngx-toastr';
+import { TranslateTestingModule } from 'ngx-translate-testing';
+import { SuperHero } from '@app/modules/super-hero/shared/super-hero.model';
 
 describe('LoaderInterceptor', () => {
-  beforeEach(() => TestBed.configureTestingModule({
-    providers: [
-      LoaderInterceptor
-      ]
-  }));
+  let httpTestingController: HttpTestingController;
+  let service: SuperHeroService;
 
-  it('should be created', () => {
-    const interceptor: LoaderInterceptor = TestBed.inject(LoaderInterceptor);
-    expect(interceptor).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [
+        HttpClientTestingModule,
+        TranslateTestingModule.withTranslations('es', {}),
+        ToastrModule.forRoot(),
+      ],
+      providers: [
+        LoaderService,
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: LoaderInterceptor,
+          multi: true,
+        },
+      ],
+    });
+
+    service = TestBed.inject(SuperHeroService);
+    httpTestingController = TestBed.inject(HttpTestingController);
+  });
+
+  it('should add an Authorization header', () => {
+    const expectedHero = { id: '1', name: 'A' } as SuperHero;
+    const superHeroId = '1';
+
+    service
+      .get(superHeroId)
+      .subscribe(
+        (hero) =>
+          expect(hero).toEqual(
+            expectedHero,
+            'should return expected superHero'
+          ),
+        fail
+      );
+
+    const httpRequest = httpTestingController.expectOne(
+      `${service.baseUrl}/${superHeroId}`
+    );
+    expect(httpRequest.request.method).toEqual('GET');
+    httpRequest.flush(expectedHero);
   });
 });

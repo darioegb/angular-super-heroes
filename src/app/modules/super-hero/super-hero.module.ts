@@ -15,7 +15,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SuperHeroGridComponent } from './super-hero-grid/super-hero-grid.component';
 import { SuperHeroDetailComponent } from './super-hero-detail/super-hero-detail.component';
 import { SuperHeroRoutingModule } from './super-hero-routing.module';
-import { SharedModule } from 'src/app/shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { NgxErrorMessageModule } from 'ngx-error-message';
 
 @NgModule({

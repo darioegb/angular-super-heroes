@@ -8,16 +8,16 @@ export class UpperCaseDirective {
   constructor(private el: ElementRef, private ngControl: NgControl) {}
 
   @HostListener('keyup', ['$event'])
-  onKeyDown(event: Event) {
+  onKeyUp(event: Event): void {
     this.toUpperCase(event);
   }
 
   @HostListener('blur', ['$event'])
-  onBlur(event: Event) {
+  onBlur(event: Event): void {
     this.toUpperCase(event);
   }
 
-  private toUpperCase(event: Event) {
+  private toUpperCase(event: Event): void {
     const newVal: string = (
       event.target as HTMLInputElement
     ).value.toUpperCase();

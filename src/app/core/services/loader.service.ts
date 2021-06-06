@@ -9,10 +9,10 @@ export class LoaderService {
   private isLoadingSubject = new BehaviorSubject<boolean>(false);
   isLoading$ = this.isLoadingSubject.asObservable().pipe(delay(0));
 
-  show() {
+  show(): void {
     this.isLoadingSubject.next(true);
   }
-  hide() {
+  hide(): void {
     this.isLoadingSubject.next(false);
   }
 }

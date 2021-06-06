@@ -12,7 +12,7 @@ import { SuperHero } from '../shared/super-hero.model';
 import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
 import { ColumnDef } from '../../../shared/models/grid.model';
 import { SuperHeroService } from '../shared/super-hero.service';
-import { PageConfig } from 'src/app/shared/models/page-config.model';
+import { PageConfig } from '@app/shared/models/page-config.model';
 import { EMPTY, fromEvent, merge, Subject } from 'rxjs';
 import {
   debounceTime,
@@ -27,8 +27,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { ConfirmDialogComponent } from 'src/app/shared/components/confirm-dialog/confirm-dialog.component';
-import { ToastTranslation } from 'src/app/shared/models/toast.model';
+import { ConfirmDialogComponent } from '@app/shared/components/confirm-dialog/confirm-dialog.component';
+import { ToastTranslation } from '@app/shared/models/toast.model';
+import { genresEnum } from '@app/shared/constants/constants';
 
 @Component({
   selector: 'app-super-hero-grid',
@@ -44,6 +45,7 @@ export class SuperHeroGridComponent
   dataSource: SuperHeroGridDataSource;
   pageConfig: PageConfig = new PageConfig();
   toastTranslations: ToastTranslation;
+  genres = genresEnum;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -109,7 +111,7 @@ export class SuperHeroGridComponent
 
   getTranslations(): void {
     this.translateService
-      .get('superHero.toasts.delete')
+      .get('superHeroes.toasts.delete')
       .pipe(take(1))
       .subscribe((translations) => (this.toastTranslations = translations));
   }
@@ -127,18 +129,13 @@ export class SuperHeroGridComponent
       .pipe(
         take(1),
         switchMap((result: boolean) =>
-          result ? this.superHeroService.deleteSuperHero(item.id) : EMPTY
+          result ? this.superHeroService.delete(item.id) : EMPTY
         )
       )
-      .subscribe(
-        () => {
-          this.onLoadData(true);
-          this.toastr.success(this.toastTranslations.success);
-        },
-        () => {
-          this.toastr.error(this.toastTranslations.error);
-        }
-      );
+      .subscribe(() => {
+        this.onLoadData(true);
+        this.toastr.success(this.toastTranslations.success);
+      });
   }
 
   ngOnDestroy(): void {
@@ -146,7 +143,7 @@ export class SuperHeroGridComponent
     this.unsubscribe$.complete();
   }
 
-  private initFilterData() {
+  private initFilterData(): void {
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
         map((event: any) => event.target.value),

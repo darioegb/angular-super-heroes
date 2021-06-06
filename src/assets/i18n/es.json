@@ -1,5 +1,5 @@
 {
-  "superHero": {
+  "superHeroes": {
     "grid": {
       "filterInput": {
         "label": "Filtrar Superheroe",
@@ -31,9 +31,9 @@
         "success": "El superheoe se agregó con éxito",
         "error": "Ocurrió un error al agregar un superheroe"
       },
-      "edit": {
-        "success": "El superheoe fue modificado con éxito",
-        "error": "Ocurrió un error al editar un superheroe"
+      "update": {
+        "success": "El superheoe fue actualizado con éxito",
+        "error": "Ocurrió un error al actualizar un superheroe"
       },
       "delete": {
         "success": "El superheoe ha sido eliminado con exitosamente",
