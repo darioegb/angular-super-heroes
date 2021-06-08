@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
+import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
 import { Option } from '@shared/models/option.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilService {
+
+  constructor(private storage: AngularFireStorage) {}
+
   /**
    * Get enum keys from enum object
    * @param type enum
@@ -23,4 +27,14 @@ export class UtilService {
       return { key, value: type[key] };
     });
   }
+
+  uploadFile(file: File): AngularFireUploadTask {
+    const fileName = file.name;
+    return this.storage.upload(`pictures/${fileName}`, file);
+  }
+
+  fileRef(fileName: string): AngularFireStorageReference {
+    return this.storage.ref(`pictures/${fileName}`);
+  }
+
 }

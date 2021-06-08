@@ -26,7 +26,7 @@ import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
 import { ColumnDef, PageConfig, ToastTranslation } from '@shared/models';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { genresEnum } from '@app/constants';
+import { genresEnum, imgSrc } from '@app/constants';
 
 @Component({
   selector: 'app-super-hero-grid',
@@ -43,6 +43,7 @@ export class SuperHeroGridComponent
   pageConfig: PageConfig = new PageConfig();
   toastTranslations: ToastTranslation;
   genres = genresEnum;
+  noImageSrc = `${imgSrc}/no-image.png`;
   private unsubscribe$ = new Subject<void>();
 
   constructor(

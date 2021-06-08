@@ -1,20 +1,15 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
-import { genresEnum } from '@app/constants';
+import { genresEnum, imgSrc } from '@app/constants';
 import { Option, ToastTranslation } from '@shared/models';
 import { UtilService } from '@shared/services';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
-
 @Component({
   selector: 'app-super-hero-detail',
   templateUrl: './super-hero-detail.component.html',
@@ -26,6 +21,8 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   superHero: SuperHero;
   view: boolean;
   toastTranslations: { [key: string]: ToastTranslation };
+  noImageSrc = `${imgSrc}/no-image.png`;
+  uploadPercent$: Observable<number>;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -125,7 +122,20 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       return;
     }
     this.setSuperHero();
-    this.superHero.id ? this.updateSuperHero() : this.saveSuperHero();
+    if (this.superHeroControls.picture.value) {
+      const file = this.superHeroControls.picture.value;
+      const task = this.utilService.uploadFile(file);
+      this.uploadPercent$ = task.percentageChanges();
+      this.utilService
+        .fileRef(file.name)
+        .getDownloadURL()
+        .subscribe((url) => {
+          this.superHeroControls.picture.setValue(url);
+          this.superHero.id ? this.updateSuperHero() : this.saveSuperHero();
+        });
+    } else {
+      this.superHero.id ? this.updateSuperHero() : this.saveSuperHero();
+    }
   }
 
   saveSuperHero(): void {

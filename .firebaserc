@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "super-heroes-c3a1b": {
+      "hosting": {
+        "super-heroes": [
+          "super-heroes-c3a1b"
+        ]
+      }
+    }
+  }
+}

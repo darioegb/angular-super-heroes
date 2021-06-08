@@ -8,11 +8,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MatPaginatorIntl } from '@angular/material/paginator';
-import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 import { ToastrModule } from 'ngx-toastr';
 
 import { MatPaginatorI18nService } from './shared/services';
 import { CoreModule } from './core/core.module';
+import { environment } from '@environments/environment';
 
 // AoT requires an exported function for factories
 export const httpLoaderFactory = (http: HttpClient) =>
@@ -25,6 +28,8 @@ export const httpLoaderFactory = (http: HttpClient) =>
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
     MatProgressSpinnerModule,
     TranslateModule.forRoot({
       defaultLanguage: 'es',
@@ -36,7 +41,7 @@ export const httpLoaderFactory = (http: HttpClient) =>
       },
     }),
     ToastrModule.forRoot(),
-    CoreModule
+    CoreModule,
   ],
   providers: [
     {

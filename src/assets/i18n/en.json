@@ -24,7 +24,8 @@
         "specialtyPlaceHolder": "Ex. Can fly",
         "heightPlaceholder": "Ex. 1.70m",
         "weightPlaceholder": "Ex. 70kg"
-      }
+      },
+      "previewCardTitle": "Preview"
     },
     "toasts": {
       "add": {

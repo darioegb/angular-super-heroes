@@ -103,6 +103,16 @@
       "id": 20,
       "name": "DOCTOR STRANGER",
       "genre": 1
+    },
+    {
+      "name": "TEST",
+      "genre": 1,
+      "specialty": "test de prueba",
+      "age": 50,
+      "height": null,
+      "weight": null,
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fbarrels-tsPath.png?alt=media&token=fa07f701-72c5-4ca0-aea3-eda2508dcb44",
+      "id": 21
     }
   ]
 }

@@ -23,19 +23,26 @@
     <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header>
       {{ column.cellDef }}
     </th>
-    <ng-container *ngIf="column.headerDef !== 'genre'; else genre">
-      <td mat-cell *matCellDef="let element">
-        {{ element[column.headerDef] }}
-      </td>
+    <ng-container [ngSwitch]="column.headerDef">
+      <ng-container *ngSwitchCase="'genre'">
+        <td mat-cell *matCellDef="let element">
+          {{
+            genres[element[column.headerDef]]
+              | dropdownTranslate: "globals.enums.genres"
+          }}
+        </td>
+      </ng-container>
+      <ng-container *ngSwitchCase="'picture'">
+        <td mat-cell *matCellDef="let element">
+          <img class="picture" [src]="element[column.headerDef] || noImageSrc" alt="picture" />
+        </td>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <td mat-cell *matCellDef="let element">
+          {{ element[column.headerDef] || "-" }}
+        </td>
+      </ng-container>
     </ng-container>
-    <ng-template #genre>
-      <td mat-cell *matCellDef="let element">
-        {{
-          genres[element[column.headerDef]]
-            | dropdownTranslate: "globals.enums.genres"
-        }}
-      </td>
-    </ng-template>
   </ng-container>
 
   <!-- Action Column -->

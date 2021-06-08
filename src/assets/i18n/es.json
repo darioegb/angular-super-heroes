@@ -24,7 +24,8 @@
         "specialtyPlaceHolder": "Ej. Puede volar",
         "heightPlaceholder": "Ej. 1.70m",
         "weightPlaceholder": "Ej. 70kg"
-      }
+      },
+      "previewCardTitle": "Vista previa"
     },
     "toasts": {
       "add": {
