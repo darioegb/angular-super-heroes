@@ -1,13 +1,19 @@
 import { Injectable } from '@angular/core';
-import { AngularFireStorage, AngularFireStorageReference, AngularFireUploadTask } from '@angular/fire/storage';
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
 import { Option } from '@shared/models/option.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UtilService {
-
   constructor(private storage: AngularFireStorage) {}
+
+  private pictureBasePath = 'pictures';
 
   /**
    * Get enum keys from enum object
@@ -28,13 +34,28 @@ export class UtilService {
     });
   }
 
-  uploadFile(file: File): AngularFireUploadTask {
-    const fileName = file.name;
-    return this.storage.upload(`pictures/${fileName}`, file);
+  uploadFile(file: File, fileName: string): AngularFireUploadTask {
+    return this.storage.upload(`${this.pictureBasePath}/${fileName}`, file);
   }
 
   fileRef(fileName: string): AngularFireStorageReference {
-    return this.storage.ref(`pictures/${fileName}`);
+    return this.storage.ref(`${this.pictureBasePath}/${fileName}`);
   }
 
+  fileName(): string {
+    return `picture-${Date.now()}`;
+  }
+
+  /**
+   * Convert file to base64 string.
+   * @param file File
+   * @returns Observable<string | ArrayBuffer>
+   */
+  fileToBase64String(file: File): Observable<string | ArrayBuffer> {
+    const reader = new FileReader();
+    return new Observable<string | ArrayBuffer>((observer) => {
+      reader.readAsDataURL(file);
+      reader.onload = () => observer.next(reader.result);
+    });
+  }
 }

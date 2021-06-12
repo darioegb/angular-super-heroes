@@ -23,6 +23,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   toastTranslations: { [key: string]: ToastTranslation };
   noImageSrc = `${imgSrc}/no-image.png`;
   uploadPercent$: Observable<number>;
+  previewPicture$: Observable<string | ArrayBuffer>;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -124,10 +125,11 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.setSuperHero();
     if (this.superHeroControls.picture.value) {
       const file = this.superHeroControls.picture.value;
-      const task = this.utilService.uploadFile(file);
+      const fileName = this.utilService.fileName();
+      const task = this.utilService.uploadFile(file, fileName);
       this.uploadPercent$ = task.percentageChanges();
       this.utilService
-        .fileRef(file.name)
+        .fileRef(fileName)
         .getDownloadURL()
         .subscribe((url) => {
           this.superHeroControls.picture.setValue(url);
@@ -163,6 +165,11 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.location.back();
+  }
+
+  onChangePicture() {
+    const file = this.superHeroControls.picture.value;
+    this.previewPicture$ = this.utilService.fileToBase64String(file);
   }
 
   ngOnDestroy(): void {

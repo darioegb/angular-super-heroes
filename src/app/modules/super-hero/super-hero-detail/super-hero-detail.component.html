@@ -115,7 +115,9 @@
           <mat-form-field appearance="fill" class="full-width">
             <ngx-mat-file-input
               formControlName="picture"
+              accept="image/*"
               [placeholder]="'superHeroes.grid.columns.picture' | translate"
+              (change)="onChangePicture()"
             >
               <mat-icon ngxMatFileInputIcon>folder</mat-icon>
             </ngx-mat-file-input>
@@ -131,7 +133,7 @@
             <mat-card-content>
               <img
                 class="picture"
-                [src]="superHeroControls.picture.value || noImageSrc"
+                [src]="(previewPicture$ | async) || noImageSrc"
                 alt="picture"
               />
             </mat-card-content>

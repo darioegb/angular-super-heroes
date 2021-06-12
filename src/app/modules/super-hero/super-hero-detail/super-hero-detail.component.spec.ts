@@ -23,17 +23,29 @@ import { ActivatedRouteStub } from '@root/testing';
 import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
 import { SuperHeroService } from '@modules/super-hero/shared/super-hero.service';
 import { of, throwError } from 'rxjs';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { UtilService } from '@shared/services';
 
 describe('SuperHeroDetailComponent', () => {
   let activatedRoute: ActivatedRouteStub;
   let component: SuperHeroDetailComponent;
   let fixture: ComponentFixture<SuperHeroDetailComponent>;
   let toastServiceStub: Partial<ToastrService>;
+  let fireStorageStub: Partial<AngularFireStorage>;
 
   beforeEach(() => {
     activatedRoute = new ActivatedRouteStub();
     toastServiceStub = {
       success: () => null,
+    };
+    fireStorageStub = {
+      upload: (..._arg) => {
+        return {
+          percentageChanges: () => of(0),
+        } as never;
+      },
+      ref: (_path: string) => null,
     };
   });
 
@@ -41,8 +53,12 @@ describe('SuperHeroDetailComponent', () => {
     let hostElement: HTMLElement;
     let submitButton: HTMLButtonElement;
     let toastService: ToastrService;
+    let utilService: UtilService;
     const superHeroServiceSpy: jasmine.SpyObj<SuperHeroService> =
       jasmine.createSpyObj('SuperHeroService', ['add', 'update']);
+    const file = new File(['foo'], 'foo.png', {
+      type: 'image/png',
+    });
 
     beforeEach(
       waitForAsync(() => {
@@ -56,6 +72,7 @@ describe('SuperHeroDetailComponent', () => {
             MatInputModule,
             MatRadioModule,
             MatSelectModule,
+            NgxMatFileInputModule,
             HttpClientTestingModule,
             TranslateTestingModule.withTranslations(
               'es',
@@ -71,12 +88,17 @@ describe('SuperHeroDetailComponent', () => {
             },
             { provide: SuperHeroService, useValue: superHeroServiceSpy },
             { provide: ToastrService, useValue: toastServiceStub },
+            {
+              provide: AngularFireStorage,
+              useValue: fireStorageStub,
+            },
           ],
         }).compileComponents();
       })
     );
 
     beforeEach(() => {
+      utilService = TestBed.inject(UtilService);
       toastService = TestBed.inject(ToastrService);
       fixture = TestBed.createComponent(SuperHeroDetailComponent);
       component = fixture.componentInstance;
@@ -160,6 +182,32 @@ describe('SuperHeroDetailComponent', () => {
         expect(component.superHero).toBeDefined();
         expect(superHeroServiceSpy.update).toHaveBeenCalled();
       });
+
+      it('should update super hero when data is valid with picture', () => {
+        spyOn(utilService, 'fileRef').and.returnValue({
+          getDownloadURL: () => of('url image'),
+        } as never);
+        spyOn(toastService, 'success');
+        superHeroServiceSpy.update.and.returnValue(of({}));
+        component.superHeroControls.picture.setValue(file);
+        fixture.detectChanges();
+        component.onSubmit();
+        expect(component.superHeroForm.valid).toBeTruthy();
+        expect(component.superHero).toBeDefined();
+        expect(utilService.fileRef).toHaveBeenCalled();
+        expect(superHeroServiceSpy.update).toHaveBeenCalled();
+        expect(toastService.success).toHaveBeenCalled();
+      });
+
+      it('should set previewPicture when input file change', () => {
+        spyOn(utilService, 'fileToBase64String').and.returnValue(
+          of('base64 image string')
+        );
+        component.superHeroControls.picture.setValue(file);
+        component.onChangePicture();
+        expect(utilService.fileToBase64String).toHaveBeenCalled();
+        expect(component.previewPicture$).toBeDefined();
+      });
     });
 
     describe('when create mode', () => {
@@ -204,6 +252,23 @@ describe('SuperHeroDetailComponent', () => {
         expect(component.superHeroForm.valid).toBeTruthy();
         expect(component.superHero).toBeDefined();
         expect(superHeroServiceSpy.add).toHaveBeenCalled();
+      });
+
+      it('should add new super hero when data is valid with picture', () => {
+        spyOn(utilService, 'fileRef').and.returnValue({
+          getDownloadURL: () => of('url image'),
+        } as never);
+        spyOn(toastService, 'success');
+        superHeroServiceSpy.add.and.returnValue(of({}));
+        component.superHeroForm.patchValue(newSuperHero);
+        component.superHeroControls.picture.setValue(file);
+        fixture.detectChanges();
+        component.onSubmit();
+        expect(component.superHeroForm.valid).toBeTruthy();
+        expect(component.superHero).toBeDefined();
+        expect(utilService.fileRef).toHaveBeenCalled();
+        expect(superHeroServiceSpy.add).toHaveBeenCalled();
+        expect(toastService.success).toHaveBeenCalled();
       });
     });
   });
