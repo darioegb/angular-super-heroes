@@ -1,5 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-import { AngularFireStorage } from '@angular/fire/storage';
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
 import { UtilService } from './util.service';
 
 describe('UtilService', () => {
@@ -13,8 +17,8 @@ describe('UtilService', () => {
 
   beforeEach(() => {
     fireStorageStub = {
-      upload: (..._arg) => null,
-      ref: (_path: string) => null,
+      upload: (..._arg): AngularFireUploadTask => null,
+      ref: (_path: string): AngularFireStorageReference => null,
     };
   });
 
@@ -36,7 +40,7 @@ describe('UtilService', () => {
 
     it('should convert enum to keyValueArray', () => {
       expect(service.convertEnumToKeyValueArray(testEnum)).toBeInstanceOf(
-        Array
+        Array,
       );
     });
 
@@ -64,6 +68,19 @@ describe('UtilService', () => {
         expect(result).toBeDefined();
         done();
       });
+    });
+
+    it('should get property value from object path', () => {
+      const user = {
+        userName: 'test',
+        address: {
+          street: '9 de julio',
+          number: 200,
+        },
+      };
+      expect(service.getObjectProperty(user, 'address.street')).toBe(
+        user.address.street,
+      );
     });
   });
 });

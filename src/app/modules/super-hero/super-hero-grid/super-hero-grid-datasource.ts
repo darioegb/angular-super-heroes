@@ -15,7 +15,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
 
   constructor(
     private superHeroService: SuperHeroService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
   ) {
     super();
     this.getTranslations();
@@ -65,7 +65,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
 
   private initDisplayedColumns(): void {
     this.columns.forEach((column) =>
-      this.displayedColumns.push(column.headerDef)
+      this.displayedColumns.push(column.headerDef),
     );
     this.displayedColumns.push('actions');
   }

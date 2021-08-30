@@ -5,15 +5,14 @@ import { LoaderService } from './core/services/loader.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-   isLoading$: Observable<boolean>;
+  isLoading$: Observable<boolean>;
 
   constructor(private loaderService: LoaderService) {}
 
   ngOnInit(): void {
     this.isLoading$ = this.loaderService.isLoading$;
   }
-
 }

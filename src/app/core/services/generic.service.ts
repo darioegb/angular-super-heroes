@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import {
   HttpClient,
@@ -11,16 +10,13 @@ import { PageConfig, Page } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
-@Injectable({
-  providedIn: 'root',
-})
 export abstract class GenericService<T> {
   public readonly baseUrl = `${environment.apiUrl}/${this.getResourceUrl()}`;
 
   constructor(
     protected httpClient: HttpClient,
     protected toastr: ToastrService,
-    protected translateService: TranslateService
+    protected translateService: TranslateService,
   ) {}
 
   abstract getResourceUrl(): string;
@@ -60,15 +56,15 @@ export abstract class GenericService<T> {
           of({
             items: [],
             count: 0,
-          })
-        )
+          }),
+        ),
       );
   }
 
   get(id: string | number): Observable<T> {
     return this.httpClient.get<T>(`${this.baseUrl}/${id}`).pipe(
       map((json) => this.fromServerModel(json)),
-      catchError((error) => this.handleError(error, 'get'))
+      catchError((error) => this.handleError(error, 'get')),
     );
   }
 
@@ -91,11 +87,14 @@ export abstract class GenericService<T> {
       .pipe(catchError((error) => this.handleError(error, 'update')));
   }
 
-  private handleError(error: HttpErrorResponse, operation: string) {
+  private handleError(
+    error: HttpErrorResponse,
+    operation: string,
+  ): Observable<never> {
     this.toastr.error(
       this.translateService.instant(
-        `${this.getResourceUrl()}.toasts.${operation}.error`
-      )
+        `${this.getResourceUrl()}.toasts.${operation}.error`,
+      ),
     );
 
     return throwError(error);

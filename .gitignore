@@ -46,4 +46,5 @@ testem.log
 Thumbs.db
 
 #DB mock
-db.json
+# db.json
+# routes.json

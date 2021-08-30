@@ -1,13 +1,18 @@
 import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, Observable } from 'rxjs';
 import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
-import { genresEnum, imgSrc } from '@app/constants';
-import { Option, ToastTranslation } from '@shared/models';
+import { genresEnum, httpMethodKeys, imgSrc } from '@app/constants';
+import { GenericObject, Option, ToastTranslation } from '@shared/models';
 import { UtilService } from '@shared/services';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 @Component({
@@ -20,7 +25,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   genres: Option[] = [];
   superHero: SuperHero;
   view: boolean;
-  toastTranslations: { [key: string]: ToastTranslation };
+  toastTranslations: GenericObject<ToastTranslation>;
   noImageSrc = `${imgSrc}/no-image.png`;
   uploadPercent$: Observable<number>;
   previewPicture$: Observable<string | ArrayBuffer>;
@@ -33,7 +38,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private toastr: ToastrService,
     private utilService: UtilService,
-    private superHeroService: SuperHeroService
+    private superHeroService: SuperHeroService,
   ) {}
 
   ngOnInit(): void {
@@ -44,7 +49,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.getTranslations();
   }
 
-  get superHeroControls() {
+  get superHeroControls(): GenericObject<AbstractControl> {
     return this.superHeroForm.controls;
   }
 
@@ -78,7 +83,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.route.params
       .pipe(takeUntil(this.unsubscribe$), withLatestFrom(this.route.data))
       .subscribe(([params, data]) => {
-        if (params.superHeroId) {
+        if (params.id) {
           this.superHero = data.superHero;
           this.view && this.superHeroForm.disable();
           this.setForm();
@@ -122,7 +127,6 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       this.superHeroForm.markAllAsTouched();
       return;
     }
-    this.setSuperHero();
     if (this.superHeroControls.picture.value) {
       const file = this.superHeroControls.picture.value;
       const fileName = this.utilService.fileName();
@@ -133,41 +137,18 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
         .getDownloadURL()
         .subscribe((url) => {
           this.superHeroControls.picture.setValue(url);
-          this.superHero.id ? this.updateSuperHero() : this.saveSuperHero();
+          this.saveOrUpdate();
         });
     } else {
-      this.superHero.id ? this.updateSuperHero() : this.saveSuperHero();
+      this.saveOrUpdate();
     }
-  }
-
-  saveSuperHero(): void {
-    this.initSuperHero();
-    this.setSuperHero();
-    this.superHeroService.add(this.superHero).subscribe({
-      next: () => {
-        this.toastr.success(this.toastTranslations.add.success);
-        this.goBack();
-      },
-      error: () => this.goBack(),
-    });
-  }
-
-  updateSuperHero(): void {
-    this.setSuperHero();
-    this.superHeroService.update(this.superHero).subscribe({
-      next: () => {
-        this.toastr.success(this.toastTranslations.update.success);
-        this.goBack();
-      },
-      error: () => this.goBack(),
-    });
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  onChangePicture() {
+  onChangePicture(): void {
     const file = this.superHeroControls.picture.value;
     this.previewPicture$ = this.utilService.fileToBase64String(file);
   }
@@ -175,5 +156,24 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  private saveOrUpdate(): void {
+    const isNew = !this.superHero?.id;
+    isNew && this.initSuperHero();
+    this.setSuperHero();
+    this.superHeroService[isNew ? httpMethodKeys.post : httpMethodKeys.put](
+      this.superHero,
+    ).subscribe({
+      next: () => {
+        this.toastr.success(
+          isNew
+            ? this.toastTranslations.add.success
+            : this.toastTranslations.update.success,
+        );
+        this.goBack();
+      },
+      error: () => this.goBack(),
+    });
   }
 }

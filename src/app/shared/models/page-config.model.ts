@@ -6,7 +6,7 @@ export class PageConfig {
     public limit?: number,
     public sort?: string,
     public order?: SortDirection,
-    public filter?: string
+    public filter?: string,
   ) {
     this.page = page || 1;
     this.limit = limit || 10;

@@ -1,2 +1,2 @@
-export * from './constants';
-export * from  './genres.enum';
+export * from './globals';
+export * from './genres.enum';

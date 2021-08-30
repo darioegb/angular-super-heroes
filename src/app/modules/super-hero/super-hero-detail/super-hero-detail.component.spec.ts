@@ -16,14 +16,18 @@ import { MatSelectModule } from '@angular/material/select';
 import { SuperHeroDetailComponent } from './super-hero-detail.component';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateTestingModule } from 'ngx-translate-testing';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ActiveToast, ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SharedModule } from '@shared/shared.module';
 import { ActivatedRouteStub } from '@root/testing';
 import { SuperHero } from '@modules/super-hero/shared/super-hero.model';
 import { SuperHeroService } from '@modules/super-hero/shared/super-hero.service';
 import { of, throwError } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/storage';
+import {
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/storage';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { UtilService } from '@shared/services';
 
@@ -37,15 +41,15 @@ describe('SuperHeroDetailComponent', () => {
   beforeEach(() => {
     activatedRoute = new ActivatedRouteStub();
     toastServiceStub = {
-      success: () => null,
+      success: (): ActiveToast<unknown> => null,
     };
     fireStorageStub = {
-      upload: (..._arg) => {
+      upload: (..._arg): AngularFireUploadTask => {
         return {
           percentageChanges: () => of(0),
         } as never;
       },
-      ref: (_path: string) => null,
+      ref: (_path: string): AngularFireStorageReference => null,
     };
   });
 
@@ -76,7 +80,7 @@ describe('SuperHeroDetailComponent', () => {
             HttpClientTestingModule,
             TranslateTestingModule.withTranslations(
               'es',
-              require('src/assets/i18n/es.json')
+              require('src/assets/i18n/es.json'),
             ),
             ToastrModule.forRoot(),
             SharedModule,
@@ -94,7 +98,7 @@ describe('SuperHeroDetailComponent', () => {
             },
           ],
         }).compileComponents();
-      })
+      }),
     );
 
     beforeEach(() => {
@@ -119,8 +123,8 @@ describe('SuperHeroDetailComponent', () => {
             } as SuperHero,
           });
           activatedRoute.setQueryParams({ view: true });
-          activatedRoute.setParam({ superHeroId: '1' });
-        })
+          activatedRoute.setParam({ id: '1' });
+        }),
       );
 
       it('should disabled form and defined superHero', fakeAsync(() => {
@@ -145,8 +149,8 @@ describe('SuperHeroDetailComponent', () => {
               specialty: 'He can fly',
             } as SuperHero,
           });
-          activatedRoute.setParam({ superHeroId: '1' });
-        })
+          activatedRoute.setParam({ id: '1' });
+        }),
       );
 
       it('should active form and defined superHero', fakeAsync(() => {
@@ -173,7 +177,7 @@ describe('SuperHeroDetailComponent', () => {
 
       it('should not update super hero when error occured', () => {
         superHeroServiceSpy.update.and.returnValue(
-          throwError('fail to update')
+          throwError('fail to update'),
         );
         component.superHeroControls.age.setValue(100);
         fixture.detectChanges();
@@ -201,7 +205,7 @@ describe('SuperHeroDetailComponent', () => {
 
       it('should set previewPicture when input file change', () => {
         spyOn(utilService, 'fileToBase64String').and.returnValue(
-          of('base64 image string')
+          of('base64 image string'),
         );
         component.superHeroControls.picture.setValue(file);
         component.onChangePicture();

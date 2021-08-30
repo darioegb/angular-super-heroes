@@ -29,9 +29,7 @@ export class UtilService {
    * @example [ { key: 'A', value: 1 }, { key: 'B', value: 2 } ]
    */
   convertEnumToKeyValueArray(type: unknown): Option[] {
-    return this.getEnumKeys(type).map((key) => {
-      return { key, value: type[key] };
-    });
+    return this.getEnumKeys(type).map((key) => ({ key, value: type[key] }));
   }
 
   uploadFile(file: File, fileName: string): AngularFireUploadTask {
@@ -55,7 +53,20 @@ export class UtilService {
     const reader = new FileReader();
     return new Observable<string | ArrayBuffer>((observer) => {
       reader.readAsDataURL(file);
-      reader.onload = () => observer.next(reader.result);
+      reader.onload = (): void => observer.next(reader.result);
     });
+  }
+
+  /**
+   * Get object property value by path
+   * @param object T
+   * @param path string. Ex: 'address.name'
+   */
+  getObjectProperty<T>(object: T, path: string): unknown {
+    if (path === undefined || path === null) {
+      return object;
+    }
+    const parts = path.split('.');
+    return parts.reduce((obj, key) => obj?.[key], object);
   }
 }

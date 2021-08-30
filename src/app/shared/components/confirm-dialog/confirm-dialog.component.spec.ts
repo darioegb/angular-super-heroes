@@ -20,12 +20,12 @@ describe('ConfirmDialogComponent', () => {
           HttpClientTestingModule,
           TranslateTestingModule.withTranslations(
             'es',
-            require('src/assets/i18n/es.json')
+            require('src/assets/i18n/es.json'),
           ),
         ],
         providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
       }).compileComponents();
-    })
+    }),
   );
 
   beforeEach(() => {

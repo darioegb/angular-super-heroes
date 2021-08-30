@@ -4,14 +4,14 @@ import { MatPaginatorI18nService } from './mat-paginator-i18n.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { DefaultLangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { ReplaySubject, of } from 'rxjs';
+import { ReplaySubject, of, Observable } from 'rxjs';
 
 describe('MatPaginatorI18nService', () => {
   const eventSubject = new ReplaySubject<DefaultLangChangeEvent>(1);
-  const fakeTranslate = {
+  const translateStub = {
     onLangChange: eventSubject.asObservable(),
     setDefaultLang: jasmine.createSpy('setDefaultLang'),
-    get: (_: string) => of({}),
+    get: (_: string): Observable<unknown> => of({}),
     defaultLang: 'es',
   };
   let service: MatPaginatorI18nService;
@@ -22,13 +22,14 @@ describe('MatPaginatorI18nService', () => {
         HttpClientTestingModule,
         TranslateTestingModule.withTranslations(
           'es',
-          require('src/assets/i18n/es.json')
+          require('src/assets/i18n/es.json'),
         ),
       ],
       providers: [
+        MatPaginatorI18nService,
         {
           provide: TranslateService,
-          useValue: fakeTranslate,
+          useValue: translateStub,
         },
       ],
     });
@@ -44,7 +45,7 @@ describe('MatPaginatorI18nService', () => {
   it('getAndInitTranslations should be called when langChange', () => {
     spyOn(service, 'getAndInitTranslations');
     eventSubject.next({ lang: 'en', translations: [] });
-    fakeTranslate.onLangChange.subscribe((newLang) => {
+    translateStub.onLangChange.subscribe((newLang) => {
       expect(newLang.lang).toEqual('en');
       expect(service.getAndInitTranslations).toHaveBeenCalled();
     });

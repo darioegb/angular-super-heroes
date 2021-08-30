@@ -21,7 +21,7 @@ describe('HeroResolver', () => {
   const superHeroServiceSpy: jasmine.SpyObj<SuperHeroService> =
     jasmine.createSpyObj('SuperHeroService', ['get']);
   const activatedRouteStub = {
-    paramMap: convertToParamMap({ superHeroId: '1' }),
+    paramMap: convertToParamMap({ id: '1' }),
   };
 
   beforeEach(() => {
@@ -35,7 +35,7 @@ describe('HeroResolver', () => {
           data: {
             superHero: { id: '1' },
           },
-        })
+        }),
       );
 
       beforeEach(
@@ -45,11 +45,13 @@ describe('HeroResolver', () => {
               HttpClientTestingModule,
               TranslateTestingModule.withTranslations(
                 'es',
-                require('src/assets/i18n/es.json')
+                require('src/assets/i18n/es.json'),
               ),
               ToastrModule.forRoot(),
             ],
             providers: [
+              SuperHeroService,
+              SuperHeroResolver,
               {
                 provide: Router,
                 useValue: router,
@@ -57,7 +59,7 @@ describe('HeroResolver', () => {
             ],
           });
           resolver = TestBed.inject(SuperHeroResolver);
-        })
+        }),
       );
 
       it('should resolve superHero', () => {
@@ -75,6 +77,7 @@ describe('HeroResolver', () => {
         TestBed.configureTestingModule({
           imports: [HttpClientTestingModule],
           providers: [
+            SuperHeroResolver,
             {
               provide: Router,
               useValue: router,
@@ -88,7 +91,7 @@ describe('HeroResolver', () => {
         });
         resolver = TestBed.inject(SuperHeroResolver);
         route = TestBed.inject(ActivatedRouteSnapshot);
-      })
+      }),
     );
     describe('without superHero data', () => {
       beforeEach(() => {

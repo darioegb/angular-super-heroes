@@ -23,7 +23,7 @@ describe('SuperHeroService', () => {
         HttpClientTestingModule,
         TranslateTestingModule.withTranslations(
           'es',
-          require('src/assets/i18n/es.json')
+          require('src/assets/i18n/es.json'),
         ),
         ToastrModule.forRoot(),
       ],
@@ -67,9 +67,9 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items).toEqual(
               expectedHeroes,
-              'should return expected superHeroes'
+              'should return expected superHeroes',
             ),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -88,9 +88,9 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items[0].name).toEqual(
               expectedHeroes[0].name,
-              'should return expected superHeroes sorter by name'
+              'should return expected superHeroes sorter by name',
             ),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -109,9 +109,9 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items[0].name).toEqual(
               expectedHeroes[1].name,
-              'should return expected superHeroes filtered'
+              'should return expected superHeroes filtered',
             ),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -127,9 +127,9 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items.length).toEqual(
               0,
-              'should return empty heroes array'
+              'should return empty heroes array',
             ),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -144,9 +144,9 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items.length).toEqual(
               0,
-              'should have empty superHeroes array'
+              'should have empty superHeroes array',
             ),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -171,9 +171,9 @@ describe('SuperHeroService', () => {
           (hero) =>
             expect(hero).toEqual(
               expectedHero,
-              'should return expected superHero'
+              'should return expected superHero',
             ),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -187,7 +187,7 @@ describe('SuperHeroService', () => {
         error: (err: HttpErrorResponse) =>
           expect(err.status).toEqual(
             404,
-            'should return 404 when superHeroe not found'
+            'should return 404 when superHeroe not found',
           ),
       });
 
@@ -204,7 +204,7 @@ describe('SuperHeroService', () => {
         .add(newHero)
         .subscribe(
           (data) => expect(data).toEqual(newHero, 'should return the hero'),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(service.baseUrl);
@@ -224,7 +224,7 @@ describe('SuperHeroService', () => {
         error: (err: HttpErrorResponse) =>
           expect(err.status).toEqual(
             400,
-            'should return 400 when superHeroe can not create'
+            'should return 400 when superHeroe can not create',
           ),
       });
 
@@ -247,7 +247,7 @@ describe('SuperHeroService', () => {
         .update(updateHero)
         .subscribe(
           (data) => expect(data).toEqual(updateHero, 'should return the hero'),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -267,7 +267,7 @@ describe('SuperHeroService', () => {
         error: (err: HttpErrorResponse) =>
           expect(err.status).toEqual(
             404,
-            'should return 404 when superHeroe does not exist'
+            'should return 404 when superHeroe does not exist',
           ),
       });
 
@@ -290,7 +290,7 @@ describe('SuperHeroService', () => {
         .delete(superHeroId)
         .subscribe(
           (data) => expect(data).toEqual({}, 'should delete the hero'),
-          fail
+          fail,
         );
 
       const req = httpTestingController.expectOne(superHeroeUrl);
@@ -309,7 +309,7 @@ describe('SuperHeroService', () => {
         error: (err: HttpErrorResponse) =>
           expect(err.status).toEqual(
             404,
-            'should return 404 when superHeroe with provide id does not exist'
+            'should return 404 when superHeroe with provide id does not exist',
           ),
       });
 

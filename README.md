@@ -6,7 +6,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 ## Json server
-To install run `npm install -g json-server` for run it server run `json-server --watch db.json`
+To install run `npm install -g json-server` for run it server run `json-server --watch db.json` or if you configure some custom routes `json-server db.json --routes routes.json`
 For more information go to [Json-server](https://github.com/typicode/json-server)
 
 ## Code scaffolding

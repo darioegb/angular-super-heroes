@@ -18,7 +18,7 @@ import { CoreModule } from './core/core.module';
 import { environment } from '@environments/environment';
 
 // AoT requires an exported function for factories
-export const httpLoaderFactory = (http: HttpClient) =>
+export const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
   new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({

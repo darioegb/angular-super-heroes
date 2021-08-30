@@ -52,13 +52,13 @@ export class SuperHeroGridComponent
     private translateService: TranslateService,
     private toastr: ToastrService,
     private dialogService: MatDialog,
-    private superHeroService: SuperHeroService
+    private superHeroService: SuperHeroService,
   ) {}
 
   ngOnInit(): void {
     this.dataSource = new SuperHeroGridDataSource(
       this.superHeroService,
-      this.translateService
+      this.translateService,
     );
     this.onLoadData(true);
     this.getTranslations();
@@ -127,8 +127,8 @@ export class SuperHeroGridComponent
       .pipe(
         take(1),
         switchMap((result: boolean) =>
-          result ? this.superHeroService.delete(item.id) : EMPTY
-        )
+          result ? this.superHeroService.delete(item.id) : EMPTY,
+        ),
       )
       .subscribe(() => {
         this.onLoadData(true);
@@ -148,7 +148,7 @@ export class SuperHeroGridComponent
         filter((result) => result.length > 2 || result.length === 0),
         debounceTime(1000),
         distinctUntilChanged(),
-        takeUntil(this.unsubscribe$)
+        takeUntil(this.unsubscribe$),
       )
       .subscribe(() => {
         this.paginator.pageIndex = 0;

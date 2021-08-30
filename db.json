@@ -1,0 +1,118 @@
+{
+  "superHeroes": [
+    {
+      "id": 1,
+      "name": "SPIDERMAN",
+      "genre": 1,
+      "specialty": "esto es una prueba",
+      "age": 50,
+      "height": 1.8,
+      "weight": 80
+    },
+    {
+      "id": 2,
+      "name": "SUPERMAN",
+      "genre": 1
+    },
+    {
+      "id": 3,
+      "name": "BATMAN",
+      "genre": 1
+    },
+    {
+      "id": 4,
+      "name": "IRON MAN",
+      "genre": 1
+    },
+    {
+      "id": 5,
+      "name": "MANOLITO EL FUERTE",
+      "genre": 1
+    },
+    {
+      "id": 6,
+      "name": "CHAPULIN COLORADO",
+      "genre": 1
+    },
+    {
+      "id": 7,
+      "name": "HULK",
+      "genre": 1
+    },
+    {
+      "id": 8,
+      "name": "POPELLE",
+      "genre": 1
+    },
+    {
+      "id": 9,
+      "name": "THOR",
+      "genre": 1
+    },
+    {
+      "id": 10,
+      "name": "DAREDEVIL",
+      "genre": 1
+    },
+    {
+      "id": 11,
+      "name": "CAPITAN AMERICA",
+      "genre": 1
+    },
+    {
+      "id": 12,
+      "name": "PANTERA NEGRA",
+      "genre": 1
+    },
+    {
+      "id": 13,
+      "name": "VALQUIRIA",
+      "genre": 2
+    },
+    {
+      "id": 14,
+      "name": "VISIÓN",
+      "genre": 1
+    },
+    {
+      "id": 15,
+      "name": "WOLVERINE",
+      "genre": 1
+    },
+    {
+      "id": 16,
+      "name": "MUJER MARAVILLA",
+      "genre": 2
+    },
+    {
+      "id": 17,
+      "name": "ANTMAN",
+      "genre": 1
+    },
+    {
+      "id": 18,
+      "name": "HIJITUS",
+      "genre": 1
+    },
+    {
+      "id": 19,
+      "name": "GATUBELA",
+      "genre": 2
+    },
+    {
+      "id": 20,
+      "name": "DOCTOR STRANGER",
+      "genre": 1
+    },
+    {
+      "name": "TEST",
+      "genre": 1,
+      "specialty": "test de prueba",
+      "age": 50,
+      "height": null,
+      "weight": null,
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1623446150279?alt=media&token=74fabebf-fa76-4762-859f-053bd672e7bf",
+      "id": 21
+    }
+  ]
+}

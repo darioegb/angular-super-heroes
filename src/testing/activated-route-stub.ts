@@ -8,7 +8,7 @@ export class ActivatedRouteStub {
   constructor(
     initialParams?: Params,
     initialData?: Data,
-    initialQueryParam?: Params
+    initialQueryParam?: Params,
   ) {
     this.setParam(initialParams);
     this.setData(initialData);
@@ -18,18 +18,18 @@ export class ActivatedRouteStub {
   readonly params = this.paramsSubject.asObservable();
   readonly data = this.dataSubject.asObservable();
   readonly snapshot = {
-    queryParams: {}
+    queryParams: {},
   };
 
-  setParam(params: Params = {}) {
+  setParam(params: Params = {}): void {
     this.paramsSubject.next(params);
   }
 
-  setData(data: Data = {}) {
+  setData(data: Data = {}): void {
     this.dataSubject.next(data);
   }
 
-  setQueryParams(queryParam: Params) {
+  setQueryParams(queryParam: Params): void {
     this.snapshot.queryParams = queryParam;
   }
 }

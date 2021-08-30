@@ -5,14 +5,12 @@ import { GenericService } from '@core/services/generic.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class SuperHeroService extends GenericService<SuperHero> {
   constructor(
     http: HttpClient,
     toastr: ToastrService,
-    translateService: TranslateService
+    translateService: TranslateService,
   ) {
     super(http, toastr, translateService);
   }

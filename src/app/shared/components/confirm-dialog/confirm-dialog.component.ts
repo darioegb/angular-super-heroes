@@ -10,7 +10,12 @@ import { DialogData } from '@shared/models/dialog.model';
       <p>{{ data.body }}</p>
     </div>
     <div mat-dialog-actions>
-      <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>
+      <button
+        mat-button
+        color="primary"
+        [mat-dialog-close]="true"
+        cdkFocusInitial
+      >
         {{ 'globals.buttons.confirm' | translate }}
       </button>
       <button mat-button mat-dialog-close>
@@ -21,7 +26,5 @@ import { DialogData } from '@shared/models/dialog.model';
   styles: [],
 })
 export class ConfirmDialogComponent {
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
 }

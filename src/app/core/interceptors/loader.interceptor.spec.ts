@@ -22,11 +22,12 @@ describe('LoaderInterceptor', () => {
         HttpClientTestingModule,
         TranslateTestingModule.withTranslations(
           'es',
-          require('src/assets/i18n/es.json')
+          require('src/assets/i18n/es.json'),
         ),
         ToastrModule.forRoot(),
       ],
       providers: [
+        SuperHeroService,
         LoaderService,
         {
           provide: HTTP_INTERCEPTORS,
@@ -50,13 +51,13 @@ describe('LoaderInterceptor', () => {
         (hero) =>
           expect(hero).toEqual(
             expectedHero,
-            'should return expected superHero'
+            'should return expected superHero',
           ),
-        fail
+        fail,
       );
 
     const httpRequest = httpTestingController.expectOne(
-      `${service.baseUrl}/${superHeroId}`
+      `${service.baseUrl}/${superHeroId}`,
     );
     expect(httpRequest.request.method).toEqual('GET');
     httpRequest.flush(expectedHero);

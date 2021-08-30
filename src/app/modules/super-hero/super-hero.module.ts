@@ -19,6 +19,7 @@ import { SuperHeroRoutingModule } from './super-hero-routing.module';
 import { SharedModule } from '@shared/shared.module';
 import { NgxErrorMessageModule } from 'ngx-error-message';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+import { SuperHeroResolver, SuperHeroService } from './shared';
 
 @NgModule({
   declarations: [SuperHeroDetailComponent, SuperHeroGridComponent],
@@ -42,5 +43,6 @@ import { NgxMatFileInputModule } from '@angular-material-components/file-input';
     SuperHeroRoutingModule,
     SharedModule,
   ],
+  providers: [SuperHeroService, SuperHeroResolver],
 })
 export class SuperHeroModule {}

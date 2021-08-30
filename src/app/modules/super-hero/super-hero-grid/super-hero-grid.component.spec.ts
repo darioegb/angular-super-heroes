@@ -13,10 +13,10 @@ import { MatTableModule } from '@angular/material/table';
 import { SuperHeroGridComponent } from './super-hero-grid.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SharedModule } from '@shared/shared.module';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ActiveToast, ToastrModule, ToastrService } from 'ngx-toastr';
 import { TranslateTestingModule } from 'ngx-translate-testing';
 import { Router, ActivatedRoute } from '@angular/router';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
@@ -24,6 +24,7 @@ import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogStub } from '@root/testing';
 import { PageConfig } from '@shared/models/page-config.model';
+import { Page } from '@root/app/shared/models';
 
 describe('SuperHeroGridComponent', () => {
   let component: SuperHeroGridComponent;
@@ -34,10 +35,10 @@ describe('SuperHeroGridComponent', () => {
 
   beforeEach(() => {
     toastServiceStub = {
-      success: () => null,
+      success: (): ActiveToast<unknown> => null,
     };
     superHeroServiceStub = {
-      getPage: () =>
+      getPage: (): Observable<Page<SuperHero>> =>
         of({
           items: [
             { id: '1', name: 'AAA' },
@@ -45,7 +46,7 @@ describe('SuperHeroGridComponent', () => {
           ] as SuperHero[],
           count: 2,
         }),
-      delete: () => of(),
+      delete: (): Observable<unknown> => of(),
     };
     dialog = new DialogStub();
   });
@@ -71,7 +72,7 @@ describe('SuperHeroGridComponent', () => {
             HttpClientTestingModule,
             TranslateTestingModule.withTranslations(
               'es',
-              require('src/assets/i18n/es.json')
+              require('src/assets/i18n/es.json'),
             ),
             ToastrModule.forRoot(),
             SharedModule,
@@ -93,7 +94,7 @@ describe('SuperHeroGridComponent', () => {
             { provide: SuperHeroService, useValue: superHeroServiceStub },
           ],
         }).compileComponents();
-      })
+      }),
     );
 
     beforeEach(() => {
@@ -108,7 +109,7 @@ describe('SuperHeroGridComponent', () => {
         of({
           items: [],
           count: 0,
-        })
+        }),
       );
       component.ngOnInit();
       fixture.detectChanges();
@@ -119,7 +120,7 @@ describe('SuperHeroGridComponent', () => {
     it('should tell router to navigate when add button clicked', () => {
       const spy = routerSpy.navigate;
       const addButton = hostElement.querySelector<HTMLButtonElement>(
-        'button[aria-label~="add"]'
+        'button[aria-label~="add"]',
       );
       addButton.click();
       const navArgs = spy.calls.mostRecent().args[0];
@@ -131,7 +132,7 @@ describe('SuperHeroGridComponent', () => {
       const superHeroId = '1';
       const spy = routerSpy.navigate;
       const editButton = hostElement.querySelector<HTMLButtonElement>(
-        'button[aria-label~="edit"]'
+        'button[aria-label~="edit"]',
       );
       editButton.click();
       const navArgs = spy.calls.mostRecent().args[0];
@@ -143,12 +144,12 @@ describe('SuperHeroGridComponent', () => {
       const superHeroId = '1';
       const spy = routerSpy.navigate;
       const viewButton = hostElement.querySelector<HTMLButtonElement>(
-        'button[aria-label~="visibility"]'
+        'button[aria-label~="visibility"]',
       );
       viewButton.click();
       const navArgs = spy.calls.mostRecent().args;
       const queryParams = Object.fromEntries(
-        Object.entries(navArgs[1].queryParams)
+        Object.entries(navArgs[1].queryParams),
       );
       expect(spy).toHaveBeenCalled();
       expect(navArgs[0][0]).toBe(`detail/${superHeroId}`);
@@ -162,7 +163,7 @@ describe('SuperHeroGridComponent', () => {
 
       const superHeroId = '1';
       const deleteButton = hostElement.querySelector<HTMLButtonElement>(
-        'button[aria-label~="delete"]'
+        'button[aria-label~="delete"]',
       );
       deleteButton.click();
       expect(dialog.open).toHaveBeenCalled();
@@ -175,7 +176,7 @@ describe('SuperHeroGridComponent', () => {
       spyOn(dialog, 'open').and.callThrough();
 
       const deleteButton = hostElement.querySelector<HTMLButtonElement>(
-        'button[aria-label~="delete"]'
+        'button[aria-label~="delete"]',
       );
       deleteButton.click();
       expect(dialog.open).toHaveBeenCalled();
@@ -184,7 +185,7 @@ describe('SuperHeroGridComponent', () => {
     it('should call onLoadData when change sort', () => {
       spyOn(component, 'onLoadData');
       const columnHeader = hostElement.querySelector<HTMLElement>(
-        'th[role="columnheader"]'
+        'th[role="columnheader"]',
       );
       columnHeader.click();
       expect(component.onLoadData).toHaveBeenCalled();

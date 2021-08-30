@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { TranslateService } from '@ngx-translate/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class MatPaginatorI18nService extends MatPaginatorIntl {
   constructor(private translate: TranslateService) {
     super();
@@ -21,6 +19,7 @@ export class MatPaginatorI18nService extends MatPaginatorIntl {
       return `0 / ${length}`;
     }
 
+    // eslint-disable-next-line no-param-reassign
     length = Math.max(length, 0);
 
     const startIndex: number = page * pageSize;
@@ -30,7 +29,7 @@ export class MatPaginatorI18nService extends MatPaginatorIntl {
         : startIndex + pageSize;
 
     return `${startIndex + 1} - ${endIndex} / ${length}`;
-  }
+  };
 
   getAndInitTranslations(): void {
     this.translate.get('globals.paginator').subscribe((translation: any) => {

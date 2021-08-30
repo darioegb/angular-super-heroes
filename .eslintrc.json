@@ -1,23 +1,17 @@
 {
   "root": true,
-  "ignorePatterns": [
-    "projects/**/*"
-  ],
+  "ignorePatterns": ["projects/**/*"],
   "overrides": [
     {
-      "files": [
-        "*.ts"
-      ],
+      "files": ["*.ts"],
       "parserOptions": {
-        "project": [
-          "tsconfig.json",
-          "e2e/tsconfig.json"
-        ],
+        "project": ["tsconfig.json", "e2e/tsconfig.json"],
         "createDefaultProgram": true
       },
       "extends": [
         "plugin:@angular-eslint/recommended",
-        "plugin:@angular-eslint/template/process-inline-templates"
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "plugin:prettier/recommended"
       ],
       "rules": {
         "@angular-eslint/component-selector": [
@@ -35,17 +29,64 @@
             "style": "camelCase",
             "type": "attribute"
           }
-        ]
+        ],
+        "@angular-eslint/use-lifecycle-interface": "error",
+        "@typescript-eslint/consistent-type-definitions": "error",
+        "@typescript-eslint/dot-notation": "off",
+        "@typescript-eslint/explicit-member-accessibility": [
+          "off",
+          {
+            "accessibility": "explicit"
+          }
+        ],
+        "@typescript-eslint/naming-convention": "off",
+        "@typescript-eslint/no-this-alias": "error",
+        "@typescript-eslint/no-unnecessary-boolean-literal-compare": "error",
+        "@typescript-eslint/explicit-function-return-type": "error",
+        "arrow-parens": ["off", "always"],
+        "comma-dangle": ["error", "always-multiline"],
+        "computed-property-spacing": ["error", "never"],
+        "func-call-spacing": ["error", "never"],
+        "id-blacklist": "off",
+        "id-match": "off",
+        "jsdoc/no-types": "off",
+        "no-duplicate-imports": "error",
+        "no-else-return": "error",
+        "no-multiple-empty-lines": "error",
+        "no-param-reassign": "error",
+        "no-restricted-imports": ["error", "rxjs/Rx"],
+        "no-underscore-dangle": "off",
+        "max-len": ["error", { "code": 120 }],
+        "object-shorthand": ["error", "always"],
+        "prefer-arrow-callback": "error",
+        "prefer-template": "error",
+        "space-before-function-paren": [
+          "error",
+          {
+            "anonymous": "always",
+            "named": "never"
+          }
+        ],
+        "dot-notation": "off",
+        "no-array-constructor": "error",
+        "no-empty-function": "off"
       }
     },
+    // NOTE: WE ARE NOT APPLYING PRETTIER IN THIS OVERRIDE, ONLY @ANGULAR-ESLINT/TEMPLATE
     {
-      "files": [
-        "*.html"
-      ],
-      "extends": [
-        "plugin:@angular-eslint/template/recommended"
-      ],
+      "files": ["*.html"],
+      "extends": ["plugin:@angular-eslint/template/recommended"],
       "rules": {}
+    },
+    // NOTE: WE ARE NOT APPLYING @ANGULAR-ESLINT/TEMPLATE IN THIS OVERRIDE, ONLY PRETTIER
+    {
+      "files": ["*.html"],
+      "excludedFiles": ["*inline-template-*.component.html"],
+      "extends": ["plugin:prettier/recommended"],
+      "rules": {
+        // NOTE: WE ARE OVERRIDING THE DEFAULT CONFIG TO ALWAYS SET THE PARSER TO ANGULAR (SEE BELOW)
+        "prettier/prettier": ["error", { "parser": "angular" }]
+      }
     }
   ]
 }
