@@ -19,6 +19,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     TranslateModule.forChild(),
   ],
-  exports: [UpperCaseDirective, DropdownTranslatePipe],
+  exports: [
+    UpperCaseDirective,
+    DropdownTranslatePipe,
+    TranslateModule,
+    MatButtonModule,
+  ],
 })
 export class SharedModule {}
