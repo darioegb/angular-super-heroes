@@ -17,12 +17,10 @@ export class UpperCaseDirective {
     this.toUpperCase(event);
   }
 
-  private toUpperCase(event: Event): void {
-    const newVal: string = (
-      event.target as HTMLInputElement
-    ).value.toUpperCase();
+  private toUpperCase({ target, stopPropagation }): void {
+    const newVal: string = (target as HTMLInputElement).value.toUpperCase();
     this.el.nativeElement.value = newVal;
     this.ngControl.control.patchValue(newVal);
-    event.stopPropagation();
+    stopPropagation();
   }
 }

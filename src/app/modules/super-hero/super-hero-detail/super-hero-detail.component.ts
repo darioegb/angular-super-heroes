@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject, Observable } from 'rxjs';
 import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { genresEnum, httpMethodKeys, imgSrc } from '@app/constants';
-import { GenericObject, Option, ToastTranslation } from '@shared/models';
+import { GenericObject, Option } from '@shared/models';
 import { UtilService } from '@shared/services';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 @Component({
@@ -25,7 +25,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   genres: Option[] = [];
   superHero: SuperHero;
   view: boolean;
-  toastTranslations: GenericObject<ToastTranslation>;
+  toastTranslations: { add: string; update: string };
   noImageSrc = `${imgSrc}/no-image.png`;
   uploadPercent$: Observable<number>;
   previewPicture$: Observable<string | ArrayBuffer>;
@@ -95,7 +95,10 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.translateService
       .get('superHeroes.toasts')
       .pipe(take(1))
-      .subscribe((translations) => (this.toastTranslations = translations));
+      .subscribe(
+        ({ add: { success: add }, update: { success: update } }) =>
+          (this.toastTranslations = { add, update }),
+      );
   }
 
   setForm(): void {
@@ -127,8 +130,8 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       this.superHeroForm.markAllAsTouched();
       return;
     }
-    if (this.superHeroControls.picture.value) {
-      const file = this.superHeroControls.picture.value;
+    const { value: file } = this.superHeroControls.picture;
+    if (file) {
       const fileName = this.utilService.fileName();
       const task = this.utilService.uploadFile(file, fileName);
       this.uploadPercent$ = task.percentageChanges();
@@ -149,7 +152,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   }
 
   onChangePicture(): void {
-    const file = this.superHeroControls.picture.value;
+    const { value: file } = this.superHeroControls.picture;
     this.previewPicture$ = this.utilService.fileToBase64String(file);
   }
 
@@ -167,9 +170,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     ).subscribe({
       next: () => {
         this.toastr.success(
-          isNew
-            ? this.toastTranslations.add.success
-            : this.toastTranslations.update.success,
+          isNew ? this.toastTranslations.add : this.toastTranslations.update,
         );
         this.goBack();
       },

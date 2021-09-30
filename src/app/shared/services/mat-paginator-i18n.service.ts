@@ -32,13 +32,23 @@ export class MatPaginatorI18nService extends MatPaginatorIntl {
   };
 
   getAndInitTranslations(): void {
-    this.translate.get('globals.paginator').subscribe((translation: any) => {
-      this.itemsPerPageLabel = translation.itemsPerPageLabel;
-      this.nextPageLabel = translation.nextPageLabel;
-      this.previousPageLabel = translation.previousPageLabel;
-      this.firstPageLabel = translation.firstPageLabel;
-      this.lastPageLabel = translation.lastPageLabel;
-      this.changes.next();
-    });
+    this.translate
+      .get('globals.paginator')
+      .subscribe(
+        ({
+          itemsPerPageLabel,
+          nextPageLabel,
+          previousPageLabel,
+          firstPageLabel,
+          lastPageLabel,
+        }) => {
+          this.itemsPerPageLabel = itemsPerPageLabel;
+          this.nextPageLabel = nextPageLabel;
+          this.previousPageLabel = previousPageLabel;
+          this.firstPageLabel = firstPageLabel;
+          this.lastPageLabel = lastPageLabel;
+          this.changes.next();
+        },
+      );
   }
 }

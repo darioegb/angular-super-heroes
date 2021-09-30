@@ -35,9 +35,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
   getTranslations(): void {
     this.translateSubscription = this.translateService
       .get('superHeroes.grid.columns')
-      .subscribe((translations) => {
-        const { name, age, genre, specialty, height, weight, picture } =
-          translations;
+      .subscribe(({ name, age, genre, specialty, height, weight, picture }) => {
         this.columns = [
           { headerDef: 'name', cellDef: name },
           { headerDef: 'age', cellDef: age },
@@ -55,17 +53,15 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
   }
 
   loadData(pageConfig: PageConfig): void {
-    this.superHeroService
-      .getPage(pageConfig)
-      .subscribe((result: Page<SuperHero>) => {
-        this.dataSubject.next(result.items);
-        this.countSubject.next(result.count);
-      });
+    this.superHeroService.getPage(pageConfig).subscribe(({ items, count }) => {
+      this.dataSubject.next(items);
+      this.countSubject.next(count);
+    });
   }
 
   private initDisplayedColumns(): void {
-    this.columns.forEach((column) =>
-      this.displayedColumns.push(column.headerDef),
+    this.columns.forEach(({ headerDef }) =>
+      this.displayedColumns.push(headerDef),
     );
     this.displayedColumns.push('actions');
   }

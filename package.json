@@ -7,7 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "test:build": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
-    "lint": "ng lint",
+    "lint": "ng lint --fix",
     "e2e": "ng e2e"
   },
   "private": true,
@@ -50,7 +50,7 @@
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "firebase-tools": "^8.0.0 || ^9.0.0",
+    "firebase-tools": "^9.19.0",
     "fuzzy": "^0.1.3",
     "inquirer": "^6.2.2",
     "inquirer-autocomplete-prompt": "^1.0.1",

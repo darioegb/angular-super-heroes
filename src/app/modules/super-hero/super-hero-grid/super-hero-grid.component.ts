@@ -24,7 +24,7 @@ import {
 } from 'rxjs/operators';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
-import { ColumnDef, PageConfig, ToastTranslation } from '@shared/models';
+import { ColumnDef, PageConfig } from '@shared/models';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
 import { genresEnum, imgSrc } from '@app/constants';
 
@@ -41,7 +41,7 @@ export class SuperHeroGridComponent
   @ViewChild('input') input: ElementRef;
   dataSource: SuperHeroGridDataSource;
   pageConfig: PageConfig = new PageConfig();
-  toastTranslations: ToastTranslation;
+  toastDeleteSuccess: string;
   genres = genresEnum;
   noImageSrc = `${imgSrc}/no-image.png`;
   private unsubscribe$ = new Subject<void>();
@@ -111,7 +111,7 @@ export class SuperHeroGridComponent
     this.translateService
       .get('superHeroes.toasts.delete')
       .pipe(take(1))
-      .subscribe((translations) => (this.toastTranslations = translations));
+      .subscribe(({ success }) => (this.toastDeleteSuccess = success));
   }
 
   onDelete(item: SuperHero): void {
@@ -132,7 +132,7 @@ export class SuperHeroGridComponent
       )
       .subscribe(() => {
         this.onLoadData(true);
-        this.toastr.success(this.toastTranslations.success);
+        this.toastr.success(this.toastDeleteSuccess);
       });
   }
 
@@ -144,8 +144,8 @@ export class SuperHeroGridComponent
   private initFilterData(): void {
     fromEvent(this.input.nativeElement, 'keyup')
       .pipe(
-        map((event: any) => event.target.value),
-        filter((result) => result.length > 2 || result.length === 0),
+        map(({ target: { value } }) => value),
+        filter(({ length }) => length > 2 || length === 0),
         debounceTime(1000),
         distinctUntilChanged(),
         takeUntil(this.unsubscribe$),
@@ -157,11 +157,12 @@ export class SuperHeroGridComponent
   }
 
   private setPageConfig(): void {
-    this.pageConfig.page = this.paginator.pageIndex + 1;
-    this.pageConfig.limit = this.paginator.pageSize;
-    this.pageConfig.sort =
-      this.sort.direction.length !== 0 ? this.sort.active : '';
-    this.pageConfig.order = this.sort.direction || this.sort.start;
+    const { active, direction, start } = this.sort;
+    const { pageIndex, pageSize } = this.paginator;
+    this.pageConfig.page = pageIndex + 1;
+    this.pageConfig.limit = pageSize;
+    this.pageConfig.sort = direction.length !== 0 ? active : '';
+    this.pageConfig.order = direction || start;
     this.pageConfig.filter = this.input.nativeElement.value;
   }
 }
