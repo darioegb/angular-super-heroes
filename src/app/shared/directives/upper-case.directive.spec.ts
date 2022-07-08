@@ -2,8 +2,8 @@ import { Component, DebugElement, OnInit } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { UpperCaseDirective } from './upper-case.directive';
 import {
-  FormGroup,
-  FormBuilder,
+  UntypedFormGroup,
+  UntypedFormBuilder,
   Validators,
   NgControl,
   ReactiveFormsModule,
@@ -17,9 +17,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
   </form>`,
 })
 class TestHostComponent implements OnInit {
-  form: FormGroup;
+  form: UntypedFormGroup;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: UntypedFormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -36,7 +36,7 @@ describe('UpperCaseDirective', () => {
     fixture = TestBed.configureTestingModule({
       declarations: [UpperCaseDirective, TestHostComponent],
       imports: [ReactiveFormsModule, HttpClientTestingModule],
-      providers: [FormBuilder, NgControl],
+      providers: [UntypedFormBuilder, NgControl],
     }).createComponent(TestHostComponent);
 
     fixture.detectChanges(); // initial binding

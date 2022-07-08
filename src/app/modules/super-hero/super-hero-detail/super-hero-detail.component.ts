@@ -2,8 +2,8 @@ import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -21,7 +21,7 @@ import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
   styleUrls: ['./super-hero-detail.component.scss'],
 })
 export class SuperHeroDetailComponent implements OnInit, OnDestroy {
-  superHeroForm: FormGroup;
+  superHeroForm: UntypedFormGroup;
   genres: Option[] = [];
   superHero: SuperHero;
   view: boolean;
@@ -34,7 +34,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   private unsubscribe$ = new Subject<void>();
 
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private location: Location,
     private route: ActivatedRoute,
     private translateService: TranslateService,
