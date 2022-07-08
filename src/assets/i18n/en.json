@@ -60,6 +60,7 @@
       "save": "Save",
       "edit": "Edit",
       "delete": "Delete",
+      "reset": "Reset",
       "view": "View"
     },
     "enums": {

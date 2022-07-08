@@ -133,7 +133,9 @@
             <mat-card-content>
               <img
                 class="picture"
-                [src]="(previewPicture$ | async) || noImageSrc"
+                [src]="
+                  picture ? picture : (previewPicture$ | async) || noImageSrc
+                "
                 alt="picture"
               />
             </mat-card-content>
@@ -151,11 +153,19 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
+      <button mat-raised-button color="warn" type="button" (click)="goBack()">
+        {{ 'globals.buttons.cancel' | translate }}
+      </button>
+      <button
+        mat-raised-button
+        type="reset"
+        [disabled]="isEditOrView"
+        (click)="reset()"
+      >
+        {{ 'globals.buttons.reset' | translate }}
+      </button>
       <button mat-raised-button color="primary" type="submit" [disabled]="view">
         {{ 'globals.buttons.save' | translate }}
-      </button>
-      <button mat-raised-button type="button" (click)="goBack()">
-        {{ 'globals.buttons.cancel' | translate }}
       </button>
     </mat-card-actions>
   </mat-card>

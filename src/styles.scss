@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
 html,
 body {
@@ -7,7 +7,7 @@ body {
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .container {
@@ -16,7 +16,7 @@ body {
 
 .error-message {
   position: absolute;
-  margin-block-start: .75rem;
+  margin-block-start: 0.75rem;
   padding: 0 1em;
 }
 
@@ -24,4 +24,8 @@ img.picture {
   width: 3rem;
   height: 3rem;
   margin: 0.5rem 0 0.5rem 0;
+}
+
+button {
+  text-transform: uppercase;
 }

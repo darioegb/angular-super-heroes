@@ -25,6 +25,8 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   genres: Option[] = [];
   superHero: SuperHero;
   view: boolean;
+  isEditOrView: boolean;
+  picture: string;
   toastTranslations: { add: string; update: string };
   noImageSrc = `${imgSrc}/no-image.png`;
   uploadPercent$: Observable<number>;
@@ -84,8 +86,10 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.unsubscribe$), withLatestFrom(this.route.data))
       .subscribe(([params, data]) => {
         if (params.id) {
+          this.isEditOrView = true;
           this.superHero = data.superHero;
           this.view && this.superHeroForm.disable();
+          this.picture = this.superHero.picture;
           this.setForm();
         }
       });
@@ -131,7 +135,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       return;
     }
     const { value: file } = this.superHeroControls.picture;
-    if (file) {
+    if (file && file !== this.picture) {
       const fileName = this.utilService.fileName();
       const task = this.utilService.uploadFile(file, fileName);
       this.uploadPercent$ = task.percentageChanges();
@@ -149,6 +153,10 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
 
   goBack(): void {
     this.location.back();
+  }
+
+  reset(): void {
+    this.superHeroForm.reset();
   }
 
   onChangePicture(): void {

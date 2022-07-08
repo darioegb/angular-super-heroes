@@ -60,6 +60,7 @@
       "save": "Guardar",
       "edit": "Editar",
       "delete": "Borrar",
+      "reset": "Limpiar",
       "view": "Ver"
     },
     "enums": {
