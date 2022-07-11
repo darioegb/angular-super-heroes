@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import {
-  AngularFireStorage,
-  AngularFireStorageReference,
-  AngularFireUploadTask,
+  Storage,
+  UploadTask,
+  StorageReference,
+  ref,
+  uploadBytesResumable,
 } from '@angular/fire/storage';
 import { Option } from '@shared/models/option.model';
 import { Observable } from 'rxjs';
@@ -11,7 +13,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UtilService {
-  constructor(private storage: AngularFireStorage) {}
+  constructor(private storage: Storage) {}
 
   private pictureBasePath = 'pictures';
 
@@ -32,12 +34,12 @@ export class UtilService {
     return this.getEnumKeys(type).map((key) => ({ key, value: type[key] }));
   }
 
-  uploadFile(file: File, fileName: string): AngularFireUploadTask {
-    return this.storage.upload(`${this.pictureBasePath}/${fileName}`, file);
+  uploadFile(file: File, fileName: string): UploadTask {
+    return uploadBytesResumable(this.fileRef(fileName), file);
   }
 
-  fileRef(fileName: string): AngularFireStorageReference {
-    return this.storage.ref(`${this.pictureBasePath}/${fileName}`);
+  fileRef(fileName: string): StorageReference {
+    return ref(this.storage, `${this.pictureBasePath}/${fileName}`);
   }
 
   fileName(): string {

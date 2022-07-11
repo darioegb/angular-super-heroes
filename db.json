@@ -14,7 +14,8 @@
       "id": 2,
       "name": "SUPERMAN",
       "genre": 1,
-      "specialty": "esto es una prueba 1"
+      "specialty": "esto es una prueba 1",
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645703098163?alt=media&token=442bc982-7682-4e5d-aef5-1eb5a8def60c"
     },
     {
       "id": 3,

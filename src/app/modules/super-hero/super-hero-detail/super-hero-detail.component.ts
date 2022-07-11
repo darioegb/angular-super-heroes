@@ -10,11 +10,13 @@ import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject, Observable } from 'rxjs';
-import { take, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { map, take, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { genresEnum, httpMethodKeys, imgSrc } from '@app/constants';
 import { GenericObject, Option } from '@shared/models';
 import { UtilService } from '@shared/services';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
+import { percentage } from '@angular/fire/storage';
+import { getDownloadURL, StorageReference } from 'firebase/storage';
 @Component({
   selector: 'app-super-hero-detail',
   templateUrl: './super-hero-detail.component.html',
@@ -29,7 +31,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   picture: string;
   toastTranslations: { add: string; update: string };
   noImageSrc = `${imgSrc}/no-image.png`;
-  uploadPercent$: Observable<number>;
+  uploadProgress$: Observable<number>;
   previewPicture$: Observable<string | ArrayBuffer>;
   private unsubscribe$ = new Subject<void>();
 
@@ -136,19 +138,26 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     }
     const { value: file } = this.superHeroControls.picture;
     if (file && file !== this.picture) {
-      const fileName = this.utilService.fileName();
-      const task = this.utilService.uploadFile(file, fileName);
-      this.uploadPercent$ = task.percentageChanges();
-      this.utilService
-        .fileRef(fileName)
-        .getDownloadURL()
-        .subscribe((url) => {
-          this.superHeroControls.picture.setValue(url);
-          this.saveOrUpdate();
-        });
+      this.upload(file);
     } else {
       this.saveOrUpdate();
     }
+  }
+
+  async upload(file: File): Promise<void> {
+    const fileName = this.utilService.fileName();
+    const task = this.utilService.uploadFile(file, fileName);
+    this.uploadProgress$ = percentage(task).pipe(
+      map(({ progress }) => progress),
+    );
+    await task;
+    this.handleFileUpload(task.snapshot.ref);
+  }
+
+  async handleFileUpload(ref: StorageReference): Promise<void> {
+    const url = await getDownloadURL(ref);
+    this.superHeroControls.picture.setValue(url);
+    this.saveOrUpdate();
   }
 
   goBack(): void {
@@ -162,6 +171,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   onChangePicture(): void {
     const { value: file } = this.superHeroControls.picture;
     this.previewPicture$ = this.utilService.fileToBase64String(file);
+    this.picture = null;
   }
 
   ngOnDestroy(): void {

@@ -122,6 +122,13 @@
               <mat-icon ngxMatFileInputIcon>folder</mat-icon>
             </ngx-mat-file-input>
           </mat-form-field>
+          <mat-progress-bar
+            *ngIf="
+              (uploadProgress$ | async) > 0 && (uploadProgress$ | async) < 100
+            "
+            mode="determinate"
+            [value]="uploadProgress$ | async"
+          ></mat-progress-bar>
         </div>
         <div class="col">
           <mat-card>
@@ -141,15 +148,6 @@
             </mat-card-content>
           </mat-card>
         </div>
-      </div>
-      <div
-        class="row"
-        *ngIf="(uploadPercent$ | async) > 0 && (uploadPercent$ | async) < 100"
-      >
-        <mat-progress-bar
-          mode="determinate"
-          [value]="uploadPercent$ | async"
-        ></mat-progress-bar>
       </div>
     </mat-card-content>
     <mat-card-actions>
