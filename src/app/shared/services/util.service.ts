@@ -1,11 +1,17 @@
 import { Injectable } from '@angular/core';
+// import {
+//   Storage,
+//   UploadTask,
+//   StorageReference,
+//   ref,
+//   uploadBytesResumable,
+// } from '@angular/fire/storage';
 import {
-  Storage,
-  UploadTask,
-  StorageReference,
-  ref,
-  uploadBytesResumable,
-} from '@angular/fire/storage';
+  AngularFireStorage,
+  AngularFireStorageReference,
+  AngularFireUploadTask,
+} from '@angular/fire/compat/storage';
+
 import { Option } from '@shared/models/option.model';
 import { Observable } from 'rxjs';
 
@@ -13,7 +19,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class UtilService {
-  constructor(private storage: Storage) {}
+  constructor(private storage: AngularFireStorage) {}
 
   private pictureBasePath = 'pictures';
 
@@ -34,12 +40,16 @@ export class UtilService {
     return this.getEnumKeys(type).map((key) => ({ key, value: type[key] }));
   }
 
-  uploadFile(file: File, fileName: string): UploadTask {
-    return uploadBytesResumable(this.fileRef(fileName), file);
+  uploadFile(path: string, file: File): AngularFireUploadTask {
+    return this.storage.upload(path, file);
   }
 
-  fileRef(fileName: string): StorageReference {
-    return ref(this.storage, `${this.pictureBasePath}/${fileName}`);
+  fileRef(path: string): AngularFireStorageReference {
+    return this.storage.ref(path);
+  }
+
+  filePath(fileName: string): string {
+    return `${this.pictureBasePath}/${fileName}`;
   }
 
   fileName(): string {
@@ -70,5 +80,21 @@ export class UtilService {
     }
     const parts = path.split('.');
     return parts.reduce((obj, key) => obj?.[key], object);
+  }
+
+  /**
+   * Replace string variable with param value
+   * @param source string
+   * @param param string
+   * @param regexp string. Ex. {var}
+   * @returns string
+   */
+  replaceStringVariable(
+    source: string,
+    param: string,
+    regexp?: RegExp,
+  ): string {
+    const regexpFinal = regexp ? regexp : /\{\{[a-zA-Z]+\}\}/;
+    return source.replace(regexpFinal, param);
   }
 }

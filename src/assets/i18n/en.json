@@ -1,5 +1,6 @@
 {
   "superHeroes": {
+    "title": "Superheroes",
     "grid": {
       "filterInput": {
         "label": "Filter Super Hero",
@@ -16,7 +17,7 @@
       }
     },
     "detail": {
-      "title": "SuperHeroe",
+      "title": "Super Hero",
       "form": {
         "agePlaceholder": "Ex. 50",
         "namePlaceholder": "Ex. Superman",
@@ -26,24 +27,10 @@
         "weightPlaceholder": "Ex. 70kg"
       },
       "previewCardTitle": "Preview"
-    },
-    "toasts": {
-      "add": {
-        "success": "The superheoe was added successfully",
-        "error": "An error occurred while adding a superhero"
-      },
-      "update": {
-        "success": "The superheoe was updated successfully",
-        "error": "An error occurred while updating a superhero"
-      },
-      "delete": {
-        "success": "The superheoe has been successfully removed",
-        "error": "An error occurred while deleting a superhero"
-      }
     }
   },
   "globals": {
-    "title": "Superheroes",
+    "title": "Crud with material",
     "grid": {
       "noMatchingDataText": "No data matching the filter {{value}}"
     },
@@ -74,6 +61,21 @@
       "delete": {
         "title": "Are you sure you want to remove {{value}}?"
       }
+    },
+    "toasts": {
+      "add": {
+        "success": "{{value}} was added successfully",
+        "error": "An error occurred while adding a {{value}}"
+      },
+      "update": {
+        "success": "{{value}} was updated successfully",
+        "error": "An error occurred while updating a {{value}}"
+      },
+      "delete": {
+        "success": "{{value}} has been successfully removed",
+        "error": "An error occurred while deleting a {{value}}"
+      },
+      "imageError": "An error occurred while uploading image"
     }
   },
   "validations": {

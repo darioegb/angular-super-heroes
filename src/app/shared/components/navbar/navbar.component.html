@@ -1,0 +1,11 @@
+<mat-toolbar color="primary">
+  <h1>{{ 'globals.title' | translate }}</h1>
+  <span class="example-spacer"></span>
+  <mat-form-field appearance="fill">
+    <mat-select [(ngModel)]="selectedLang" (selectionChange)="changeLanguaje()">
+      <mat-option *ngFor="let lang of langOptions" [value]="lang.value">
+        {{ lang.key }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-toolbar>

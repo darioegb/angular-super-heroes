@@ -57,45 +57,43 @@ describe('SuperHeroGridComponent', () => {
       'navigate',
     ]);
 
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [SuperHeroGridComponent],
-          imports: [
-            NoopAnimationsModule,
-            FormsModule,
-            MatIconModule,
-            MatInputModule,
-            MatPaginatorModule,
-            MatSortModule,
-            MatTableModule,
-            HttpClientTestingModule,
-            TranslateTestingModule.withTranslations(
-              'es',
-              require('src/assets/i18n/es.json'),
-            ),
-            ToastrModule.forRoot(),
-            SharedModule,
-          ],
-          providers: [
-            {
-              provide: Router,
-              useValue: routerSpy,
-            },
-            {
-              provide: ActivatedRoute,
-              useValue: {},
-            },
-            {
-              provide: MatDialog,
-              useValue: dialog,
-            },
-            { provide: ToastrService, useValue: toastServiceStub },
-            { provide: SuperHeroService, useValue: superHeroServiceStub },
-          ],
-        }).compileComponents();
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SuperHeroGridComponent],
+        imports: [
+          NoopAnimationsModule,
+          FormsModule,
+          MatIconModule,
+          MatInputModule,
+          MatPaginatorModule,
+          MatSortModule,
+          MatTableModule,
+          HttpClientTestingModule,
+          TranslateTestingModule.withTranslations(
+            'es',
+            require('src/assets/i18n/es.json'),
+          ),
+          ToastrModule.forRoot(),
+          SharedModule,
+        ],
+        providers: [
+          {
+            provide: Router,
+            useValue: routerSpy,
+          },
+          {
+            provide: ActivatedRoute,
+            useValue: {},
+          },
+          {
+            provide: MatDialog,
+            useValue: dialog,
+          },
+          { provide: ToastrService, useValue: toastServiceStub },
+          { provide: SuperHeroService, useValue: superHeroServiceStub },
+        ],
+      }).compileComponents();
+    }));
 
     beforeEach(() => {
       fixture = TestBed.createComponent(SuperHeroGridComponent);
@@ -114,7 +112,7 @@ describe('SuperHeroGridComponent', () => {
       component.ngOnInit();
       fixture.detectChanges();
       expect(superHeroServiceStub.getPage).toHaveBeenCalled();
-      expect(hostElement.querySelectorAll('tr').length).toEqual(2);
+      expect(hostElement.querySelectorAll('tr').length).toEqual(3);
     });
 
     it('should tell router to navigate when add button clicked', () => {
@@ -184,9 +182,8 @@ describe('SuperHeroGridComponent', () => {
 
     it('should call onLoadData when change sort', () => {
       spyOn(component, 'onLoadData');
-      const columnHeader = hostElement.querySelector<HTMLElement>(
-        'th[role="columnheader"]',
-      );
+      const columnHeader =
+        hostElement.querySelector<HTMLElement>('th.cdk-column-name');
       columnHeader.click();
       expect(component.onLoadData).toHaveBeenCalled();
       expect(component.sort.active.length).toBeGreaterThan(0);

@@ -3,7 +3,7 @@ import {
   AngularFireStorage,
   AngularFireStorageReference,
   AngularFireUploadTask,
-} from '@angular/fire/storage';
+} from '@angular/fire/compat/storage';
 import { UtilService } from './util.service';
 
 describe('UtilService', () => {
@@ -46,7 +46,7 @@ describe('UtilService', () => {
 
     it('should upload file when uploadFile method is call', () => {
       spyOn(fireStorageService, 'upload');
-      service.uploadFile({} as never, 'test');
+      service.uploadFile('test', {} as never);
       expect(fireStorageService.upload).toHaveBeenCalled();
     });
 

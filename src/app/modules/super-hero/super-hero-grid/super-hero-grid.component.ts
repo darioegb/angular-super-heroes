@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   OnDestroy,
@@ -56,10 +57,7 @@ export class SuperHeroGridComponent
   ) {}
 
   ngOnInit(): void {
-    this.dataSource = new SuperHeroGridDataSource(
-      this.superHeroService,
-      this.translateService,
-    );
+    this.dataSource = new SuperHeroGridDataSource(this.superHeroService);
     this.onLoadData(true);
     this.getTranslations();
   }
@@ -109,9 +107,11 @@ export class SuperHeroGridComponent
 
   getTranslations(): void {
     this.translateService
-      .get('superHeroes.toasts.delete')
+      .get('globals.toasts.delete.success', {
+        value: this.translateService.instant('superHeroes.detail.title'),
+      })
       .pipe(take(1))
-      .subscribe(({ success }) => (this.toastDeleteSuccess = success));
+      .subscribe((result) => (this.toastDeleteSuccess = result));
   }
 
   onDelete(item: SuperHero): void {
@@ -134,6 +134,11 @@ export class SuperHeroGridComponent
         this.onLoadData(true);
         this.toastr.success(this.toastDeleteSuccess);
       });
+  }
+
+  onReset(): void {
+    this.input.nativeElement.value = '';
+    this.onLoadData();
   }
 
   ngOnDestroy(): void {

@@ -1,8 +1,9 @@
 {
   "superHeroes": {
+    "title": "Superhéroes",
     "grid": {
       "filterInput": {
-        "label": "Filtrar Superheroe",
+        "label": "Filtrar Superhéroe",
         "placeholder": "Ej. super"
       },
       "columns": {
@@ -16,7 +17,7 @@
       }
     },
     "detail": {
-      "title": "SuperHeroe",
+      "title": "Superhéroe",
       "form": {
         "agePlaceholder": "Ej. 50",
         "namePlaceholder": "Ej. Superman",
@@ -26,24 +27,10 @@
         "weightPlaceholder": "Ej. 70kg"
       },
       "previewCardTitle": "Vista previa"
-    },
-    "toasts": {
-      "add": {
-        "success": "El superheoe se agregó con éxito",
-        "error": "Ocurrió un error al agregar un superheroe"
-      },
-      "update": {
-        "success": "El superheoe fue actualizado con éxito",
-        "error": "Ocurrió un error al actualizar un superheroe"
-      },
-      "delete": {
-        "success": "El superheoe ha sido eliminado con exitosamente",
-        "error": "Ocurrió un error al eliminar un superheroe"
-      }
     }
   },
   "globals": {
-    "title": "Superhéroes",
+    "title": "ABM con material",
     "grid": {
       "noMatchingDataText": "No hay datos que coincidan con el filtro {{value}}"
     },
@@ -74,6 +61,21 @@
       "delete": {
         "title": "¿Esta seguro que desea eliminar a {{value}}?"
       }
+    },
+    "toasts": {
+      "add": {
+        "success": "{{value}} se agregó con éxito",
+        "error": "Ocurrió un error al agregar un {{value}}"
+      },
+      "update": {
+        "success": "{{value}} fue actualizado con éxito",
+        "error": "Ocurrió un error al actualizar un {{value}}"
+      },
+      "delete": {
+        "success": "El {{value}} ha sido eliminado exitosamente",
+        "error": "Ocurrió un error al eliminar un {{value}}"
+      },
+      "imageError": "Ocurrió un error al subir la imagen"
     }
   },
   "validations": {

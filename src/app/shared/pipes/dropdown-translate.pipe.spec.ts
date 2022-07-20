@@ -12,31 +12,29 @@ describe('DropdownTranslatePipe', () => {
   let service: TranslateService;
   let translateServiceStub: TranslateServiceStub;
 
-  beforeEach(
-    waitForAsync(() => {
-      translateServiceStub = new TranslateServiceStub(
-        new UtilService({} as never),
-      );
-      TestBed.configureTestingModule({
-        imports: [
-          BrowserModule,
-          HttpClientTestingModule,
-          TranslateTestingModule.withTranslations(
-            'es',
-            require('src/assets/i18n/es.json'),
-          ),
-        ],
-        providers: [
-          {
-            provide: TranslateService,
-            useValue: translateServiceStub,
-          },
-        ],
-      });
-      service = TestBed.inject(TranslateService);
-      pipe = new DropdownTranslatePipe(service);
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    translateServiceStub = new TranslateServiceStub(
+      new UtilService({} as never),
+    );
+    TestBed.configureTestingModule({
+      imports: [
+        BrowserModule,
+        HttpClientTestingModule,
+        TranslateTestingModule.withTranslations(
+          'es',
+          require('src/assets/i18n/es.json'),
+        ),
+      ],
+      providers: [
+        {
+          provide: TranslateService,
+          useValue: translateServiceStub,
+        },
+      ],
+    });
+    service = TestBed.inject(TranslateService);
+    pipe = new DropdownTranslatePipe(service);
+  }));
 
   it('create an instance', () => {
     expect(pipe).toBeTruthy();

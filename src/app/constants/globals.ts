@@ -7,3 +7,21 @@ export const httpMethodKeys = {
   post: 'add',
   put: 'update',
 };
+export const defaultFormControlSizes = {
+  text: {
+    min: 3,
+    max: 60,
+  },
+  email: {
+    min: 10,
+    max: 100,
+  },
+  number: {
+    min: 1,
+    max: 999_999_999,
+  },
+  textarea: {
+    min: 10,
+    max: 250,
+  },
+};

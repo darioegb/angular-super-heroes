@@ -1,24 +1,27 @@
 import { DataSource } from '@angular/cdk/collections';
-import { Observable, BehaviorSubject, Subscription } from 'rxjs';
-import { Column, ColumnDef, Page, PageConfig } from '@shared/models';
-import { TranslateService } from '@ngx-translate/core';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { Column, ColumnDef, PageConfig } from '@shared/models';
+
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 
 export class SuperHeroGridDataSource extends DataSource<SuperHero> {
-  private columns: Column[] = [];
+  private columns: Column[] = [
+    { headerDef: 'name', cellDef: 'superHeroes.grid.columns.name' },
+    { headerDef: 'age', cellDef: 'superHeroes.grid.columns.age' },
+    { headerDef: 'genre', cellDef: 'superHeroes.grid.columns.genre' },
+    { headerDef: 'specialty', cellDef: 'superHeroes.grid.columns.specialty' },
+    { headerDef: 'height', cellDef: 'superHeroes.grid.columns.height' },
+    { headerDef: 'weight', cellDef: 'superHeroes.grid.columns.weight' },
+    { headerDef: 'picture', cellDef: 'superHeroes.grid.columns.picture' },
+  ];
   private displayedColumns: string[] = [];
   private dataSubject = new BehaviorSubject<SuperHero[]>([]);
   private countSubject = new BehaviorSubject<number>(0);
-  private translateSubscription: Subscription;
 
   count$ = this.countSubject.asObservable();
 
-  constructor(
-    private superHeroService: SuperHeroService,
-    private translateService: TranslateService,
-  ) {
+  constructor(private superHeroService: SuperHeroService) {
     super();
-    this.getTranslations();
     this.initDisplayedColumns();
   }
 
@@ -29,23 +32,6 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
   disconnect(): void {
     this.dataSubject.complete();
     this.countSubject.complete();
-    this.translateSubscription.unsubscribe();
-  }
-
-  getTranslations(): void {
-    this.translateSubscription = this.translateService
-      .get('superHeroes.grid.columns')
-      .subscribe(({ name, age, genre, specialty, height, weight, picture }) => {
-        this.columns = [
-          { headerDef: 'name', cellDef: name },
-          { headerDef: 'age', cellDef: age },
-          { headerDef: 'genre', cellDef: genre },
-          { headerDef: 'specialty', cellDef: specialty },
-          { headerDef: 'height', cellDef: height },
-          { headerDef: 'weight', cellDef: weight },
-          { headerDef: 'picture', cellDef: picture },
-        ];
-      });
   }
 
   columnsDef(): ColumnDef {

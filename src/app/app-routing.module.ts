@@ -5,7 +5,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'superheroes', pathMatch: 'full' },
   {
     path: 'superheroes',
-    loadChildren: (): any =>
+    loadChildren: () =>
       import('./modules/super-hero/super-hero.module').then(
         (m) => m.SuperHeroModule,
       ),

@@ -3,6 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Pipe({
   name: 'dropdownTranslate',
+  pure: false,
 })
 export class DropdownTranslatePipe implements PipeTransform {
   constructor(private translateService: TranslateService) {}

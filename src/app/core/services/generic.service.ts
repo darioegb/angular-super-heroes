@@ -10,17 +10,28 @@ import { PageConfig, Page } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 import { httpMethodKeys } from '@root/app/constants';
+import { Injectable, Input } from '@angular/core';
 
+@Injectable()
 export abstract class GenericService<T> {
-  public readonly baseUrl = `${environment.apiUrl}/${this.getResourceUrl()}`;
+  @Input()
+  set baseUrl(urlName: string) {
+    this._baseUrl = `${environment[urlName]}/${this.getResourceUrl()}`;
+  }
+  get baseUrl(): string {
+    return this._baseUrl;
+  }
 
   constructor(
     protected httpClient: HttpClient,
     protected toastr: ToastrService,
     protected translateService: TranslateService,
-  ) {}
+  ) {
+    this.baseUrl = 'apiUrl';
+  }
 
   abstract getResourceUrl(): string;
+  private _baseUrl: string;
 
   toServerModel(entity: T): any {
     return entity;
@@ -97,11 +108,12 @@ export abstract class GenericService<T> {
     operation: string,
   ): Observable<never> {
     this.toastr.error(
-      this.translateService.instant(
-        `${this.getResourceUrl()}.toasts.${operation}.error`,
-      ),
+      this.translateService.instant(`globals.toasts.${operation}.error`, {
+        value: this.translateService.instant(
+          `${this.getResourceUrl()}.detail.title`,
+        ),
+      }),
     );
-
-    return throwError(error);
+    return throwError(() => error);
   }
 }

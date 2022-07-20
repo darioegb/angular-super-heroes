@@ -27,7 +27,7 @@ import {
   AngularFireStorage,
   AngularFireStorageReference,
   AngularFireUploadTask,
-} from '@angular/fire/storage';
+} from '@angular/fire/compat/storage';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { UtilService } from '@shared/services';
 
@@ -47,6 +47,7 @@ describe('SuperHeroDetailComponent', () => {
       upload: (..._arg): AngularFireUploadTask => {
         return {
           percentageChanges: () => of(0),
+          snapshotChanges: () => of({}),
         } as never;
       },
       ref: (_path: string): AngularFireStorageReference => null,
@@ -64,42 +65,40 @@ describe('SuperHeroDetailComponent', () => {
       type: 'image/png',
     });
 
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [SuperHeroDetailComponent],
-          imports: [
-            NoopAnimationsModule,
-            ReactiveFormsModule,
-            MatButtonModule,
-            MatCardModule,
-            MatInputModule,
-            MatRadioModule,
-            MatSelectModule,
-            NgxMatFileInputModule,
-            HttpClientTestingModule,
-            TranslateTestingModule.withTranslations(
-              'es',
-              require('src/assets/i18n/es.json'),
-            ),
-            ToastrModule.forRoot(),
-            SharedModule,
-          ],
-          providers: [
-            {
-              provide: ActivatedRoute,
-              useValue: activatedRoute,
-            },
-            { provide: SuperHeroService, useValue: superHeroServiceSpy },
-            { provide: ToastrService, useValue: toastServiceStub },
-            {
-              provide: AngularFireStorage,
-              useValue: fireStorageStub,
-            },
-          ],
-        }).compileComponents();
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [SuperHeroDetailComponent],
+        imports: [
+          NoopAnimationsModule,
+          ReactiveFormsModule,
+          MatButtonModule,
+          MatCardModule,
+          MatInputModule,
+          MatRadioModule,
+          MatSelectModule,
+          NgxMatFileInputModule,
+          HttpClientTestingModule,
+          TranslateTestingModule.withTranslations(
+            'es',
+            require('src/assets/i18n/es.json'),
+          ),
+          ToastrModule.forRoot(),
+          SharedModule,
+        ],
+        providers: [
+          {
+            provide: ActivatedRoute,
+            useValue: activatedRoute,
+          },
+          { provide: SuperHeroService, useValue: superHeroServiceSpy },
+          { provide: ToastrService, useValue: toastServiceStub },
+          {
+            provide: AngularFireStorage,
+            useValue: fireStorageStub,
+          },
+        ],
+      }).compileComponents();
+    }));
 
     beforeEach(() => {
       utilService = TestBed.inject(UtilService);
@@ -112,20 +111,18 @@ describe('SuperHeroDetailComponent', () => {
     });
 
     describe('when view mode', () => {
-      beforeEach(
-        waitForAsync(() => {
-          activatedRoute.setData({
-            superHero: {
-              id: '1',
-              name: 'A',
-              genre: 1,
-              specialty: 'He can fly',
-            } as SuperHero,
-          });
-          activatedRoute.setQueryParams({ view: true });
-          activatedRoute.setParam({ id: '1' });
-        }),
-      );
+      beforeEach(waitForAsync(() => {
+        activatedRoute.setData({
+          superHero: {
+            id: '1',
+            name: 'AAAA',
+            genre: 1,
+            specialty: 'He can fly',
+          } as SuperHero,
+        });
+        activatedRoute.setQueryParams({ view: true });
+        activatedRoute.setParam({ id: '1' });
+      }));
 
       it('should disabled form and defined superHero', fakeAsync(() => {
         component.ngOnInit();
@@ -139,19 +136,17 @@ describe('SuperHeroDetailComponent', () => {
     });
 
     describe('when edit mode', () => {
-      beforeEach(
-        waitForAsync(() => {
-          activatedRoute.setData({
-            superHero: {
-              id: '1',
-              name: 'A',
-              genre: 1,
-              specialty: 'He can fly',
-            } as SuperHero,
-          });
-          activatedRoute.setParam({ id: '1' });
-        }),
-      );
+      beforeEach(waitForAsync(() => {
+        activatedRoute.setData({
+          superHero: {
+            id: '1',
+            name: 'AAA',
+            genre: 1,
+            specialty: 'He can fly',
+          } as SuperHero,
+        });
+        activatedRoute.setParam({ id: '1' });
+      }));
 
       it('should active form and defined superHero', fakeAsync(() => {
         component.ngOnInit();
@@ -216,7 +211,7 @@ describe('SuperHeroDetailComponent', () => {
 
     describe('when create mode', () => {
       const newSuperHero: SuperHero = {
-        name: 'B',
+        name: 'BBB',
         genre: 1,
         specialty: 'He can run fast',
       };
