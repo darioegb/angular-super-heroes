@@ -1,8 +1,8 @@
-import { genresEnum } from '@app/constants';
+import { GenreEnum } from '@app/constants';
 export interface SuperHero {
   id?: string;
   name: string;
-  genre: genresEnum;
+  genre: GenreEnum;
   specialty: string;
   age?: number;
   height?: number;

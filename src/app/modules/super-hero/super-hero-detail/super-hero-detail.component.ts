@@ -13,7 +13,7 @@ import { Subject } from 'rxjs';
 import { takeUntil, withLatestFrom } from 'rxjs/operators';
 import {
   defaultFormControlSizes,
-  genresEnum,
+  GenreEnum,
   httpMethodKeys,
 } from '@app/constants';
 import { GenericObject, Option } from '@shared/models';
@@ -51,7 +51,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.genres = this.utilService.convertEnumToKeyValueArray(genresEnum);
+    this.genres = this.utilService.convertEnumToKeyValueArray(GenreEnum);
     this.view = /true/i.test(this.route.snapshot.queryParams?.view);
     this.initForm();
     this.getData();

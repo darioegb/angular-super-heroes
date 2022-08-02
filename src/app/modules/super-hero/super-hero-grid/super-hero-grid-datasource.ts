@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { genresEnum } from '@app/constants';
+import { GenreEnum } from '@app/constants';
 import { Column, ColumnDef, PageConfig } from '@shared/models';
 import { DropdownTranslatePipe } from '@shared/pipes/dropdown-translate.pipe';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
@@ -15,7 +15,7 @@ export class SuperHeroGridDataSource extends DataSource<SuperHero> {
       cellDef: 'superHeroes.grid.columns.genre',
       format: (value): string =>
         this.dropdownTranslatePipe.transform(
-          genresEnum[value],
+          GenreEnum[value],
           'globals.enums.genres',
         ),
     },
