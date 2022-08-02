@@ -85,6 +85,7 @@
     "email": "It is not a valid email.",
     "min": "The minimum allowed is {{param}}.",
     "max": "The maximum allowed is {{param}}.",
+    "fileSize": "The file is too large",
     "pattern": {
       "numeric": "The valid format is numeric.",
       "alphabet": "The valid format is alphabetical.",

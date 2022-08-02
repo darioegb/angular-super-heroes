@@ -85,6 +85,7 @@
     "email": "No es un correo electrónico válido.",
     "min": "El mínimo permitido es {{param}}.",
     "max": "El máximo permitido es {{param}}.",
+    "fileSize": "El archivo es muy grande",
     "pattern": {
       "numeric": "El formato válido es numérico.",
       "alphabet": "El formato válido es alfabético.",

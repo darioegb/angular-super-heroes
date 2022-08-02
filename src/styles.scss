@@ -44,6 +44,29 @@ button {
   text-transform: uppercase;
 }
 
+.full-width {
+  width: 100%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.col {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.col:last-child {
+  margin-right: 0;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
 @media (prefers-color-scheme: dark) {
   @include mat.core-theme($dark-theme);
   @include mat.button-theme($dark-theme);

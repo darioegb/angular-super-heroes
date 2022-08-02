@@ -17,10 +17,9 @@ export class UpperCaseDirective {
     this.toUpperCase(event);
   }
 
-  private toUpperCase({ target, stopPropagation }): void {
+  private toUpperCase({ target }): void {
     const newVal: string = (target as HTMLInputElement).value.toUpperCase();
     this.el.nativeElement.value = newVal;
     this.ngControl.control.patchValue(newVal);
-    stopPropagation();
   }
 }

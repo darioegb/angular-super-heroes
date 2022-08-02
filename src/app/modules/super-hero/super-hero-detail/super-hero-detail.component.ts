@@ -1,5 +1,5 @@
-import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import {
   AbstractControl,
   UntypedFormBuilder,
@@ -9,18 +9,17 @@ import {
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
-import { Subject, Observable } from 'rxjs';
-import { take, takeLast, takeUntil, withLatestFrom } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil, withLatestFrom } from 'rxjs/operators';
 import {
   defaultFormControlSizes,
   genresEnum,
   httpMethodKeys,
-  imgSrc,
 } from '@app/constants';
 import { GenericObject, Option } from '@shared/models';
 import { UtilService } from '@shared/services';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
-import { AngularFireStorageReference } from '@angular/fire/compat/storage';
+import { fileSizeValidator } from '@shared/directives';
 
 @Component({
   selector: 'app-super-hero-detail',
@@ -33,11 +32,9 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   superHero: SuperHero;
   view: boolean;
   isEditOrView: boolean;
+  isUploading = false;
   picture: string;
   toastTranslations: { add: string; update: string };
-  noImageSrc = `${imgSrc}/no-image.png`;
-  uploadProgress$: Observable<number>;
-  previewPicture$: Observable<string | ArrayBuffer>;
   controlSize = defaultFormControlSizes;
   private unsubscribe$ = new Subject<void>();
 
@@ -49,7 +46,9 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     private toastr: ToastrService,
     private utilService: UtilService,
     private superHeroService: SuperHeroService,
-  ) {}
+  ) {
+    this.translateService.onLangChange.subscribe(() => this.getTranslations());
+  }
 
   ngOnInit(): void {
     this.genres = this.utilService.convertEnumToKeyValueArray(genresEnum);
@@ -86,7 +85,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
       age: [null, Validators.min(number.min)],
       height: [null, Validators.min(number.min)],
       weight: [null, Validators.min(number.min)],
-      picture: [null],
+      picture: [null, fileSizeValidator],
     });
   }
 
@@ -107,7 +106,6 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   getTranslations(): void {
     this.translateService
       .get('globals.toasts')
-      .pipe(take(1))
       .subscribe(({ add: { success: add }, update: { success: update } }) => {
         const param = this.translateService.instant('superHeroes.detail.title');
         this.toastTranslations = {
@@ -148,57 +146,24 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     }
     const { value: file } = this.superHeroControls.picture;
     if (file && file !== this.picture) {
-      this.upload(file);
+      this.isUploading = true;
     } else {
       this.saveOrUpdate();
     }
-  }
-
-  upload(file: File): void {
-    const fileName = this.utilService.fileName();
-    const filePath = this.utilService.filePath(fileName);
-    const fileRef = this.utilService.fileRef(filePath);
-    const task = this.utilService.uploadFile(filePath, file);
-    this.uploadProgress$ = task.percentageChanges();
-    task
-      .snapshotChanges()
-      .pipe(takeLast(1))
-      .subscribe({
-        complete: () => this.handleFileUpload(fileRef),
-        error: () =>
-          this.toastr.error(
-            this.translateService.instant('globals.toasts.imageError'),
-          ),
-      });
   }
 
   goBack(): void {
     this.location.back();
   }
 
-  reset(): void {
-    this.superHeroForm.reset();
-  }
-
-  onChangePicture(): void {
-    const { value: file } = this.superHeroControls.picture;
-    this.previewPicture$ = this.utilService.fileToBase64String(file);
-    this.picture = null;
+  onFileUploaded(): void {
+    this.isUploading = false;
+    this.saveOrUpdate();
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
-  }
-
-  private handleFileUpload(fileRef: AngularFireStorageReference): void {
-    fileRef
-      .getDownloadURL()
-      .pipe(take(1))
-      .subscribe((url) => {
-        this.superHeroControls.picture.setValue(url);
-        this.saveOrUpdate();
-      });
   }
 
   private saveOrUpdate(): void {

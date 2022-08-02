@@ -1,174 +1,121 @@
 <form [formGroup]="superHeroForm" (ngSubmit)="onSubmit()">
-  <mat-card class="shipping-card">
-    <mat-card-header>
-      <mat-card-title>{{
-        'superHeroes.detail.title' | translate
-      }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>{{
-              'superHeroes.grid.columns.name' | translate
-            }}</mat-label>
-            <input
-              type="text"
-              [placeholder]="
-                'superHeroes.detail.form.namePlaceholder' | translate
-              "
-              formControlName="name"
-              matInput
-              ngxErrorMessage
-              appUpperCase
-            />
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>{{
-              'superHeroes.grid.columns.age' | translate
-            }}</mat-label>
-            <input
-              type="number"
-              [placeholder]="
-                'superHeroes.detail.form.agePlaceholder' | translate
-              "
-              formControlName="age"
-              matInput
-              ngxErrorMessage
-            />
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>{{
-              'superHeroes.grid.columns.genre' | translate
-            }}</mat-label>
-            <mat-select
-              [placeholder]="
-                'superHeroes.detail.form.genrePlaceholder' | translate
-              "
-              formControlName="genre"
-              ngxErrorMessage
-            >
-              <mat-option *ngFor="let genre of genres" [value]="genre.value">
-                {{ genre.key | dropdownTranslate: 'globals.enums.genres' }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>{{
-              'superHeroes.grid.columns.specialty' | translate
-            }}</mat-label>
-            <textarea
-              [placeholder]="
-                'superHeroes.detail.form.specialtyPlaceHolder' | translate
-              "
-              formControlName="specialty"
-              matInput
-              ngxErrorMessage
-            ></textarea>
-            <mat-hint align="end"
-              >{{ superHeroControls.specialty.value?.length }} /
-              {{ controlSize.textarea.max }}</mat-hint
-            >
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>{{
-              'superHeroes.grid.columns.height' | translate
-            }}</mat-label>
-            <input
-              type="number"
-              [placeholder]="
-                'superHeroes.detail.form.heightPlaceholder' | translate
-              "
-              formControlName="height"
-              matInput
-              ngxErrorMessage
-            />
-          </mat-form-field>
-        </div>
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <mat-label>{{
-              'superHeroes.grid.columns.weight' | translate
-            }}</mat-label>
-            <input
-              type="number"
-              [placeholder]="
-                'superHeroes.detail.form.weightPlaceholder' | translate
-              "
-              formControlName="weight"
-              matInput
-              ngxErrorMessage
-            />
-          </mat-form-field>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field appearance="fill" class="full-width">
-            <ngx-mat-file-input
-              formControlName="picture"
-              accept="image/*"
-              [placeholder]="'superHeroes.grid.columns.picture' | translate"
-              (change)="onChangePicture()"
-            >
-              <mat-icon ngxMatFileInputIcon>folder</mat-icon>
-            </ngx-mat-file-input>
-          </mat-form-field>
-          <mat-progress-bar
-            *ngIf="
-              (uploadProgress$ | async) > 0 && (uploadProgress$ | async) < 100
+  <app-form-card class="shipping-card">
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            'superHeroes.grid.columns.name' | translate
+          }}</mat-label>
+          <input
+            type="text"
+            [placeholder]="
+              'superHeroes.detail.form.namePlaceholder' | translate
             "
-            mode="determinate"
-            [value]="uploadProgress$ | async"
-          ></mat-progress-bar>
-        </div>
-        <div class="col">
-          <mat-card>
-            <mat-card-header>
-              <mat-card-title>
-                {{ 'superHeroes.detail.previewCardTitle' | translate }}
-              </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <img
-                class="picture"
-                [src]="
-                  picture ? picture : (previewPicture$ | async) || noImageSrc
-                "
-                alt="picture"
-              />
-            </mat-card-content>
-          </mat-card>
-        </div>
+            formControlName="name"
+            matInput
+            ngxErrorMessage
+            appUpperCase
+          />
+        </mat-form-field>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="warn" type="button" (click)="goBack()">
-        {{ 'globals.buttons.cancel' | translate }}
-      </button>
-      <button
-        mat-raised-button
-        type="reset"
-        [disabled]="isEditOrView"
-        (click)="reset()"
-      >
-        {{ 'globals.buttons.reset' | translate }}
-      </button>
-      <button mat-raised-button color="primary" type="submit" [disabled]="view">
-        {{ 'globals.buttons.save' | translate }}
-      </button>
-    </mat-card-actions>
-  </mat-card>
+      <div class="col">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            'superHeroes.grid.columns.age' | translate
+          }}</mat-label>
+          <input
+            type="number"
+            [placeholder]="'superHeroes.detail.form.agePlaceholder' | translate"
+            formControlName="age"
+            matInput
+            ngxErrorMessage
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            'superHeroes.grid.columns.genre' | translate
+          }}</mat-label>
+          <mat-select
+            [placeholder]="
+              'superHeroes.detail.form.genrePlaceholder' | translate
+            "
+            formControlName="genre"
+            ngxErrorMessage
+          >
+            <mat-option *ngFor="let genre of genres" [value]="genre.value">
+              {{ genre.key | dropdownTranslate: 'globals.enums.genres' }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            'superHeroes.grid.columns.specialty' | translate
+          }}</mat-label>
+          <textarea
+            [placeholder]="
+              'superHeroes.detail.form.specialtyPlaceHolder' | translate
+            "
+            formControlName="specialty"
+            matInput
+            ngxErrorMessage
+          ></textarea>
+          <mat-hint align="end"
+            >{{ superHeroControls.specialty.value?.length }} /
+            {{ controlSize.textarea.max }}</mat-hint
+          >
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            'superHeroes.grid.columns.height' | translate
+          }}</mat-label>
+          <input
+            type="number"
+            [placeholder]="
+              'superHeroes.detail.form.heightPlaceholder' | translate
+            "
+            formControlName="height"
+            matInput
+            ngxErrorMessage
+          />
+        </mat-form-field>
+      </div>
+      <div class="col">
+        <mat-form-field appearance="fill" class="full-width">
+          <mat-label>{{
+            'superHeroes.grid.columns.weight' | translate
+          }}</mat-label>
+          <input
+            type="number"
+            [placeholder]="
+              'superHeroes.detail.form.weightPlaceholder' | translate
+            "
+            formControlName="weight"
+            matInput
+            ngxErrorMessage
+          />
+        </mat-form-field>
+      </div>
+    </div>
+    <app-form-img-upload
+      [formControl]="superHeroControls.picture"
+      [isUploading]="isUploading"
+      [(picture)]="picture"
+      (fileUploaded)="onFileUploaded()"
+    ></app-form-img-upload>
+    <app-form-card-actions
+      actions
+      [isEditOrView]="isEditOrView"
+      [view]="view"
+    ></app-form-card-actions>
+  </app-form-card>
 </form>

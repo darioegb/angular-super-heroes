@@ -2,7 +2,6 @@ import {
   AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -13,38 +12,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatDialog } from '@angular/material/dialog';
-import { EMPTY, fromEvent, merge, Subject } from 'rxjs';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  filter,
-  map,
-  switchMap,
-  take,
-  takeUntil,
-} from 'rxjs/operators';
+import { EMPTY, merge, Subject } from 'rxjs';
+import { switchMap, take, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
-import { ColumnDef, PageConfig } from '@shared/models';
+import { ColumnDef, FilterInput, PageConfig } from '@shared/models';
 import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { genresEnum, imgSrc } from '@app/constants';
+import { DropdownTranslatePipe } from '@shared/pipes/dropdown-translate.pipe';
 
 @Component({
   selector: 'app-super-hero-grid',
   templateUrl: './super-hero-grid.component.html',
   styleUrls: ['./super-hero-grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SuperHeroGridComponent
   implements AfterViewInit, OnInit, OnDestroy
 {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('input') input: ElementRef;
-  dataSource: SuperHeroGridDataSource;
-  pageConfig: PageConfig = new PageConfig();
   toastDeleteSuccess: string;
-  genres = genresEnum;
-  noImageSrc = `${imgSrc}/no-image.png`;
+  dataSource: SuperHeroGridDataSource;
+  filterInput: FilterInput;
+  filter = '';
+  pageConfig: PageConfig = new PageConfig();
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -54,10 +45,16 @@ export class SuperHeroGridComponent
     private toastr: ToastrService,
     private dialogService: MatDialog,
     private superHeroService: SuperHeroService,
-  ) {}
+    private dropdownTranslatePipe: DropdownTranslatePipe,
+  ) {
+    this.translateService.onLangChange.subscribe(() => this.getTranslations());
+  }
 
   ngOnInit(): void {
-    this.dataSource = new SuperHeroGridDataSource(this.superHeroService);
+    this.dataSource = new SuperHeroGridDataSource(
+      this.superHeroService,
+      this.dropdownTranslatePipe,
+    );
     this.onLoadData(true);
     this.getTranslations();
   }
@@ -66,7 +63,6 @@ export class SuperHeroGridComponent
     this.sort.sortChange
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => (this.paginator.pageIndex = 0));
-    this.initFilterData();
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.onLoadData());
@@ -83,12 +79,13 @@ export class SuperHeroGridComponent
     this.dataSource.loadData(this.pageConfig);
   }
 
-  onAddOrEditOrView(item?: SuperHero, view = false): void {
-    if (!item) {
+  onAddOrEditOrView(event: { item: SuperHero; view?: boolean }): void {
+    if (!event) {
       this.router.navigate(['detail'], {
         relativeTo: this.route,
       });
     } else {
+      const { item, view } = event;
       this.router.navigate([`detail/${item.id}`], {
         state: {
           data: {
@@ -110,15 +107,25 @@ export class SuperHeroGridComponent
       .get('globals.toasts.delete.success', {
         value: this.translateService.instant('superHeroes.detail.title'),
       })
-      .pipe(take(1))
-      .subscribe((result) => (this.toastDeleteSuccess = result));
+      .pipe(
+        withLatestFrom(
+          this.translateService.get('superHeroes.grid.filterInput'),
+        ),
+      )
+      .subscribe(([deleteSucess, { label, placeholder }]) => {
+        this.toastDeleteSuccess = deleteSucess;
+        this.filterInput = {
+          label,
+          placeholder,
+        };
+      });
   }
 
-  onDelete(item: SuperHero): void {
+  onDelete({ name, id }: SuperHero): void {
     const dialogRef = this.dialogService.open(ConfirmDialogComponent, {
       data: {
         title: this.translateService.instant('globals.dialogs.delete.title', {
-          value: item.name,
+          value: name,
         }),
       },
     });
@@ -127,7 +134,7 @@ export class SuperHeroGridComponent
       .pipe(
         take(1),
         switchMap((result: boolean) =>
-          result ? this.superHeroService.delete(item.id) : EMPTY,
+          result ? this.superHeroService.delete(id) : EMPTY,
         ),
       )
       .subscribe(() => {
@@ -136,8 +143,12 @@ export class SuperHeroGridComponent
       });
   }
 
+  onFilterChange(value: string): void {
+    this.filter = value;
+    value.length !== 0 ? this.initFilterData() : this.onReset();
+  }
+
   onReset(): void {
-    this.input.nativeElement.value = '';
     this.onLoadData();
   }
 
@@ -147,18 +158,8 @@ export class SuperHeroGridComponent
   }
 
   private initFilterData(): void {
-    fromEvent(this.input.nativeElement, 'keyup')
-      .pipe(
-        map(({ target: { value } }) => value),
-        filter(({ length }) => length > 2 || length === 0),
-        debounceTime(1000),
-        distinctUntilChanged(),
-        takeUntil(this.unsubscribe$),
-      )
-      .subscribe(() => {
-        this.paginator.pageIndex = 0;
-        this.onLoadData();
-      });
+    this.paginator.pageIndex = 0;
+    this.onLoadData();
   }
 
   private setPageConfig(): void {
@@ -168,6 +169,6 @@ export class SuperHeroGridComponent
     this.pageConfig.limit = pageSize;
     this.pageConfig.sort = direction.length !== 0 ? active : '';
     this.pageConfig.order = direction || start;
-    this.pageConfig.filter = this.input.nativeElement.value;
+    this.pageConfig.filter = this.filter;
   }
 }

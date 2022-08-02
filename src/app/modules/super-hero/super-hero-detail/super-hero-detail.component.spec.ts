@@ -172,7 +172,7 @@ describe('SuperHeroDetailComponent', () => {
 
       it('should not update super hero when error occured', () => {
         superHeroServiceSpy.update.and.returnValue(
-          throwError('fail to update'),
+          throwError(() => 'fail to update'),
         );
         component.superHeroControls.age.setValue(100);
         fixture.detectChanges();
@@ -180,32 +180,6 @@ describe('SuperHeroDetailComponent', () => {
         expect(component.superHeroForm.valid).toBeTruthy();
         expect(component.superHero).toBeDefined();
         expect(superHeroServiceSpy.update).toHaveBeenCalled();
-      });
-
-      it('should update super hero when data is valid with picture', () => {
-        spyOn(utilService, 'fileRef').and.returnValue({
-          getDownloadURL: () => of('url image'),
-        } as never);
-        spyOn(toastService, 'success');
-        superHeroServiceSpy.update.and.returnValue(of({}));
-        component.superHeroControls.picture.setValue(file);
-        fixture.detectChanges();
-        component.onSubmit();
-        expect(component.superHeroForm.valid).toBeTruthy();
-        expect(component.superHero).toBeDefined();
-        expect(utilService.fileRef).toHaveBeenCalled();
-        expect(superHeroServiceSpy.update).toHaveBeenCalled();
-        expect(toastService.success).toHaveBeenCalled();
-      });
-
-      it('should set previewPicture when input file change', () => {
-        spyOn(utilService, 'fileToBase64String').and.returnValue(
-          of('base64 image string'),
-        );
-        component.superHeroControls.picture.setValue(file);
-        component.onChangePicture();
-        expect(utilService.fileToBase64String).toHaveBeenCalled();
-        expect(component.previewPicture$).toBeDefined();
       });
     });
 
@@ -244,30 +218,15 @@ describe('SuperHeroDetailComponent', () => {
       });
 
       it('should not add new super hero when error occured', () => {
-        superHeroServiceSpy.add.and.returnValue(throwError('fail to save'));
+        superHeroServiceSpy.add.and.returnValue(
+          throwError(() => 'fail to save'),
+        );
         component.superHeroForm.patchValue(newSuperHero);
         fixture.detectChanges();
         component.onSubmit();
         expect(component.superHeroForm.valid).toBeTruthy();
         expect(component.superHero).toBeDefined();
         expect(superHeroServiceSpy.add).toHaveBeenCalled();
-      });
-
-      it('should add new super hero when data is valid with picture', () => {
-        spyOn(utilService, 'fileRef').and.returnValue({
-          getDownloadURL: () => of('url image'),
-        } as never);
-        spyOn(toastService, 'success');
-        superHeroServiceSpy.add.and.returnValue(of({}));
-        component.superHeroForm.patchValue(newSuperHero);
-        component.superHeroControls.picture.setValue(file);
-        fixture.detectChanges();
-        component.onSubmit();
-        expect(component.superHeroForm.valid).toBeTruthy();
-        expect(component.superHero).toBeDefined();
-        expect(utilService.fileRef).toHaveBeenCalled();
-        expect(superHeroServiceSpy.add).toHaveBeenCalled();
-        expect(toastService.success).toHaveBeenCalled();
       });
     });
   });

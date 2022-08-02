@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col">
+    <mat-form-field appearance="fill" class="full-width">
+      <ngx-mat-file-input
+        ngDefaultControl
+        ngxErrorMessage
+        [formControl]="formControl"
+        accept="image/*"
+        [placeholder]="'superHeroes.grid.columns.picture' | translate"
+        (change)="onChangePicture()"
+      >
+        <mat-icon ngxMatFileInputIcon>folder</mat-icon>
+      </ngx-mat-file-input>
+    </mat-form-field>
+    <mat-progress-bar
+      *ngIf="(uploadProgress$ | async) > 0 && (uploadProgress$ | async) < 100"
+      mode="determinate"
+      [value]="uploadProgress$ | async"
+    ></mat-progress-bar>
+  </div>
+  <div class="col">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          {{ 'superHeroes.detail.previewCardTitle' | translate }}
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <img
+          class="picture"
+          [src]="picture ? picture : (previewPicture$ | async) || noImageSrc"
+          alt="picture"
+        />
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

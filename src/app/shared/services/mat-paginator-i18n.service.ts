@@ -4,12 +4,12 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class MatPaginatorI18nService extends MatPaginatorIntl {
-  constructor(private translate: TranslateService) {
+  constructor(private translateService: TranslateService) {
     super();
 
-    this.translate.onLangChange.subscribe(() => {
-      this.getAndInitTranslations();
-    });
+    this.translateService.onLangChange.subscribe(() =>
+      this.getAndInitTranslations(),
+    );
 
     this.getAndInitTranslations();
   }
@@ -32,7 +32,7 @@ export class MatPaginatorI18nService extends MatPaginatorIntl {
   };
 
   getAndInitTranslations(): void {
-    this.translate
+    this.translateService
       .get('globals.paginator')
       .subscribe(
         ({

@@ -1,0 +1,23 @@
+<button
+  mat-icon-button
+  aria-label="Icon button with a visibility icon"
+  (click)="handleEditOrView(true)"
+>
+  <mat-icon aria-hidden="false">visibility</mat-icon>
+</button>
+<button
+  color="primary"
+  mat-icon-button
+  aria-label="Icon button with a edit icon"
+  (click)="handleEditOrView()"
+>
+  <mat-icon aria-hidden="false">edit</mat-icon>
+</button>
+<button
+  color="warn"
+  mat-icon-button
+  aria-label="Icon button with a delete icon"
+  (click)="handleDelete()"
+>
+  <mat-icon aria-hidden="false">delete</mat-icon>
+</button>

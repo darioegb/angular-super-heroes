@@ -1,0 +1,19 @@
+<mat-form-field appearance="outline">
+  <mat-label>{{ filterInput.label }}</mat-label>
+  <input
+    type="search"
+    matInput
+    [placeholder]="filterInput.placeholder"
+    #input
+  />
+  <button
+    mat-button
+    *ngIf="input.value"
+    matSuffix
+    mat-icon-button
+    aria-label="Clear"
+    (click)="onReset()"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>

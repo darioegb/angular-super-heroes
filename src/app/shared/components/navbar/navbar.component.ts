@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { locales } from '@root/app/constants';
 
 import { Option } from '@shared/models';
 
@@ -9,16 +10,7 @@ import { Option } from '@shared/models';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  langOptions: Option[] = [
-    {
-      key: 'English',
-      value: 'en',
-    },
-    {
-      key: 'Español',
-      value: 'es',
-    },
-  ];
+  langOptions: Option[] = locales;
   selectedLang: string;
 
   constructor(private translate: TranslateService) {}

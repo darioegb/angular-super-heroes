@@ -10,23 +10,21 @@ describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
   let fixture: ComponentFixture<ConfirmDialogComponent>;
 
-  beforeEach(
-    waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [ConfirmDialogComponent],
-        imports: [
-          MatDialogModule,
-          NoopAnimationsModule,
-          HttpClientTestingModule,
-          TranslateTestingModule.withTranslations(
-            'es',
-            require('src/assets/i18n/es.json'),
-          ),
-        ],
-        providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
-      }).compileComponents();
-    }),
-  );
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ConfirmDialogComponent],
+      imports: [
+        MatDialogModule,
+        NoopAnimationsModule,
+        HttpClientTestingModule,
+        TranslateTestingModule.withTranslations(
+          'es',
+          require('src/assets/i18n/es.json'),
+        ),
+      ],
+      providers: [{ provide: MAT_DIALOG_DATA, useValue: {} }],
+    }).compileComponents();
+  }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ConfirmDialogComponent);

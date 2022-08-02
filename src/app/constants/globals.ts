@@ -25,3 +25,13 @@ export const defaultFormControlSizes = {
     max: 250,
   },
 };
+export const locales = [
+  {
+    key: 'English',
+    value: 'en',
+  },
+  {
+    key: 'Español',
+    value: 'es',
+  },
+];
