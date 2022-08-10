@@ -3,7 +3,6 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Optional,
   Output,
   Self,
 } from '@angular/core';
@@ -14,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Observable, take, takeLast } from 'rxjs';
 
-import { imgSrc } from '@app/constants';
+import { IMG_SRC } from '@app/constants';
 import { UtilService } from '@shared/services';
 
 @Component({
@@ -23,10 +22,9 @@ import { UtilService } from '@shared/services';
   styleUrls: ['./form-img-upload.component.scss'],
 })
 export class FormImgUploadComponent implements OnInit, ControlValueAccessor {
-  file: File;
   formControl: FormControl;
   disabled = false;
-  noImageSrc = `${imgSrc}/no-image.png`;
+  noImageSrc: string;
   uploadProgress$: Observable<number>;
   previewPicture$: Observable<string | ArrayBuffer>;
   @Input() picture: string;
@@ -58,6 +56,7 @@ export class FormImgUploadComponent implements OnInit, ControlValueAccessor {
     this.formControl = this.ngControl
       ? (this.ngControl.control as FormControl)
       : new FormControl();
+    this.noImageSrc = `${IMG_SRC}/no-image.png`;
   }
 
   writeValue(obj: string): void {
@@ -76,9 +75,8 @@ export class FormImgUploadComponent implements OnInit, ControlValueAccessor {
     this.disabled = isDisabled;
   }
 
-  onChangePicture(): void {
+  pictureChanged(): void {
     const { value: file } = this.formControl;
-    this.file = file;
     this.previewPicture$ = this.utilService.fileToBase64String(file);
     this.picture = null;
     this.pictureChange.emit(this.picture);
@@ -88,7 +86,7 @@ export class FormImgUploadComponent implements OnInit, ControlValueAccessor {
     const fileName = this.utilService.fileName();
     const filePath = this.utilService.filePath(fileName);
     const fileRef = this.utilService.fileRef(filePath);
-    const task = this.utilService.uploadFile(filePath, this.file);
+    const task = this.utilService.uploadFile(filePath, this.formControl.value);
     this.uploadProgress$ = task.percentageChanges();
     task
       .snapshotChanges()

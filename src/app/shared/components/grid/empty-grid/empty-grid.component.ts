@@ -1,19 +1,19 @@
-import { Component, ElementRef, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-empty-grid',
   template: `
-    <tr class="mat-row">
-      <td class="mat-cell" colspan="4">
-        {{
-          'globals.grid.noMatchingDataText'
-            | translate: { value: input?.nativeElement?.value || '' }
-        }}
-      </td>
-    </tr>
+    {{ 'globals.grid.noMatchingDataText' | translate: { value: filter || '' } }}
   `,
-  styles: [],
 })
 export class EmptyGridComponent {
-  @Input() input: ElementRef<unknown>;
+  @Input()
+  set filter(value: string) {
+    this._filter = value;
+  }
+  get filter(): string {
+    return this._filter;
+  }
+
+  private _filter: string;
 }

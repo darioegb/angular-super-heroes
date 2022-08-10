@@ -12,9 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil, withLatestFrom } from 'rxjs/operators';
 import {
-  defaultFormControlSizes,
+  DEFAULT_FORM_CONTROL_SIZES,
   GenreEnum,
-  httpMethodKeys,
+  HTTP_METHOD_KEYS,
 } from '@app/constants';
 import { GenericObject, Option } from '@shared/models';
 import { UtilService } from '@shared/services';
@@ -35,7 +35,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   isUploading = false;
   picture: string;
   toastTranslations: { add: string; update: string };
-  controlSize = defaultFormControlSizes;
+  controlSize = DEFAULT_FORM_CONTROL_SIZES;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -170,7 +170,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     const isNew = !this.superHero?.id;
     isNew && this.initSuperHero();
     this.setSuperHero();
-    this.superHeroService[isNew ? httpMethodKeys.post : httpMethodKeys.put](
+    this.superHeroService[isNew ? HTTP_METHOD_KEYS.post : HTTP_METHOD_KEYS.put](
       this.superHero,
     ).subscribe({
       next: () => {

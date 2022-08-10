@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { locales } from '@root/app/constants';
+import { LOCALES } from '@root/app/constants';
 
 import { Option } from '@shared/models';
 
@@ -10,12 +10,13 @@ import { Option } from '@shared/models';
   styleUrls: ['./navbar.component.scss'],
 })
 export class NavbarComponent implements OnInit {
-  langOptions: Option[] = locales;
+  langOptions: Option[];
   selectedLang: string;
 
   constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
+    this.langOptions = LOCALES;
     const lang = localStorage.getItem('lang');
     this.selectedLang = lang ? lang : this.translate.defaultLang;
     this.translate.use(this.selectedLang);

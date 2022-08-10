@@ -1,13 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-form-card',
   template: `
     <mat-card class="shipping-card">
       <mat-card-header>
-        <mat-card-title>{{
-          'superHeroes.detail.title' | translate
-        }}</mat-card-title>
+        <mat-card-title>{{ title }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <ng-content></ng-content>
@@ -24,4 +22,6 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export class FormCardComponent {}
+export class FormCardComponent {
+  @Input() title: string;
+}

@@ -47,6 +47,7 @@
       <app-grid-filter
         [filterInput]="filterInput"
         (filterChange)="onFilterChange($event)"
+        #filter
       ></app-grid-filter>
     </th>
   </ng-container>
@@ -60,8 +61,11 @@
     *matHeaderRowDef="columnsDef?.displayedColumns; sticky: true"
   ></tr>
   <tr mat-row *matRowDef="let row; columns: columnsDef?.displayedColumns"></tr>
-
-  <app-empty-grid [input]="input" *matNoDataRow></app-empty-grid>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">
+      <app-empty-grid [filter]="filter"></app-empty-grid>
+    </td>
+  </tr>
 </table>
 
 <mat-paginator

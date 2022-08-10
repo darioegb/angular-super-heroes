@@ -5,7 +5,7 @@ import { DialogData } from '@shared/models/dialog.model';
 @Component({
   selector: 'app-confirm-dialog',
   template: `
-    <h1 mat-dialog-title>{{ data.title }}</h1>
+    <h1 mat-dialog-title>{{ data.title || '' }}</h1>
     <div mat-dialog-content *ngIf="data.body">
       <p>{{ data.body }}</p>
     </div>
@@ -23,7 +23,6 @@ import { DialogData } from '@shared/models/dialog.model';
       </button>
     </div>
   `,
-  styles: [],
 })
 export class ConfirmDialogComponent {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData) {}
