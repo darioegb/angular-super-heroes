@@ -49,3 +49,6 @@ Thumbs.db
 #DB mock
 # db.json
 # routes.json
+
+# Storybook
+documentation.json

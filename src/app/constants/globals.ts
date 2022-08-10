@@ -1,13 +1,17 @@
-export const assetRoot = 'assets';
-export const imgSrc = `${assetRoot}/imgs`;
-export const idKey = 'id';
-export const httpMethodKeys = {
+import { HttpClient } from '@angular/common/http';
+import { TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export const ASSET_ROOT = 'assets';
+export const IMG_SRC = `${ASSET_ROOT}/imgs`;
+export const ID_KEY = 'id';
+export const HTTP_METHOD_KEYS = {
   get: 'get',
   delete: 'delete',
   post: 'add',
   put: 'update',
 };
-export const defaultFormControlSizes = {
+export const DEFAULT_FORM_CONTROL_SIZES = {
   text: {
     min: 3,
     max: 60,
@@ -25,7 +29,7 @@ export const defaultFormControlSizes = {
     max: 250,
   },
 };
-export const locales = [
+export const LOCALES = [
   {
     key: 'English',
     value: 'en',
@@ -35,3 +39,14 @@ export const locales = [
     value: 'es',
   },
 ];
+
+export const APP_I18N_CONFIG = {
+  defaultLanguage: 'es',
+  useDefaultLang: true,
+  loader: {
+    provide: TranslateLoader,
+    useFactory: (http: HttpClient): TranslateHttpLoader =>
+      new TranslateHttpLoader(http),
+    deps: [HttpClient],
+  },
+};

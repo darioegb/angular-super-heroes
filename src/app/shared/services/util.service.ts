@@ -1,11 +1,4 @@
 import { Injectable } from '@angular/core';
-// import {
-//   Storage,
-//   UploadTask,
-//   StorageReference,
-//   ref,
-//   uploadBytesResumable,
-// } from '@angular/fire/storage';
 import {
   AngularFireStorage,
   AngularFireStorageReference,

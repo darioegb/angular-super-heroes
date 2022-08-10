@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot,
   Router,
 } from '@angular/router';
-import { idKey } from '@root/app/constants';
+import { ID_KEY } from '@root/app/constants';
 import { Observable, of } from 'rxjs';
 import { SuperHero } from './super-hero.model';
 import { SuperHeroService } from './super-hero.service';
@@ -25,6 +25,6 @@ export class SuperHeroResolver implements Resolve<SuperHero> {
       this.router.getCurrentNavigation().extras.state?.data?.superHero;
     return superHero
       ? of(superHero)
-      : this.superHeroService.get(route.paramMap.get(idKey));
+      : this.superHeroService.get(route.paramMap.get(ID_KEY));
   }
 }

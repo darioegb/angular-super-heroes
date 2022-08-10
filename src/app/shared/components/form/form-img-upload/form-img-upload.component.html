@@ -7,7 +7,7 @@
         [formControl]="formControl"
         accept="image/*"
         [placeholder]="'superHeroes.grid.columns.picture' | translate"
-        (change)="onChangePicture()"
+        (change)="pictureChanged()"
       >
         <mat-icon ngxMatFileInputIcon>folder</mat-icon>
       </ngx-mat-file-input>

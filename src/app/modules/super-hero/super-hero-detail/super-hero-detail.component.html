@@ -1,5 +1,8 @@
 <form [formGroup]="superHeroForm" (ngSubmit)="onSubmit()">
-  <app-form-card class="shipping-card">
+  <app-form-card
+    class="shipping-card"
+    [title]="'superHeroes.detail.title' | translate"
+  >
     <div class="row">
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">

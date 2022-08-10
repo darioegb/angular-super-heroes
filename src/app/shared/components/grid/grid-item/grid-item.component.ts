@@ -1,6 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
-import { imgSrc } from '@app/constants';
+import { IMG_SRC } from '@app/constants';
 import { Column } from '@shared/models';
 
 @Component({
@@ -19,10 +19,13 @@ import { Column } from '@shared/models';
         : row[column.headerDef] || '-'
     }}</ng-template>
   `,
-  styles: [],
 })
-export class GridItemComponent<T> {
-  noImageSrc = `${imgSrc}/no-image.png`;
+export class GridItemComponent<T> implements OnInit {
+  noImageSrc: string;
   @Input() row: T;
   @Input() column: Column;
+
+  ngOnInit(): void {
+    this.noImageSrc = `${IMG_SRC}/no-image.png`;
+  }
 }

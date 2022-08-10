@@ -82,7 +82,7 @@ describe('FormImgUploadComponent', () => {
   it('should emit pictureChange event when picture is changed', () => {
     spyOn(component.pictureChange, 'emit');
     component.formControl.setValue(file);
-    component.onChangePicture();
+    component.pictureChanged();
     expect(component.pictureChange.emit).toHaveBeenCalled();
   });
 
@@ -92,7 +92,7 @@ describe('FormImgUploadComponent', () => {
     } as never);
     spyOn(component.fileUploaded, 'emit');
     component.isUploading = true;
-    component.file = file;
+    component.formControl.setValue(file);
     expect(utilService.fileRef).toHaveBeenCalled();
     expect(component.fileUploaded.emit).toHaveBeenCalled();
   });

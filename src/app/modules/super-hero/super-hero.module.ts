@@ -11,12 +11,13 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { NgxErrorMessageModule } from 'ngx-error-message';
+import { NgxMatFileInputModule } from '@angular-material-components/file-input';
+
 import { SuperHeroGridComponent } from './super-hero-grid/super-hero-grid.component';
 import { SuperHeroDetailComponent } from './super-hero-detail/super-hero-detail.component';
 import { SuperHeroRoutingModule } from './super-hero-routing.module';
 import { SharedModule } from '@shared/shared.module';
-import { NgxErrorMessageModule } from 'ngx-error-message';
-import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 import { SuperHeroResolver, SuperHeroService } from './shared';
 
 @NgModule({

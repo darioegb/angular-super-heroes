@@ -4,23 +4,19 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClientModule } from '@angular/common/http';
+import { TranslateModule } from '@ngx-translate/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ToastrModule } from 'ngx-toastr';
 
+import { APP_I18N_CONFIG } from '@app/constants/globals';
 import { MatPaginatorI18nService } from './shared/services';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from '@shared/shared.module';
 import { environment } from '@environments/environment';
-
-// AoT requires an exported function for factories
-export const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
-  new TranslateHttpLoader(http, './assets/i18n/', '.json');
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,15 +28,7 @@ export const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
     MatProgressSpinnerModule,
-    TranslateModule.forRoot({
-      defaultLanguage: 'es',
-      useDefaultLang: true,
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
+    TranslateModule.forRoot(APP_I18N_CONFIG),
     ToastrModule.forRoot(),
     CoreModule,
     SharedModule,
