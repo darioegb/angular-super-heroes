@@ -1,4 +1,6 @@
 import { Story, Meta } from '@storybook/angular/types-6-0';
+import { moduleMetadata } from '@storybook/angular';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { GridItemComponent } from './grid-item.component';
 
@@ -37,6 +39,11 @@ export default {
       },
     },
   },
+  decorators: [
+    moduleMetadata({
+      imports: [NoopAnimationsModule],
+    }),
+  ],
   parameters,
 } as Meta;
 
