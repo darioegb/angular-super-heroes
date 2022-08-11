@@ -27,7 +27,7 @@ describe('EmptyGridComponent', () => {
 
   it('should show empty row message', () => {
     expect(component).toBeTruthy();
-    expect(hostElement.querySelector('td').innerText).toBe(
+    expect(hostElement.innerText).toBe(
       'No hay datos que coincidan con el filtro',
     );
   });

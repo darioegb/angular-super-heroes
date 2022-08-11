@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot,
   Router,
 } from '@angular/router';
-import { ID_KEY } from '@root/app/constants';
+import { ID_KEY } from '@shared/globals';
 import { Observable, of } from 'rxjs';
 import { SuperHero } from './super-hero.model';
 import { SuperHeroService } from './super-hero.service';

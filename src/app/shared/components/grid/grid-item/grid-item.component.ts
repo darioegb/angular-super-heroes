@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { IMG_SRC } from '@app/constants';
+import { IMG_SRC } from '@shared/globals';
 import { Column } from '@shared/models';
 
 @Component({

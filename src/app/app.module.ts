@@ -12,7 +12,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ToastrModule } from 'ngx-toastr';
 
-import { APP_I18N_CONFIG } from '@app/constants/globals';
+import { APP_I18N_CONFIG } from '@root/app/shared/globals';
 import { MatPaginatorI18nService } from './shared/services';
 import { CoreModule } from './core/core.module';
 import { SharedModule } from '@shared/shared.module';

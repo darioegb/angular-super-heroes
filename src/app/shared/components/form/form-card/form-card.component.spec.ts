@@ -29,8 +29,10 @@ describe('FormCardComponent', () => {
 
   it('should render', () => {
     expect(component).toBeTruthy();
+    component.title = 'Test';
+    fixture.detectChanges();
     expect(hostElement.querySelector('mat-card-title').textContent).toContain(
-      'Superhéroe',
+      'Test',
     );
     expect(hostElement.querySelector('mat-card-content')).toBeDefined();
   });

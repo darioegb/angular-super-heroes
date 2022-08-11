@@ -11,12 +11,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { Subject } from 'rxjs';
 import { takeUntil, withLatestFrom } from 'rxjs/operators';
-import {
-  DEFAULT_FORM_CONTROL_SIZES,
-  GenreEnum,
-  HTTP_METHOD_KEYS,
-} from '@app/constants';
+import { DEFAULT_FORM_CONTROL_SIZES, HTTP_METHOD_KEYS } from '@shared/globals';
 import { GenericObject, Option } from '@shared/models';
+import { GenreEnum } from '@shared/enums';
 import { UtilService } from '@shared/services';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { fileSizeValidator } from '@shared/directives';

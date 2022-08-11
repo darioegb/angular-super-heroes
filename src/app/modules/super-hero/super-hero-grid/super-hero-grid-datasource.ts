@@ -1,7 +1,7 @@
 import { DataSource } from '@angular/cdk/collections';
 import { Observable, BehaviorSubject } from 'rxjs';
 
-import { GenreEnum } from '@app/constants';
+import { GenreEnum } from '@shared/enums';
 import { Column, ColumnDef, PageConfig } from '@shared/models';
 import { DropdownTranslatePipe } from '@shared/pipes/dropdown-translate.pipe';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';

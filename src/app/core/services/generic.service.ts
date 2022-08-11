@@ -9,7 +9,7 @@ import { map, catchError } from 'rxjs/operators';
 import { PageConfig, Page } from '@shared/models';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
-import { HTTP_METHOD_KEYS } from '@root/app/constants';
+import { HTTP_METHOD_KEYS } from '@shared/globals';
 import { Injectable, Input } from '@angular/core';
 
 @Injectable()
@@ -100,7 +100,9 @@ export abstract class GenericService<T> {
     const resourceServer = this.toServerModel(resource);
     return this.httpClient
       .put(`${this.baseUrl}/${resourceServer.id}`, resourceServer)
-      .pipe(catchError((error) => this.handleError(error, HTTP_METHOD_KEYS.put)));
+      .pipe(
+        catchError((error) => this.handleError(error, HTTP_METHOD_KEYS.put)),
+      );
   }
 
   protected handleError(

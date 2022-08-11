@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LOCALES } from '@root/app/constants';
+import { LOCALES } from '@shared/globals';
 
 import { Option } from '@shared/models';
 

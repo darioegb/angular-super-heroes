@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SuperHeroGridComponent } from './super-hero-grid/super-hero-grid.component';
 import { SuperHeroDetailComponent } from './super-hero-detail/super-hero-detail.component';
 import { SuperHeroResolver } from './shared/super-hero.resolver';
-import { ID_KEY } from '@root/app/constants';
+import { ID_KEY } from '@shared/globals';
 
 const routes: Routes = [
   {

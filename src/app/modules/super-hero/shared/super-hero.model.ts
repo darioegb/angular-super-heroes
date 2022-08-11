@@ -1,4 +1,4 @@
-import { GenreEnum } from '@app/constants';
+import { GenreEnum } from '@shared/enums';
 export interface SuperHero {
   id?: string;
   name: string;

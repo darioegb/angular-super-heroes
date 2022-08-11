@@ -13,7 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 
 import { Observable, take, takeLast } from 'rxjs';
 
-import { IMG_SRC } from '@app/constants';
+import { IMG_SRC } from '@shared/globals';
 import { UtilService } from '@shared/services';
 
 @Component({
