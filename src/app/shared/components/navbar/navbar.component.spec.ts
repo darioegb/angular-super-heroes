@@ -22,8 +22,8 @@ describe('NavbarComponent', () => {
         MatToolbarModule,
         MatSelectModule,
         TranslateTestingModule.withTranslations(
-          'es',
-          require('src/assets/i18n/es.json'),
+          'en',
+          require('src/assets/i18n/en.json'),
         ),
       ],
     }).compileComponents();
@@ -37,12 +37,14 @@ describe('NavbarComponent', () => {
   beforeEach(() => localStorage.clear());
 
   it('should create', () => {
-    localStorage.setItem('lang', 'es');
+    localStorage.setItem('lang', 'en');
     expect(component).toBeTruthy();
   });
 
   it('should render title', () => {
-    expect(hostElement.querySelector('h1').innerHTML).toBe('ABM con material');
+    expect(hostElement.querySelector('h1').innerHTML).toBe(
+      'Crud with material',
+    );
   });
 
   it('should set locale when change select', () => {
@@ -53,15 +55,15 @@ describe('NavbarComponent', () => {
     selectTrigger.triggerEventHandler('click', {});
     fixture.detectChanges();
     const options = document.querySelectorAll('.mat-select-panel mat-option');
-    (options[0] as any).click(); // Click the second option, "English".
+    (options[1] as any).click();
     fixture.detectChanges();
     expect(component.changeLanguaje).toHaveBeenCalled();
-    expect(component.selectedLang).toBe('en');
+    expect(component.selectedLang).toBe('es');
   });
 
   it('should change language', () => {
-    component.selectedLang = 'en';
+    component.selectedLang = 'es';
     component.changeLanguaje();
-    expect(localStorage.getItem('lang')).toBe('en');
+    expect(localStorage.getItem('lang')).toBe('es');
   });
 });

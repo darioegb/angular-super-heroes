@@ -38,29 +38,27 @@ describe('HeroResolver', () => {
         }),
       );
 
-      beforeEach(
-        waitForAsync(() => {
-          TestBed.configureTestingModule({
-            imports: [
-              HttpClientTestingModule,
-              TranslateTestingModule.withTranslations(
-                'es',
-                require('src/assets/i18n/es.json'),
-              ),
-              ToastrModule.forRoot(),
-            ],
-            providers: [
-              SuperHeroService,
-              SuperHeroResolver,
-              {
-                provide: Router,
-                useValue: router,
-              },
-            ],
-          });
-          resolver = TestBed.inject(SuperHeroResolver);
-        }),
-      );
+      beforeEach(waitForAsync(() => {
+        TestBed.configureTestingModule({
+          imports: [
+            HttpClientTestingModule,
+            TranslateTestingModule.withTranslations(
+              'en',
+              require('src/assets/i18n/en.json'),
+            ),
+            ToastrModule.forRoot(),
+          ],
+          providers: [
+            SuperHeroService,
+            SuperHeroResolver,
+            {
+              provide: Router,
+              useValue: router,
+            },
+          ],
+        });
+        resolver = TestBed.inject(SuperHeroResolver);
+      }));
 
       it('should resolve superHero', () => {
         resolver.resolve(route, null).subscribe((resolved) => {
@@ -72,27 +70,25 @@ describe('HeroResolver', () => {
   });
 
   describe('without complete state', () => {
-    beforeEach(
-      waitForAsync(() => {
-        TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule],
-          providers: [
-            SuperHeroResolver,
-            {
-              provide: Router,
-              useValue: router,
-            },
-            {
-              provide: ActivatedRouteSnapshot,
-              useValue: activatedRouteStub,
-            },
-            { provide: SuperHeroService, useValue: superHeroServiceSpy },
-          ],
-        });
-        resolver = TestBed.inject(SuperHeroResolver);
-        route = TestBed.inject(ActivatedRouteSnapshot);
-      }),
-    );
+    beforeEach(waitForAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [HttpClientTestingModule],
+        providers: [
+          SuperHeroResolver,
+          {
+            provide: Router,
+            useValue: router,
+          },
+          {
+            provide: ActivatedRouteSnapshot,
+            useValue: activatedRouteStub,
+          },
+          { provide: SuperHeroService, useValue: superHeroServiceSpy },
+        ],
+      });
+      resolver = TestBed.inject(SuperHeroResolver);
+      route = TestBed.inject(ActivatedRouteSnapshot);
+    }));
     describe('without superHero data', () => {
       beforeEach(() => {
         router.setState({

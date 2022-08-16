@@ -18,8 +18,8 @@ describe('FormCardActionsComponent', () => {
       imports: [
         MatCardModule,
         TranslateTestingModule.withTranslations(
-          'es',
-          require('src/assets/i18n/es.json'),
+          'en',
+          require('src/assets/i18n/en.json'),
         ),
       ],
       providers: [

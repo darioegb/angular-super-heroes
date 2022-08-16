@@ -12,7 +12,7 @@ describe('MatPaginatorI18nService', () => {
     onLangChange: eventSubject.asObservable(),
     setDefaultLang: jasmine.createSpy('setDefaultLang'),
     get: (_: string): Observable<unknown> => of({}),
-    defaultLang: 'es',
+    defaultLang: 'en',
   };
   let service: MatPaginatorI18nService;
 
@@ -21,8 +21,8 @@ describe('MatPaginatorI18nService', () => {
       imports: [
         HttpClientTestingModule,
         TranslateTestingModule.withTranslations(
-          'es',
-          require('src/assets/i18n/es.json'),
+          'en',
+          require('src/assets/i18n/en.json'),
         ),
       ],
       providers: [
@@ -44,9 +44,9 @@ describe('MatPaginatorI18nService', () => {
 
   it('getAndInitTranslations should be called when langChange', () => {
     spyOn(service, 'getAndInitTranslations');
-    eventSubject.next({ lang: 'en', translations: [] });
+    eventSubject.next({ lang: 'es', translations: [] });
     translateStub.onLangChange.subscribe((newLang) => {
-      expect(newLang.lang).toEqual('en');
+      expect(newLang.lang).toEqual('es');
       expect(service.getAndInitTranslations).toHaveBeenCalled();
     });
   });

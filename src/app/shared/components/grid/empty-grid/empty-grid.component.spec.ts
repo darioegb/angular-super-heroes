@@ -13,8 +13,8 @@ describe('EmptyGridComponent', () => {
       declarations: [EmptyGridComponent],
       imports: [
         TranslateTestingModule.withTranslations(
-          'es',
-          require('src/assets/i18n/es.json'),
+          'en',
+          require('src/assets/i18n/en.json'),
         ),
       ],
     }).compileComponents();
@@ -27,8 +27,6 @@ describe('EmptyGridComponent', () => {
 
   it('should show empty row message', () => {
     expect(component).toBeTruthy();
-    expect(hostElement.innerText).toBe(
-      'No hay datos que coincidan con el filtro',
-    );
+    expect(hostElement.innerText).toBe('No data matching the filter');
   });
 });

@@ -41,7 +41,7 @@ export const LOCALES = [
 ];
 
 export const APP_I18N_CONFIG = {
-  defaultLanguage: 'es',
+  defaultLanguage: 'en',
   useDefaultLang: true,
   loader: {
     provide: TranslateLoader,

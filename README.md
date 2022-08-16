@@ -15,33 +15,6 @@ It is a project of a superhero crud using a scalable architecture and applying g
 - Used storybook to document shared components, directives.
 - Used the light and dark theme per operating system so that it changes according to the user's configuration.
 
-## Development server
-
-Run `ng s` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Json server
-
-To install run `npm install -g json-server` for run it server run `json-server --watch db.json` or if you configure some custom routes `json-server db.json --routes routes.json`
-For more information go to [Json-server](https://github.com/typicode/json-server)
-
-## Code scaffolding
-
-Run `ng g component component-name` to generate a new component. You can also use `ng g directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-Or run `npm run test:build` to execute production unit tests.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
 ## Structure directory
 
 - Core folder contains all about core features like global services, interceptors, guards, etc.
@@ -87,6 +60,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
     |-- index.html
 ```
 
+## Linting & Formating
+
+The code was linting by [eslint](https://github.com/angular-eslint/angular-eslint) against tslint because the latter was deprecated. Also use [prettier](https://prettier.io/) for formating propouses.
+
 ## Documentation
 
 Shared components were documented using a [storybook](https://storybook.js.org/docs/angular/get-started/introduction) and displayed in [chromatic](https://www.chromatic.com/).
@@ -96,3 +73,37 @@ Documententation live [link](https://62f4e8e7c4bcded2362c1765-mqczqbpvlu.chromat
 Run `npm run storybook` for dev documentation server. Navigate to `http://localhost:6006/`. The documentation will automatically reload if you change any of the source files.
 
 To deploy documentation changes run `npm run chromatic`.
+
+## I18n
+
+Internationalization is made with [@ngx-translate](https://github.com/ngx-translate/core) because you can change language at runtime without reload the whole app.
+
+To create a new translation you just have to create a key-value tuple in each internationalization json file in assets/i18n
+
+## Development server
+
+Run `ng s` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
+## Json server
+
+To install run `npm install -g json-server` for run it server run `json-server --watch db.json` or if you configure some custom routes `json-server db.json --routes routes.json`
+For more information go to [Json-server](https://github.com/typicode/json-server)
+
+## Code scaffolding
+
+Run `ng g component component-name` to generate a new component. You can also use `ng g directive|pipe|service|class|guard|interface|enum|module`.
+
+## Build
+
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Running unit tests
+
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+Or run `npm run test:build` to execute production unit tests.
+
+## Further help
+
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
