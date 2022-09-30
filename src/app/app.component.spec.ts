@@ -6,8 +6,11 @@ import { TranslateTestingModule } from 'ngx-translate-testing';
 import { AppComponent } from './app.component';
 import { LoaderService } from './core/services';
 import { SharedModule } from './shared/shared.module';
+import { TranslateService } from '@ngx-translate/core';
 
 describe('AppComponent', () => {
+  let service: TranslateService;
+
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -22,13 +25,15 @@ describe('AppComponent', () => {
       declarations: [AppComponent],
       providers: [LoaderService],
     }).compileComponents();
+    service = TestBed.inject(TranslateService);
   }));
 
   it('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
+    spyOn(service, 'use');
     expect(app).toBeTruthy();
     app.ngOnInit();
-    expect(app.isLoading$).toBeDefined();
+    expect(service.use).toHaveBeenCalled();
   });
 });

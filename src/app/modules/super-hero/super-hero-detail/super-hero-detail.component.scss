@@ -1,0 +1,11 @@
+@use 'variables' as *;
+
+@media (max-width: #{map-get($breakpoints, md)}) {
+  .row {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+  .col {
+    margin-right: 0;
+  }
+}

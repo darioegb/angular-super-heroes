@@ -34,14 +34,14 @@ export class GridFilterComponent implements AfterViewInit, OnDestroy {
     this.onKeyUp();
   }
 
-  onReset(): void {
-    this.input.nativeElement.value = '';
-    this.filterChange.emit('');
-  }
-
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+
+  onReset(): void {
+    this.input.nativeElement.value = '';
+    this.filterChange.emit('');
   }
 
   private onKeyUp(): void {
@@ -49,7 +49,7 @@ export class GridFilterComponent implements AfterViewInit, OnDestroy {
       .pipe(
         map(({ target: { value } }) => value),
         filter(({ length }) => length > 2 || length === 0),
-        debounceTime(1000),
+        debounceTime(500),
         distinctUntilChanged(),
         takeUntil(this.unsubscribe$),
       )

@@ -68,11 +68,11 @@ export class UtilService {
    * @param path string. Ex: 'address.name'
    */
   getObjectProperty<T>(object: T, path: string): unknown {
-    if (path === undefined || path === null) {
-      return object;
+    if (!!path) {
+      const parts = path.split('.');
+      return parts.reduce((obj, key) => obj?.[key], object);
     }
-    const parts = path.split('.');
-    return parts.reduce((obj, key) => obj?.[key], object);
+    return object;
   }
 
   /**
@@ -87,7 +87,7 @@ export class UtilService {
     param: string,
     regexp?: RegExp,
   ): string {
-    const regexpFinal = regexp ? regexp : /\{\{[a-zA-Z]+\}\}/;
+    const regexpFinal = regexp ?? /\{\{[a-zA-Z]+\}\}/;
     return source.replace(regexpFinal, param);
   }
 }

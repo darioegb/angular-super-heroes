@@ -53,9 +53,8 @@ export class FormImgUploadComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
-    this.formControl = this.ngControl
-      ? (this.ngControl.control as FormControl)
-      : new FormControl();
+    this.formControl =
+      (this.ngControl?.control as FormControl) ?? new FormControl();
     this.noImageSrc = `${IMG_SRC}/no-image.png`;
   }
 

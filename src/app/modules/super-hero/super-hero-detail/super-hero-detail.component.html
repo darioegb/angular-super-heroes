@@ -1,18 +1,18 @@
 <form [formGroup]="superHeroForm" (ngSubmit)="onSubmit()">
   <app-form-card
     class="shipping-card"
-    [title]="'superHeroes.detail.title' | translate"
+    [title]="'superheroes.detail.title' | translate"
   >
     <div class="row">
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>{{
-            'superHeroes.grid.columns.name' | translate
+            'superheroes.grid.columns.name' | translate
           }}</mat-label>
           <input
             type="text"
             [placeholder]="
-              'superHeroes.detail.form.namePlaceholder' | translate
+              'superheroes.detail.form.namePlaceholder' | translate
             "
             formControlName="name"
             matInput
@@ -24,11 +24,11 @@
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>{{
-            'superHeroes.grid.columns.age' | translate
+            'superheroes.grid.columns.age' | translate
           }}</mat-label>
           <input
             type="number"
-            [placeholder]="'superHeroes.detail.form.agePlaceholder' | translate"
+            [placeholder]="'superheroes.detail.form.agePlaceholder' | translate"
             formControlName="age"
             matInput
             ngxErrorMessage
@@ -40,11 +40,11 @@
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>{{
-            'superHeroes.grid.columns.genre' | translate
+            'superheroes.grid.columns.genre' | translate
           }}</mat-label>
           <mat-select
             [placeholder]="
-              'superHeroes.detail.form.genrePlaceholder' | translate
+              'superheroes.detail.form.genrePlaceholder' | translate
             "
             formControlName="genre"
             ngxErrorMessage
@@ -58,11 +58,11 @@
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>{{
-            'superHeroes.grid.columns.specialty' | translate
+            'superheroes.grid.columns.specialty' | translate
           }}</mat-label>
           <textarea
             [placeholder]="
-              'superHeroes.detail.form.specialtyPlaceHolder' | translate
+              'superheroes.detail.form.specialtyPlaceHolder' | translate
             "
             formControlName="specialty"
             matInput
@@ -79,12 +79,12 @@
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>{{
-            'superHeroes.grid.columns.height' | translate
+            'superheroes.grid.columns.height' | translate
           }}</mat-label>
           <input
             type="number"
             [placeholder]="
-              'superHeroes.detail.form.heightPlaceholder' | translate
+              'superheroes.detail.form.heightPlaceholder' | translate
             "
             formControlName="height"
             matInput
@@ -95,12 +95,12 @@
       <div class="col">
         <mat-form-field appearance="fill" class="full-width">
           <mat-label>{{
-            'superHeroes.grid.columns.weight' | translate
+            'superheroes.grid.columns.weight' | translate
           }}</mat-label>
           <input
             type="number"
             [placeholder]="
-              'superHeroes.detail.form.weightPlaceholder' | translate
+              'superheroes.detail.form.weightPlaceholder' | translate
             "
             formControlName="weight"
             matInput

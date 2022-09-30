@@ -16,6 +16,6 @@ export class SuperHeroService extends GenericService<SuperHero> {
   }
 
   getResourceUrl(): string {
-    return 'superHeroes';
+    return 'superheroes';
   }
 }

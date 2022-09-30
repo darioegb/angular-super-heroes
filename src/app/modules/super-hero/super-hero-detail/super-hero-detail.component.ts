@@ -44,7 +44,9 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     private utilService: UtilService,
     private superHeroService: SuperHeroService,
   ) {
-    this.translateService.onLangChange.subscribe(() => this.getTranslations());
+    this.translateService.onLangChange
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.getTranslations());
   }
 
   ngOnInit(): void {
@@ -53,6 +55,11 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.initForm();
     this.getData();
     this.getTranslations();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   get superHeroControls(): GenericObject<AbstractControl> {
@@ -104,7 +111,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
     this.translateService
       .get('globals.toasts')
       .subscribe(({ add: { success: add }, update: { success: update } }) => {
-        const param = this.translateService.instant('superHeroes.detail.title');
+        const param = this.translateService.instant('superheroes.detail.title');
         this.toastTranslations = {
           add: this.utilService.replaceStringVariable(add, param),
           update: this.utilService.replaceStringVariable(update, param),
@@ -156,11 +163,6 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   onFileUploaded(): void {
     this.isUploading = false;
     this.saveOrUpdate();
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   private saveOrUpdate(): void {

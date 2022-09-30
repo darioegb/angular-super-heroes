@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
 import { NavbarComponent } from './navbar.component';
@@ -22,12 +23,32 @@ export default {
         disable: true,
       },
     },
+    networkStatus: {
+      table: {
+        disable: true,
+      },
+    },
+    networkStatus$: {
+      table: {
+        disable: true,
+      },
+    },
     ngOnInit: {
       table: {
         disable: true,
       },
     },
+    ngOnDestroy: {
+      table: {
+        disable: true,
+      },
+    },
     changeLanguaje: {
+      table: {
+        disable: true,
+      },
+    },
+    checkNetworkStatus: {
       table: {
         disable: true,
       },
@@ -41,13 +62,15 @@ export default {
         StorybookTranslateModule,
         MatToolbarModule,
         MatSelectModule,
+        MatIconModule,
       ],
     }),
   ],
   parameters: {
     docs: {
       description: {
-        component: 'Navbar is top navbar using angular material',
+        component:
+          'Navbar is top navbar using angular material. It display status connection and combobox to change language',
       },
     },
   },

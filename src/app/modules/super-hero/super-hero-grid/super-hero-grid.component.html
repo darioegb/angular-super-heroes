@@ -1,78 +1,67 @@
-<table
-  mat-table
-  class="mat-elevation-z8"
-  [dataSource]="dataSource"
-  matSort
-  matSortDirection="asc"
-  aria-label="Elements"
->
-  <ng-container
-    *ngFor="let column of columnsDef?.columns"
-    [matColumnDef]="column.headerDef"
-  >
-    <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header>
-      {{ column.cellDef | translate }}
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <app-grid-item [row]="element" [column]="column"></app-grid-item>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="actions">
-    <th mat-header-cell *matHeaderCellDef scope="colgroup">
-      <app-add-button (addClick)="onAddOrEditOrView()"></app-add-button>
-    </th>
-    <td mat-cell *matCellDef="let element">
-      <app-grid-actions
-        [item]="element"
-        (editOrView)="onAddOrEditOrView($event)"
-        (delete)="onDelete($event)"
-      ></app-grid-actions>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-title">
-    <th
-      mat-header-cell
-      *matHeaderCellDef
-      [style.text-align]="center"
-      [attr.colspan]="4"
+<section class="grid-container mat-elevation-z8" tabindex="0">
+  <div class="grid-container__header flex">
+    <h2>{{ 'superheroes.title' | translate }}</h2>
+    <app-grid-filter
+      class="filter"
+      [filterInput]="filterInput"
+      (filterChange)="onFilterChange($event)"
+      #filter
+    ></app-grid-filter>
+  </div>
+  <div class="grid-container__body">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      matSort
+      matSortDirection="asc"
+      aria-label="Elements"
     >
-      <h2>{{ 'superHeroes.title' | translate }}</h2>
-    </th>
-  </ng-container>
+      <ng-container
+        *ngFor="let column of columnsDef?.columns"
+        [matColumnDef]="column.headerDef"
+      >
+        <th mat-header-cell *matHeaderCellDef scope="col" mat-sort-header>
+          {{ column.cellDef | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <app-grid-item [row]="element" [column]="column"></app-grid-item>
+        </td>
+      </ng-container>
 
-  <ng-container matColumnDef="header-row-filter">
-    <th class="filter" mat-header-cell *matHeaderCellDef [attr.colspan]="4">
-      <app-grid-filter
-        [filterInput]="filterInput"
-        (filterChange)="onFilterChange($event)"
-        #filter
-      ></app-grid-filter>
-    </th>
-  </ng-container>
-
-  <tr
-    mat-header-row
-    *matHeaderRowDef="['header-row-title', 'header-row-filter']"
-  ></tr>
-  <tr
-    mat-header-row
-    *matHeaderRowDef="columnsDef?.displayedColumns; sticky: true"
-  ></tr>
-  <tr mat-row *matRowDef="let row; columns: columnsDef?.displayedColumns"></tr>
-  <tr class="mat-row" *matNoDataRow>
-    <td class="mat-cell" colspan="4">
-      <app-empty-grid [filter]="filter"></app-empty-grid>
-    </td>
-  </tr>
-</table>
-
-<mat-paginator
-  #paginator
-  [length]="dataSource.count$ | async"
-  [pageIndex]="0"
-  [pageSize]="5"
-  [pageSizeOptions]="[5, 10, 15, 20]"
->
-</mat-paginator>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef scope="colgroup">
+          <app-add-button (addClick)="onAddOrEditOrView()"></app-add-button>
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <app-grid-actions
+            [item]="element"
+            (editOrView)="onAddOrEditOrView($event)"
+            (delete)="onDelete($event)"
+          ></app-grid-actions>
+        </td>
+      </ng-container>
+      <tr
+        mat-header-row
+        *matHeaderRowDef="columnsDef?.displayedColumns; sticky: true"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: columnsDef?.displayedColumns"
+      ></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">
+          <app-empty-grid [filter]="filter"></app-empty-grid>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <mat-paginator
+    class="mat-paginator-sticky"
+    #paginator
+    [length]="dataSource.count$ | async"
+    [pageIndex]="0"
+    [pageSize]="5"
+    [pageSizeOptions]="[5, 10, 15, 20]"
+  >
+  </mat-paginator>
+</section>

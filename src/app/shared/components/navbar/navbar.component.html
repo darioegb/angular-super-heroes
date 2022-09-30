@@ -1,6 +1,16 @@
 <mat-toolbar color="primary">
   <h1>{{ 'globals.title' | translate }}</h1>
   <span class="example-spacer"></span>
+  <h2>
+    <ng-template [ngIf]="networkStatus" [ngIfElse]="offline">
+      <mat-icon aria-hidden="false" aria-label="Online icon">wifi</mat-icon>
+    </ng-template>
+    <ng-template #offline>
+      <mat-icon aria-hidden="false" aria-label="Offline icon"
+        >wifi_off</mat-icon
+      >
+    </ng-template>
+  </h2>
   <mat-form-field appearance="fill">
     <mat-select [(ngModel)]="selectedLang" (selectionChange)="changeLanguaje()">
       <mat-option *ngFor="let lang of langOptions" [value]="lang.value">

@@ -45,7 +45,7 @@ export abstract class GenericService<T> {
     let params = new HttpParams()
       .set('_page', pageConfig.page.toString())
       .set('_limit', pageConfig.limit.toString())
-      .set('_sort', !!pageConfig.sort ? pageConfig.sort : 'id')
+      .set('_sort', pageConfig.sort ?? 'id')
       .set('_order', pageConfig.order.toString());
 
     if (pageConfig.filter.length > 0) {
@@ -109,13 +109,18 @@ export abstract class GenericService<T> {
     error: HttpErrorResponse,
     operation: string,
   ): Observable<never> {
-    this.toastr.error(
-      this.translateService.instant(`globals.toasts.${operation}.error`, {
-        value: this.translateService.instant(
-          `${this.getResourceUrl()}.detail.title`,
-        ),
-      }),
-    );
+    navigator.onLine
+      ? this.toastr.error(
+          this.translateService.instant(`globals.toasts.${operation}.error`, {
+            value: this.translateService.instant(
+              `${this.getResourceUrl()}.detail.title`,
+            ),
+          }),
+        )
+      : this.toastr.warning(
+          this.translateService.instant('globals.toasts.bgAsync'),
+        );
+
     return throwError(() => error);
   }
 }

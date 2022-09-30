@@ -1,9 +1,38 @@
-/* Structure */
-table {
-  width: 100%;
-}
+@use 'variables' as *;
 
-.filter {
-  padding-block-start: .5rem;
+.grid-container {
+  &__header {
+    background: #fff;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+  &__body {
+    max-height: 800px;
+    overflow: auto;
+    .mat-table {
+      width: 100%;
+      td.mat-cell,
+      th.mat-header-cell {
+        white-space: break-spaces;
+        max-width: 10rem;
+      }
+    }
+    @media (max-width: #{map-get($breakpoints, md)}) {
+      .mat-table {
+        td.mat-cell,
+        th.mat-header-cell {
+          overflow: scroll;
+          hyphens: auto;
+          white-space: nowrap;
+          padding: 0 1rem;
+        }
+      }
+    }
+  }
 }
-
+@media (min-width: #{map-get($breakpoints, md)}) {
+  .filter {
+    padding-block-start: 0.5rem;
+  }
+}

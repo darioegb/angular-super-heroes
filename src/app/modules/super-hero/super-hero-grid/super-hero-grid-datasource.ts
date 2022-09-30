@@ -8,23 +8,23 @@ import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 
 export class SuperHeroGridDataSource extends DataSource<SuperHero> {
   private columns: Column[] = [
-    { headerDef: 'name', cellDef: 'superHeroes.grid.columns.name' },
-    { headerDef: 'age', cellDef: 'superHeroes.grid.columns.age' },
+    { headerDef: 'name', cellDef: 'superheroes.grid.columns.name' },
+    { headerDef: 'age', cellDef: 'superheroes.grid.columns.age' },
     {
       headerDef: 'genre',
-      cellDef: 'superHeroes.grid.columns.genre',
+      cellDef: 'superheroes.grid.columns.genre',
       format: (value): string =>
         this.dropdownTranslatePipe.transform(
           GenreEnum[value],
           'globals.enums.genres',
         ),
     },
-    { headerDef: 'specialty', cellDef: 'superHeroes.grid.columns.specialty' },
-    { headerDef: 'height', cellDef: 'superHeroes.grid.columns.height' },
-    { headerDef: 'weight', cellDef: 'superHeroes.grid.columns.weight' },
+    { headerDef: 'specialty', cellDef: 'superheroes.grid.columns.specialty' },
+    { headerDef: 'height', cellDef: 'superheroes.grid.columns.height' },
+    { headerDef: 'weight', cellDef: 'superheroes.grid.columns.weight' },
     {
       headerDef: 'picture',
-      cellDef: 'superHeroes.grid.columns.picture',
+      cellDef: 'superheroes.grid.columns.picture',
       isImg: true,
     },
   ];

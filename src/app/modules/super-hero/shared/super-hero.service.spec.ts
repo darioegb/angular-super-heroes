@@ -52,7 +52,7 @@ describe('SuperHeroService', () => {
     function getSuperHeroUrl(conf: PageConfig): string {
       const { page, limit, sort, order } = conf;
       let url = `${service.baseUrl}?_page=${page}&_limit=${limit}&_sort=${
-        !!sort ? sort : 'id'
+        sort ?? 'id'
       }&_order=${order}`;
       if (conf.filter) {
         url = url.concat(`&name_like=${conf.filter}`);
@@ -60,14 +60,14 @@ describe('SuperHeroService', () => {
       return url;
     }
 
-    it('should return expected superHeroes (called once)', () => {
+    it('should return expected superheroes (called once)', () => {
       service
         .getPage(pageConfing)
         .subscribe(
           (page) =>
             expect(page.items).toEqual(
               expectedHeroes,
-              'should return expected superHeroes',
+              'should return expected superheroes',
             ),
           fail,
         );
@@ -78,7 +78,7 @@ describe('SuperHeroService', () => {
       req.flush(expectedHeroes);
     });
 
-    it('should return expected superHeroes (called once) with sort by name', () => {
+    it('should return expected superheroes (called once) with sort by name', () => {
       const pageConfigAlt = { ...pageConfing };
       pageConfigAlt.sort = 'name';
       superHeroeUrl = getSuperHeroUrl(pageConfigAlt);
@@ -88,7 +88,7 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items[0].name).toEqual(
               expectedHeroes[0].name,
-              'should return expected superHeroes sorter by name',
+              'should return expected superheroes sorter by name',
             ),
           fail,
         );
@@ -99,7 +99,7 @@ describe('SuperHeroService', () => {
       req.flush(expectedHeroes);
     });
 
-    it('should return expected superHeroes (called once) with filter', () => {
+    it('should return expected superheroes (called once) with filter', () => {
       const pageConfigAlt = { ...pageConfing };
       pageConfigAlt.filter = 'B';
       superHeroeUrl = getSuperHeroUrl(pageConfigAlt);
@@ -109,7 +109,7 @@ describe('SuperHeroService', () => {
           (page) =>
             expect(page.items[0].name).toEqual(
               expectedHeroes[1].name,
-              'should return expected superHeroes filtered',
+              'should return expected superheroes filtered',
             ),
           fail,
         );
@@ -137,14 +137,14 @@ describe('SuperHeroService', () => {
       req.flush(msg, { status: 404, statusText: 'Not Found' });
     });
 
-    it('should be OK returning no superHeroes', () => {
+    it('should be OK returning no superheroes', () => {
       service
         .getPage(pageConfing)
         .subscribe(
           (page) =>
             expect(page.items.length).toEqual(
               0,
-              'should have empty superHeroes array',
+              'should have empty superheroes array',
             ),
           fail,
         );
