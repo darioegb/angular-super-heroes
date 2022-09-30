@@ -1,7 +1,20 @@
-.example-spacer {
-  flex: 1 1 auto;
-}
+@use 'variables' as *;
 
-.mat-form-field {
-  width: auto;
+.mat-toolbar {
+  justify-content: space-evenly;
+  .example-spacer {
+    flex: 1 1 auto;
+  }
+  .mat-form-field {
+    max-width: 10rem;
+    margin-left: 1rem;
+  }
+  @media only screen and (max-width: #{map-get($breakpoints, md)}) {
+    .mat-form-field {
+      margin-left: 0;
+    }
+    .example-spacer {
+      display: none;
+    }
+  }
 }

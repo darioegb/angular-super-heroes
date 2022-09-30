@@ -1,5 +1,5 @@
 {
-  "superHeroes": {
+  "superheroes": {
     "title": "Superhéroes",
     "grid": {
       "filterInput": {
@@ -29,6 +29,10 @@
       "previewCardTitle": "Vista previa"
     }
   },
+  "pageNotFound": {
+    "title": "404",
+    "subtitle": "Ups. Nada por aquí..."
+  },
   "globals": {
     "title": "ABM con material",
     "grid": {
@@ -48,7 +52,8 @@
       "edit": "Editar",
       "delete": "Borrar",
       "reset": "Limpiar",
-      "view": "Ver"
+      "view": "Ver",
+      "backHome": "Ir a inicio"
     },
     "enums": {
       "genres": {
@@ -75,6 +80,7 @@
         "success": "El {{value}} ha sido eliminado exitosamente",
         "error": "Ocurrió un error al eliminar un {{value}}"
       },
+      "bgAsync": "Se va guardar en la cache, cuando se recupere conexión se enviaran los datos al servidor",
       "imageError": "Ocurrió un error al subir la imagen"
     }
   },

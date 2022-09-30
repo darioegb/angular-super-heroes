@@ -1,27 +1,28 @@
 {
-  "superHeroes": [
+  "superheroes": [
     {
       "id": 1,
       "name": "SPIDERMAN",
       "genre": 1,
-      "specialty": "esto es una prueba 1",
+      "specialty": "Fuerza, rapidez y reflejos proporcionales a una araña. Capacidad de adherirse a casi cualquier superficie. Factor de curación acelerado que le permite sanar huesos rotos o graves heridas en los tejidos en unas horas.",
       "age": 50,
       "height": 1.8,
       "weight": 82,
-      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645188127132?alt=media&token=2a7d67d0-fcc3-4eda-be38-de3b9bcd994f"
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645188127132?alt=media&token=2a7d67d0-fcc3-4eda-be38-de3b9bcd994f.png"
     },
     {
       "id": 2,
       "name": "SUPERMAN",
       "genre": 1,
       "specialty": "esto es una prueba 1",
-      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645703098163?alt=media&token=442bc982-7682-4e5d-aef5-1eb5a8def60c"
+      "picture": "https://firebasestorage.googleapis.com/v0/b/super-heroes-c3a1b.appspot.com/o/pictures%2Fpicture-1645703098163?alt=media&token=442bc982-7682-4e5d-aef5-1eb5a8def60c.png"
     },
     {
       "id": 3,
       "name": "BATMAN",
       "genre": 1,
-      "specialty": "esto es una prueba 1"
+      "specialty": "esto es una prueba 1",
+      "age": 50
     },
     {
       "id": 4,
@@ -45,7 +46,8 @@
       "id": 7,
       "name": "HULK",
       "genre": 1,
-      "specialty": "esto es una prueba 1"
+      "specialty": "esto es una prueba 1",
+      "age": 50
     },
     {
       "id": 8,

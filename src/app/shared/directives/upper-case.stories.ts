@@ -24,19 +24,15 @@ import { UpperCaseDirective } from './upper-case.directive';
   </mat-form-field>`,
 })
 class DummyComponent {
+  /**
+   * @ignore
+   */
   control = new FormControl('', Validators.required);
 }
 
 export default {
   title: 'directives/UpperCase',
   component: DummyComponent,
-  argTypes: {
-    control: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   decorators: [
     moduleMetadata({
       declarations: [UpperCaseDirective],

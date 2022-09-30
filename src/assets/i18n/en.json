@@ -1,5 +1,5 @@
 {
-  "superHeroes": {
+  "superheroes": {
     "title": "Superheroes",
     "grid": {
       "filterInput": {
@@ -29,6 +29,10 @@
       "previewCardTitle": "Preview"
     }
   },
+  "pageNotFound": {
+    "title": "404",
+    "subtitle": "Oops. Nothing here..."
+  },
   "globals": {
     "title": "Crud with material",
     "grid": {
@@ -48,7 +52,8 @@
       "edit": "Edit",
       "delete": "Delete",
       "reset": "Reset",
-      "view": "View"
+      "view": "View",
+      "backHome": "Go Home"
     },
     "enums": {
       "genres": {
@@ -75,6 +80,7 @@
         "success": "{{value}} has been successfully removed",
         "error": "An error occurred while deleting a {{value}}"
       },
+      "bgAsync": "It will be saved in the cache, when the connection is recovered the data will be sent to the server",
       "imageError": "An error occurred while uploading image"
     }
   },

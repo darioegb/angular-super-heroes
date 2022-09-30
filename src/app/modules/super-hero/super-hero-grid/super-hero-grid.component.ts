@@ -47,7 +47,9 @@ export class SuperHeroGridComponent
     private superHeroService: SuperHeroService,
     private dropdownTranslatePipe: DropdownTranslatePipe,
   ) {
-    this.translateService.onLangChange.subscribe(() => this.getTranslations());
+    this.translateService.onLangChange
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(() => this.getTranslations());
   }
 
   ngOnInit(): void {
@@ -66,6 +68,11 @@ export class SuperHeroGridComponent
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(() => this.onLoadData());
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   }
 
   get columnsDef(): ColumnDef {
@@ -105,11 +112,11 @@ export class SuperHeroGridComponent
   getTranslations(): void {
     this.translateService
       .get('globals.toasts.delete.success', {
-        value: this.translateService.instant('superHeroes.detail.title'),
+        value: this.translateService.instant('superheroes.detail.title'),
       })
       .pipe(
         withLatestFrom(
-          this.translateService.get('superHeroes.grid.filterInput'),
+          this.translateService.get('superheroes.grid.filterInput'),
         ),
       )
       .subscribe(([deleteSucess, { label, placeholder }]) => {
@@ -150,11 +157,6 @@ export class SuperHeroGridComponent
 
   onReset(): void {
     this.onLoadData();
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
   }
 
   private initFilterData(): void {

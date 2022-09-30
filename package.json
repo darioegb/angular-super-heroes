@@ -1,10 +1,14 @@
 {
   "name": "super-heroes",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "start:pwa": "http-server -p 8080 -P 'http://localhost:8080?' -c-1 dist/superheroes",
+    "start:json": "json-server db.json --routes routes.json",
     "build": "ng build",
+    "build:pwa:dev": "ng build && webpack --config ./webpack.dev.config.js && node workbox-build-inject.js",
+    "build:pwa:prod": "ng build --configuration=production && webpack --config ./webpack.prod.config.js && node workbox-build-inject.js",
     "test": "ng test",
     "test:build": "ng test --code-coverage --watch=false --browsers=ChromeHeadlessNoSandbox",
     "lint": "ng lint --fix",
@@ -86,7 +90,9 @@
     "protractor": "~7.0.0",
     "ts-node": "~10.8.2",
     "typescript": "~4.7.4",
-    "webpack": "5.74.0"
+    "webpack": "5.74.0",
+    "webpack-cli": "^4.10.0",
+    "workbox-build": "^6.5.4"
   },
   "overrides": {
     "webpack": "5.74.0"

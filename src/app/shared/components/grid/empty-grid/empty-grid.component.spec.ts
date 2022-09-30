@@ -29,4 +29,11 @@ describe('EmptyGridComponent', () => {
     expect(component).toBeTruthy();
     expect(hostElement.innerText).toBe('No data matching the filter');
   });
+
+  it('should show empty row message with search text', () => {
+    component.filter = 'test';
+    fixture.detectChanges();
+    expect(component).toBeTruthy();
+    expect(hostElement.innerText).toBe('No data matching the filter test');
+  });
 });

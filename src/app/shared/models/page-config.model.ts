@@ -8,10 +8,10 @@ export class PageConfig {
     public order?: SortDirection,
     public filter?: string,
   ) {
-    this.page = page || 1;
-    this.limit = limit || 5;
+    this.page = page ?? 1;
+    this.limit = limit ?? 5;
     this.sort = sort || null;
-    this.order = !!order ? order : 'asc';
+    this.order = order ?? 'asc';
     this.filter = filter || '';
   }
 }

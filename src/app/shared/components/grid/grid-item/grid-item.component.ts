@@ -9,14 +9,14 @@ import { Column } from '@shared/models';
     <ng-container *ngIf="column.isImg; else default">
       <img
         class="picture"
-        [src]="row[column.headerDef] || noImageSrc"
+        [src]="row[column.headerDef] ?? noImageSrc"
         alt="picture"
       />
     </ng-container>
     <ng-template #default>{{
       column.format
         ? column.format(row[column.headerDef])
-        : row[column.headerDef] || '-'
+        : row[column.headerDef] ?? '-'
     }}</ng-template>
   `,
 })

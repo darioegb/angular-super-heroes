@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LoaderService } from './core/services/loader.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,11 +7,9 @@ import { LoaderService } from './core/services/loader.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isLoading$: Observable<boolean>;
-
-  constructor(private loaderService: LoaderService) {}
+  constructor(private translate: TranslateService) {}
 
   ngOnInit(): void {
-    this.isLoading$ = this.loaderService.isLoading$;
+    this.translate.use(localStorage.getItem('lang') || 'en');
   }
 }
