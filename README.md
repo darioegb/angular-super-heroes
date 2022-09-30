@@ -92,7 +92,7 @@ It is a kickoff angular project of a superhero crud using a scalable architectur
 > To start the development server run:
 
 ```bash
-  $ ng s
+  ng s
 ```
 
 After that navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
@@ -104,19 +104,19 @@ It's a mock server to run when the backend not exist or it'sn't updated.
 > To install run:
 
 ```bash
-$ npm install -g json-server
+  npm install -g json-server
 ```
 
 > For run it server run:
 
 ```bash
-$ json-server --watch db.json
+  json-server --watch db.json
 ```
 
 > Or if you configure some custom routes run:
 
 ```bash
-$ json-server db.json --routes routes.json
+  json-server db.json --routes routes.json
 ```
 
 For more information go to [Json-server](https://github.com/typicode/json-server)
@@ -179,7 +179,7 @@ Documententation live [link](https://62f4e8e7c4bcded2362c1765-mqczqbpvlu.chromat
 > To start dev documentation server run:
 
 ```bash
-npm run storybook
+  npm run storybook
 ```
 
 After that navigate to `http://localhost:6006/`. The documentation will automatically reload if you change any of the source files.
@@ -198,19 +198,19 @@ and compiling by webpack.
 > To build the pwa-capable project for the development environment run:
 
 ```bash
-npm run build:pwa:dev
+  npm run build:pwa:dev
 ```
 
 > Or for production run:
 
 ```bash
-npm run build:pwa:prod
+  npm run build:pwa:prod
 ```
 
 > To debbug locally the pwa run:
 
 ```bash
-npm run start:pwa
+  npm run start:pwa
 ```
 
 Before that be sure to have [http-server](https://www.npmjs.com/package/http-server) already installed in our system.
