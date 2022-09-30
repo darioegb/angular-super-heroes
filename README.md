@@ -228,7 +228,7 @@ The code was linting by [eslint](https://github.com/angular-eslint/angular-eslin
 > To execute the linting validation run:
 
 ```bash
-  ng lint
+  npm run lint
 ```
 
 #### Testing
