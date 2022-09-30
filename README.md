@@ -164,11 +164,10 @@ JSON structure used is as follows: have a node for each feature (page, section) 
     }
   },
   "validations": {
-    "required": "The field is required.",
+    "required": "The field is required."
     // other validations
   }
 }
-
 ```
 
 ## Documentation
@@ -180,7 +179,7 @@ Documententation live [link](https://62f4e8e7c4bcded2362c1765-mqczqbpvlu.chromat
 > To start dev documentation server run:
 
 ```bash
-$ npm run storybook
+npm run storybook
 ```
 
 After that navigate to `http://localhost:6006/`. The documentation will automatically reload if you change any of the source files.
@@ -188,7 +187,7 @@ After that navigate to `http://localhost:6006/`. The documentation will automati
 > To deploy documentation changes run:
 
 ```bash
-  $ npm run chromatic
+  npm run chromatic
 ```
 
 ### PWA
@@ -199,19 +198,19 @@ and compiling by webpack.
 > To build the pwa-capable project for the development environment run:
 
 ```bash
-$ npm run build:pwa:dev
+npm run build:pwa:dev
 ```
 
 > Or for production run:
 
 ```bash
-$ npm run build:pwa:prod
+npm run build:pwa:prod
 ```
 
 > To debbug locally the pwa run:
 
 ```bash
-$ npm run start:pwa
+npm run start:pwa
 ```
 
 Before that be sure to have [http-server](https://www.npmjs.com/package/http-server) already installed in our system.
@@ -229,15 +228,23 @@ The code was linting by [eslint](https://github.com/angular-eslint/angular-eslin
 > To execute the linting validation run:
 
 ```bash
-  $ ng lint
+  ng lint
 ```
 
 #### Testing
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To run the tests in debug mode with a browser, execute the following command and the browser will be open.
 
-> Or to execute production unit tests run: 
-```bash 
-  $ npm run test:build
+```bash
+  ng test
 ```
+
+The tests are executed via [Karma](https://karma-runner.github.io) and we can write them with [Jasmine](https://jasmine.github.io/).
+
+> Or to execute production unit tests run:
+
+```bash
+  npm run test:build
+```
+
 The production execution also generate code coverage. By architectural agreement I have taken 80% coverage as a base.
