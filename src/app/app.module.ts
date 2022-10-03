@@ -1,4 +1,3 @@
-import { LayoutsModule } from './layouts/layouts.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -11,11 +10,12 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { ToastrModule } from 'ngx-toastr';
 
 import { APP_I18N_CONFIG } from '@shared/globals';
-import { environment } from '@environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatPaginatorI18nService } from './shared/services';
-import { CoreModule } from './core/core.module';
+import { CoreModule } from '@core/core.module';
+import { environment } from '@environments/environment';
+import { LayoutsModule } from '@layouts/layouts.module';
+import { MatPaginatorI18nService } from '@shared/services';
 
 @NgModule({
   declarations: [AppComponent],

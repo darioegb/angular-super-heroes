@@ -22,8 +22,9 @@
       "@root/*": ["src/*"],
       "@app/*": ["src/app/*"],
       "@core/*": ["src/app/core/*"],
-      "@shared/*": ["src/app/shared/*"],
+      "@layouts/*": ["src/app/layouts/*"],
       "@modules/*": ["src/app/modules/*"],
+      "@shared/*": ["src/app/shared/*"],
       "@environments/*": ["src/environments/*"],
     }
   }

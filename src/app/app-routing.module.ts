@@ -1,6 +1,6 @@
 import { AppLayoutComponent } from '@app/layouts/app-layout/app-layout.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
   {

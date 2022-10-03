@@ -14,17 +14,19 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgxErrorMessageModule } from 'ngx-error-message';
 
 import { UpperCaseDirective, FileSizeValidatorDirective } from './directives';
-import { DropdownTranslatePipe } from './pipes/dropdown-translate.pipe';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { FormCardComponent } from './components/form/form-card/form-card.component';
-import { FormCardActionsComponent } from './components/form/form-card-actions/form-card-actions.component';
-import { FormImgUploadComponent } from './components/form/form-img-upload/form-img-upload.component';
-import { EmptyGridComponent } from './components/grid/empty-grid/empty-grid.component';
-import { GridActionsComponent } from './components/grid/grid-actions/grid-actions.component';
-import { GridItemComponent } from './components/grid/grid-item/grid-item.component';
-import { GridFilterComponent } from './components/grid/grid-filter/grid-filter.component';
-import { AddButtonComponent } from './components/add-button/add-button.component';
+import { DropdownTranslatePipe } from './pipes';
+import {
+  AddButtonComponent,
+  ConfirmDialogComponent,
+  EmptyGridComponent,
+  FormCardActionsComponent,
+  FormCardComponent,
+  FormImgUploadComponent,
+  GridActionsComponent,
+  GridFilterComponent,
+  GridItemComponent,
+  NavbarComponent,
+} from './components';
 
 @NgModule({
   declarations: [

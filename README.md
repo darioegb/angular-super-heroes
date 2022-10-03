@@ -12,8 +12,9 @@ It is a kickoff angular project of a superhero crud using a scalable architectur
 - Used the json server to simulate the backend when working on draft functions.
 - Used storybook to document shared components, directives.
 - Used the light and dark theme per operating system so that it changes according to the user's configuration.
-- Used Workbox to manage the app as a PWA, caching resources, and using offline mode.
+- Used workbox to manage the app as a PWA, caching resources, and using offline mode.
 - The navbar also show if there is internet connection.
+- Used [ts-paths](https://www.typescriptlang.org/tsconfig#paths) and [barrels](https://basarat.gitbook.io/typescript/main-1/barrel) to improve imports in typescript files. 
 
 ## Table of Contents
 
@@ -193,7 +194,7 @@ After that navigate to `http://localhost:6006/`. The documentation will automati
 ### PWA
 
 PWA is manage using [workbox](https://developer.chrome.com/docs/workbox/)
-and compiling by webpack.
+and compiling by [webpack](https://webpack.js.org/concepts/).
 
 > To build the pwa-capable project for the development environment run:
 
