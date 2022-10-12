@@ -175,7 +175,7 @@ JSON structure used is as follows: have a node for each feature (page, section) 
 
 Shared components were documented using a [storybook](https://storybook.js.org/docs/angular/get-started/introduction) and displayed in [chromatic](https://www.chromatic.com/).
 
-Documententation live [link](https://62f4e8e7c4bcded2362c1765-mqczqbpvlu.chromatic.com/)
+Documententation live [link](https://62f4e8e7c4bcded2362c1765-gvdyyfubxy.chromatic.com/)
 
 > To start dev documentation server run:
 
