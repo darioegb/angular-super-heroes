@@ -35,6 +35,7 @@ It is a kickoff angular project of a superhero crud using a scalable architectur
 - Pages folder contains all global pages like not-found, unauthorized, and so on.
 - Shared folder contains all shared components, models, enums, directives, pipes and constants (globals.ts).
 - Assets folder contains globals statics files like i18n json's, imgs, also can we have fonts, icons, scss.
+- Testing folder contains globals testing stub utilities.
 
 ```
 |-- src
@@ -80,6 +81,7 @@ It is a kickoff angular project of a superhero crud using a scalable architectur
         |-- imgs
         |-- scss
     |-- enviroments
+    |-- testing
     |-- main.ts
     |-- index.html
 ```
