@@ -7,8 +7,6 @@ It is a kickoff angular project of a superhero crud using a scalable architectur
 - Unit tests were used for each typed file that needs to be tested as components, service directives.
 - Use global file with contents to keep all globals in the same file.
 - i18n was used to keep all the text in global files and no harcode in the htmls files.
-- The Core module was used to group all the global elements of the application such as interceptors, guards, core services, layouts, among others.
-- The shared module was used to group all the components, directives, services, pipes, models, enums, constants that will be used in different parts of the application.
 - Used the json server to simulate the backend when working on draft functions.
 - Used storybook to document shared components, directives.
 - Used the light and dark theme per operating system so that it changes according to the user's configuration.
@@ -180,7 +178,7 @@ Documententation live [link](https://62f4e8e7c4bcded2362c1765-gvdyyfubxy.chromat
 > To start dev documentation server run:
 
 ```bash
-  npm run storybook
+  yarn storybook
 ```
 
 After that navigate to `http://localhost:6006/`. The documentation will automatically reload if you change any of the source files.
@@ -188,7 +186,7 @@ After that navigate to `http://localhost:6006/`. The documentation will automati
 > To deploy documentation changes run:
 
 ```bash
-  npm run chromatic
+  yarn chromatic
 ```
 
 ### PWA
@@ -199,19 +197,19 @@ and compiling by [webpack](https://webpack.js.org/concepts/).
 > To build the pwa-capable project for the development environment run:
 
 ```bash
-  npm run build:pwa:dev
+  yarn build:pwa:dev
 ```
 
 > Or for production run:
 
 ```bash
-  npm run build:pwa:prod
+  yarn build:pwa:prod
 ```
 
 > To debbug locally the pwa run:
 
 ```bash
-  npm run start:pwa
+  yarn start:pwa
 ```
 
 Before that be sure to have [http-server](https://www.npmjs.com/package/http-server) already installed in our system.
@@ -229,7 +227,7 @@ The code was linting by [eslint](https://github.com/angular-eslint/angular-eslin
 > To execute the linting validation run:
 
 ```bash
-  npm run lint
+  yarn lint
 ```
 
 #### Testing
@@ -245,7 +243,7 @@ The tests are executed via [Karma](https://karma-runner.github.io) and we can wr
 > Or to execute production unit tests run:
 
 ```bash
-  npm run test:build
+  yarn test:build
 ```
 
 The production execution also generate code coverage. By architectural agreement I have taken 80% coverage as a base.
