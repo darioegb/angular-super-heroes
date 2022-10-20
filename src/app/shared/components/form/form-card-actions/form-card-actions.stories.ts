@@ -3,7 +3,7 @@ import { moduleMetadata } from '@storybook/angular';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { FormCardActionsComponent } from './form-card-actions.component';
 
 export default {

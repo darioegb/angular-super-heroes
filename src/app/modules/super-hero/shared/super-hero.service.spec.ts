@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { SuperHeroService } from './super-hero.service';
 import { SuperHero } from './super-hero.model';
-import { PageConfig } from '@shared/models/page-config.model';
+import { PageConfig } from '@shared/models';
 
 describe('SuperHeroService', () => {
   let httpTestingController: HttpTestingController;
@@ -61,16 +61,14 @@ describe('SuperHeroService', () => {
     }
 
     it('should return expected superheroes (called once)', () => {
-      service
-        .getPage(pageConfing)
-        .subscribe(
-          (page) =>
-            expect(page.items).toEqual(
-              expectedHeroes,
-              'should return expected superheroes',
-            ),
-          fail,
-        );
+      service.getPage(pageConfing).subscribe({
+        next: (page) =>
+          expect(page.items).toEqual(
+            expectedHeroes,
+            'should return expected superheroes',
+          ),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       expect(req.request.method).toEqual('GET');
@@ -82,16 +80,14 @@ describe('SuperHeroService', () => {
       const pageConfigAlt = { ...pageConfing };
       pageConfigAlt.sort = 'name';
       superHeroeUrl = getSuperHeroUrl(pageConfigAlt);
-      service
-        .getPage(pageConfigAlt)
-        .subscribe(
-          (page) =>
-            expect(page.items[0].name).toEqual(
-              expectedHeroes[0].name,
-              'should return expected superheroes sorter by name',
-            ),
-          fail,
-        );
+      service.getPage(pageConfigAlt).subscribe({
+        next: (page) =>
+          expect(page.items[0].name).toEqual(
+            expectedHeroes[0].name,
+            'should return expected superheroes sorter by name',
+          ),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       expect(req.request.method).toEqual('GET');
@@ -103,16 +99,14 @@ describe('SuperHeroService', () => {
       const pageConfigAlt = { ...pageConfing };
       pageConfigAlt.filter = 'B';
       superHeroeUrl = getSuperHeroUrl(pageConfigAlt);
-      service
-        .getPage(pageConfigAlt)
-        .subscribe(
-          (page) =>
-            expect(page.items[0].name).toEqual(
-              expectedHeroes[1].name,
-              'should return expected superheroes filtered',
-            ),
-          fail,
-        );
+      service.getPage(pageConfigAlt).subscribe({
+        next: (page) =>
+          expect(page.items[0].name).toEqual(
+            expectedHeroes[1].name,
+            'should return expected superheroes filtered',
+          ),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       expect(req.request.method).toEqual('GET');
@@ -121,16 +115,14 @@ describe('SuperHeroService', () => {
     });
 
     it('should turn 404 into an empty heroes result', () => {
-      service
-        .getPage(pageConfing)
-        .subscribe(
-          (page) =>
-            expect(page.items.length).toEqual(
-              0,
-              'should return empty heroes array',
-            ),
-          fail,
-        );
+      service.getPage(pageConfing).subscribe({
+        next: (page) =>
+          expect(page.items.length).toEqual(
+            0,
+            'should return empty heroes array',
+          ),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       const msg = 'deliberate 404 error';
@@ -138,16 +130,14 @@ describe('SuperHeroService', () => {
     });
 
     it('should be OK returning no superheroes', () => {
-      service
-        .getPage(pageConfing)
-        .subscribe(
-          (page) =>
-            expect(page.items.length).toEqual(
-              0,
-              'should have empty superheroes array',
-            ),
-          fail,
-        );
+      service.getPage(pageConfing).subscribe({
+        next: (page) =>
+          expect(page.items.length).toEqual(
+            0,
+            'should have empty superheroes array',
+          ),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       req.flush([]);
@@ -165,16 +155,14 @@ describe('SuperHeroService', () => {
     });
 
     it('should return expected superHero (called once)', () => {
-      service
-        .get(superHeroId)
-        .subscribe(
-          (hero) =>
-            expect(hero).toEqual(
-              expectedHero,
-              'should return expected superHero',
-            ),
-          fail,
-        );
+      service.get(superHeroId).subscribe({
+        next: (hero) =>
+          expect(hero).toEqual(
+            expectedHero,
+            'should return expected superHero',
+          ),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       expect(req.request.method).toEqual('GET');
@@ -200,12 +188,10 @@ describe('SuperHeroService', () => {
   describe('#add', () => {
     const newHero = { id: '1', name: 'A' } as SuperHero;
     it('should add a superHeroe and return it', () => {
-      service
-        .add(newHero)
-        .subscribe(
-          (data) => expect(data).toEqual(newHero, 'should return the hero'),
-          fail,
-        );
+      service.add(newHero).subscribe({
+        next: (data) => expect(data).toEqual(newHero, 'should return the hero'),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(service.baseUrl);
       expect(req.request.method).toEqual('POST');
@@ -243,12 +229,11 @@ describe('SuperHeroService', () => {
     });
 
     it('should update a superHeroe and return it', () => {
-      service
-        .update(updateHero)
-        .subscribe(
-          (data) => expect(data).toEqual(updateHero, 'should return the hero'),
-          fail,
-        );
+      service.update(updateHero).subscribe({
+        next: (data) =>
+          expect(data).toEqual(updateHero, 'should return the hero'),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       expect(req.request.method).toEqual('PUT');
@@ -286,12 +271,10 @@ describe('SuperHeroService', () => {
     });
 
     it('should delete a superHeroe', () => {
-      service
-        .delete(superHeroId)
-        .subscribe(
-          (data) => expect(data).toEqual({}, 'should delete the hero'),
-          fail,
-        );
+      service.delete(superHeroId).subscribe({
+        next: (data) => expect(data).toEqual({}, 'should delete the hero'),
+        error: fail,
+      });
 
       const req = httpTestingController.expectOne(superHeroeUrl);
       expect(req.request.method).toEqual('DELETE');

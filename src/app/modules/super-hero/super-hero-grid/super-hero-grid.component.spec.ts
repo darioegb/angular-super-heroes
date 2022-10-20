@@ -3,22 +3,21 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
-
-import { SuperHeroGridComponent } from './super-hero-grid.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { SharedModule } from '@shared/shared.module';
-import { ActiveToast, ToastrModule, ToastrService } from 'ngx-toastr';
-import { TranslateTestingModule } from 'ngx-translate-testing';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Observable, of } from 'rxjs';
-import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { ActiveToast, ToastrModule, ToastrService } from 'ngx-toastr';
+import { TranslateTestingModule } from 'ngx-translate-testing';
+import { Router, ActivatedRoute } from '@angular/router';
+import { Observable, of } from 'rxjs';
+
+import { SuperHeroGridComponent } from './super-hero-grid.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { SharedModule } from '@shared/shared.module';
+import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { DialogStub } from '@root/testing';
-import { PageConfig } from '@shared/models/page-config.model';
-import { Page } from '@root/app/shared/models';
+import { PageConfig, Page } from '@shared/models';
 
 describe('SuperHeroGridComponent', () => {
   let component: SuperHeroGridComponent;

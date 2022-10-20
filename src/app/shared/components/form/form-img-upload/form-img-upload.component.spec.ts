@@ -15,7 +15,7 @@ import {
 
 import { FormImgUploadComponent } from './form-img-upload.component';
 import { TranslateTestingModule } from 'ngx-translate-testing';
-import { UtilService } from '@root/app/shared/services';
+import { UtilService } from '@shared/services';
 
 describe('FormImgUploadComponent', () => {
   let component: FormImgUploadComponent;

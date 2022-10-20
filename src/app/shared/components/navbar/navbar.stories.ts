@@ -6,7 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
 
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { NavbarComponent } from './navbar.component';
 
 export default {

@@ -6,7 +6,7 @@ import { FormControl, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgxErrorMessageModule } from 'ngx-error-message';
 import { MatInputModule } from '@angular/material/input';
 
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { UpperCaseDirective } from './upper-case.directive';
 
 @Component({

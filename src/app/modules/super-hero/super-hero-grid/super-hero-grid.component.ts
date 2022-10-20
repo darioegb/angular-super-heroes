@@ -17,8 +17,8 @@ import { switchMap, take, takeUntil, withLatestFrom } from 'rxjs/operators';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 import { SuperHeroGridDataSource } from './super-hero-grid-datasource';
 import { ColumnDef, FilterInput, PageConfig } from '@shared/models';
-import { ConfirmDialogComponent } from '@shared/components/confirm-dialog/confirm-dialog.component';
-import { DropdownTranslatePipe } from '@shared/pipes/dropdown-translate.pipe';
+import { ConfirmDialogComponent } from '@shared/components';
+import { DropdownTranslatePipe } from '@shared/pipes';
 
 @Component({
   selector: 'app-super-hero-grid',

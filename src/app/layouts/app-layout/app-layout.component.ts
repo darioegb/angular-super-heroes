@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { LoaderService } from '@root/app/core/services';
 import { Observable } from 'rxjs';
+
+import { LoaderService } from '@core/services';
 
 @Component({
   selector: 'app-app-layout',

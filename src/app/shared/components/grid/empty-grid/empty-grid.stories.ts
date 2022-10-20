@@ -4,7 +4,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { EmptyGridComponent } from './empty-grid.component';
 
 export default {

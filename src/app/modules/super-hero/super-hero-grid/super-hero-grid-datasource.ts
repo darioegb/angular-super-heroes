@@ -3,7 +3,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
 
 import { GenreEnum } from '@shared/enums';
 import { Column, ColumnDef, PageConfig } from '@shared/models';
-import { DropdownTranslatePipe } from '@shared/pipes/dropdown-translate.pipe';
+import { DropdownTranslatePipe } from '@shared/pipes';
 import { SuperHero, SuperHeroService } from '@modules/super-hero/shared';
 
 export class SuperHeroGridDataSource extends DataSource<SuperHero> {

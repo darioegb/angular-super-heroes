@@ -45,16 +45,11 @@ describe('LoaderInterceptor', () => {
     const expectedHero = { id: '1', name: 'A' } as SuperHero;
     const superHeroId = '1';
 
-    service
-      .get(superHeroId)
-      .subscribe(
-        (hero) =>
-          expect(hero).toEqual(
-            expectedHero,
-            'should return expected superHero',
-          ),
-        fail,
-      );
+    service.get(superHeroId).subscribe({
+      next: (hero) =>
+        expect(hero).toEqual(expectedHero, 'should return expected superHero'),
+      error: fail,
+    });
 
     const httpRequest = httpTestingController.expectOne(
       `${service.baseUrl}/${superHeroId}`,

@@ -4,9 +4,9 @@ import {
   AngularFireStorageReference,
   AngularFireUploadTask,
 } from '@angular/fire/compat/storage';
-
-import { Option } from '@shared/models/option.model';
 import { Observable } from 'rxjs';
+
+import { Option } from '@shared/models';
 
 @Injectable({
   providedIn: 'root',

@@ -1,4 +1,4 @@
-import { UtilService } from '@root/app/shared/services';
+import { UtilService } from '@shared/services';
 import { Observable, of } from 'rxjs';
 
 export class TranslateServiceStub {

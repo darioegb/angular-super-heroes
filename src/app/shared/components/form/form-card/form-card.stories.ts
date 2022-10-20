@@ -12,9 +12,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { NgxErrorMessageModule } from 'ngx-error-message';
 
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { FormCardComponent } from './form-card.component';
-import { FormCardActionsComponent } from '@shared/components/form/form-card-actions/form-card-actions.component';
+import { FormCardActionsComponent } from '@shared/components';
 
 export default {
   title: 'Components/Form/FormCard',
@@ -73,8 +73,8 @@ const Template: Story<FormCardComponent> = (args: FormCardComponent) => ({
       <!-- Others form fields -->
       <app-form-card-actions
         actions
-        [isEditOrView]="isEditOrView"
-        [view]="view"
+        [isEditOrView]="false"
+        [view]="false"
       ></app-form-card-actions>
     </app-form-card>
   </form>
@@ -84,6 +84,4 @@ const Template: Story<FormCardComponent> = (args: FormCardComponent) => ({
 export const Default = Template.bind({});
 Default.args = {
   title: 'Title',
-  isEditOrView: false,
-  view: false,
 };

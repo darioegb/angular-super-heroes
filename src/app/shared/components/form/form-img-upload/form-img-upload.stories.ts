@@ -15,7 +15,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { environment } from '@environments/environment';
 import { NgxMatFileInputModule } from '@angular-material-components/file-input';
 
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { FormImgUploadComponent } from './form-img-upload.component';
 import { fileSizeValidator } from '@shared/directives';
 

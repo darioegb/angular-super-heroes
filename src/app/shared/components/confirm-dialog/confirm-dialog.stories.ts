@@ -6,7 +6,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 import { ConfirmDialogComponent } from './confirm-dialog.component';
-import { StorybookTranslateModule } from '@root/app/storybook-translate/storybook-translate.module';
+import { StorybookTranslateModule } from '@app/storybook-translate/storybook-translate.module';
 import { userEvent, within } from '@storybook/testing-library';
 
 @Component({
