@@ -14,7 +14,7 @@
   <mat-form-field appearance="fill">
     <mat-select [(ngModel)]="selectedLang" (selectionChange)="changeLanguaje()">
       <mat-option *ngFor="let lang of langOptions" [value]="lang.value">
-        {{ lang.key }}
+        {{ lang.key | translate }}
       </mat-option>
     </mat-select>
   </mat-form-field>

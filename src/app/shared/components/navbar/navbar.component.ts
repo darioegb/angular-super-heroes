@@ -21,7 +21,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.checkNetworkStatus();
-    this.langOptions = LOCALES;
+    this.langOptions = LOCALES.map((value) => ({
+      key: `globals.locales.${value}`,
+      value,
+    }));
     this.selectedLang =
       localStorage.getItem('lang') || this.translate.defaultLang;
   }

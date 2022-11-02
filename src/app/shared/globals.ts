@@ -29,16 +29,7 @@ export const DEFAULT_FORM_CONTROL_SIZES = {
     max: 250,
   },
 };
-export const LOCALES = [
-  {
-    key: 'English',
-    value: 'en',
-  },
-  {
-    key: 'Español',
-    value: 'es',
-  },
-];
+export const LOCALES = ['en', 'es'];
 
 export const APP_I18N_CONFIG = {
   defaultLanguage: 'en',

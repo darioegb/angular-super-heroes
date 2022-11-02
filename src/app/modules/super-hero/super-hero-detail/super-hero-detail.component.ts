@@ -32,7 +32,7 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   isUploading = false;
   picture: string;
   toastTranslations: { add: string; update: string };
-  controlSize = DEFAULT_FORM_CONTROL_SIZES;
+  textareaMax: number;
   private unsubscribe$ = new Subject<void>();
 
   constructor(
@@ -50,6 +50,9 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    ({
+      textarea: { min: this.textareaMax },
+    } = DEFAULT_FORM_CONTROL_SIZES);
     this.genres = this.utilService.convertEnumToKeyValueArray(GenreEnum);
     this.view = /true/i.test(this.route.snapshot.queryParams?.view);
     this.initForm();
@@ -67,14 +70,18 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
   }
 
   initForm(): void {
-    const { text, number, textarea } = this.controlSize;
+    const {
+      text: { min: textMin, max: textMax },
+      number: { min: numberMin },
+      textarea: { min: textareaMin, max: textareaMax },
+    } = DEFAULT_FORM_CONTROL_SIZES;
     this.superHeroForm = this.fb.group({
       name: [
         null,
         Validators.compose([
           Validators.required,
-          Validators.minLength(text.min),
-          Validators.maxLength(text.max),
+          Validators.minLength(textMin),
+          Validators.maxLength(textMax),
         ]),
       ],
       genre: [null, Validators.required],
@@ -82,13 +89,13 @@ export class SuperHeroDetailComponent implements OnInit, OnDestroy {
         null,
         Validators.compose([
           Validators.required,
-          Validators.minLength(textarea.min),
-          Validators.maxLength(textarea.max),
+          Validators.minLength(textareaMin),
+          Validators.maxLength(textareaMax),
         ]),
       ],
-      age: [null, Validators.min(number.min)],
-      height: [null, Validators.min(number.min)],
-      weight: [null, Validators.min(number.min)],
+      age: [null, Validators.min(numberMin)],
+      height: [null, Validators.min(numberMin)],
+      weight: [null, Validators.min(numberMin)],
       picture: [null, fileSizeValidator],
     });
   }
