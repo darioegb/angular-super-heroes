@@ -44,9 +44,9 @@ export default {
   parameters: {
     docs: {
       description: {
-        component:
-          // eslint-disable-next-line max-len
-          'FormCard is a card form wrapper using angular material. Cand project content by default projection and also using actions select for inject FormCardActions component.',
+        component: `FormCard is a card form container using angular material.
+          Can project content by default projection and also using actions select for inject FormCardActions component.
+        `,
       },
     },
   },

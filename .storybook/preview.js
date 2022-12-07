@@ -6,11 +6,12 @@ setCompodocJson(docJson);
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
   controls: {
+    exclude: ['unsubscribe$', 'control'],
     matchers: {
       color: /(background|color)$/i,
       date: /Date$/,
     },
-    exclude: ['unsubscribe$', 'control'],
+    sort: 'requiredFirst',
   },
   docs: { inlineStories: true },
 };

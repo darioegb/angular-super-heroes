@@ -1,6 +1,10 @@
 {
   "name": "super-heroes",
   "version": "0.0.1",
+  "description": "A Material app",
+  "productName": "Superheroes",
+  "author": "darioegb <darioegb@gmail.com>",
+  "private": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -18,7 +22,6 @@
     "build-storybook": "npm run docs:json && build-storybook",
     "chromatic": "npx chromatic --project-token=53def9863557"
   },
-  "private": true,
   "dependencies": {
     "@angular-material-components/file-input": "^8.0.0",
     "@angular/animations": "^14.0.5",
